@@ -215,6 +215,53 @@
     color:var(--ink-3);font-size:.82rem;line-height:1.6}
   footer b{color:var(--ink-2);font-weight:600}
 
+
+  /* autocomplétion */
+  .inputwrap{position:relative;flex:1}
+  .ac{position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--card);
+    border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(38,48,42,.12);
+    z-index:40;overflow:hidden;display:none}
+  .ac.on{display:block}
+  .ac button{display:block;width:100%;text-align:left;border:none;background:none;font-family:inherit;
+    font-size:.95rem;color:var(--ink);padding:10px 15px;cursor:pointer;transition:background .1s}
+  .ac button:hover,.ac button.sel{background:var(--sage-soft);color:var(--sage)}
+  .ac button .r{float:right;font-size:.78rem;color:var(--ink-3)}
+  /* recherche par nom + types */
+  .findrow{display:flex;gap:8px;margin-bottom:10px}
+  .findrow input{flex:1;border:1px solid var(--line);border-radius:12px;padding:10px 14px;
+    font-family:inherit;font-size:.94rem;background:var(--card);color:var(--ink)}
+  .findrow input:focus{outline:none;border-color:var(--sage)}
+  .types{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:16px}
+  .type{border:1px solid var(--line);background:var(--card);color:var(--ink-2);padding:6px 13px;
+    border-radius:100px;font-family:inherit;font-size:.85rem;font-weight:500;cursor:pointer;transition:all .13s}
+  .type:hover{border-color:var(--sage);color:var(--sage)}
+  .type.on{background:var(--sage);border-color:var(--sage);color:#fff}
+  /* panier / courses */
+  .cart{background:none;border:none;color:var(--ink-3);font-family:inherit;font-size:1.05rem;
+    cursor:pointer;padding:4px;line-height:1;transition:all .14s}
+  .cart:hover{color:var(--cook);transform:scale(1.12)}
+  .cart.on{color:var(--cook)}
+  .cartrecipes{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:16px}
+  .cartchip{background:var(--sage-soft);color:var(--sage);border:1px solid var(--sage-line);
+    padding:6px 8px 6px 13px;border-radius:100px;font-size:.86rem;font-weight:500;
+    display:inline-flex;align-items:center;gap:7px}
+  .cartchip button{background:none;border:none;color:var(--sage);cursor:pointer;font-size:.9rem;line-height:1;padding:0 2px}
+  .shopgroup{margin-bottom:14px}
+  .shopgroup h4{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);
+    font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:7px}
+  .shoplist{display:grid;gap:6px}
+  .sitem{display:flex;align-items:center;gap:11px;padding:10px 14px;background:var(--card);
+    border:1px solid var(--line);border-radius:11px;cursor:pointer;user-select:none;transition:background .12s}
+  .sitem:hover{border-color:var(--sage-line)}
+  .sitem .box{flex:0 0 20px;height:20px;border:2px solid var(--sage-line);border-radius:6px;
+    display:flex;align-items:center;justify-content:center;transition:all .14s}
+  .sitem.done .box{background:var(--sage);border-color:var(--sage)}
+  .sitem .box svg{opacity:0;color:#fff}.sitem.done .box svg{opacity:1}
+  .sitem .nm{flex:1;font-size:.94rem}
+  .sitem .from{font-size:.76rem;color:var(--ink-3)}
+  .sitem.done .nm{text-decoration:line-through;color:var(--ink-3)}
+  .shoptools{display:flex;gap:14px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
+  .shoptools .info{font-size:.86rem;color:var(--ink-2)}
   .toast{
     position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(16px);
     background:var(--ink);color:#fff;padding:10px 20px;border-radius:100px;font-weight:500;
@@ -244,7 +291,10 @@
   <div class="wrap">
     <div class="slabel">Mon frigo <span class="count" id="pcount"></span></div>
     <div class="inputrow">
-      <input id="inp" type="text" placeholder="Ajouter un ingrédient…" autocomplete="off">
+      <div class="inputwrap">
+        <input id="inp" type="text" placeholder="Ajouter un ingrédient…" autocomplete="off">
+        <div class="ac" id="ac"></div>
+      </div>
       <button id="addbtn" aria-label="Ajouter">＋</button>
     </div>
     <div class="mychips" id="mychips"></div>
@@ -269,7 +319,18 @@
 <section>
   <div class="wrap">
     <div class="slabel">Recettes <span class="count" id="rcount"></span></div>
+    <div class="findrow"><input id="qnom" type="search" placeholder="Chercher une recette par son nom…" autocomplete="off"></div>
+    <div class="types" id="types"></div>
     <div class="results" id="results"></div>
+  </div>
+</section>
+
+<section id="shopsec" style="display:none">
+  <div class="wrap">
+    <div class="slabel">Ma liste de courses <span class="count" id="shopcount"></span></div>
+    <div class="cartrecipes" id="cartrecipes"></div>
+    <div class="shoptools" id="shoptools"></div>
+    <div id="shoplist"></div>
   </div>
 </section>
 
@@ -731,6 +792,32 @@ function trouver(fridge,opts=[],limit=50){
 (function(){const seen=new Set();for(let i=RECETTES.length-1;i>=0;i--){
   if(seen.has(RECETTES[i].u))RECETTES.splice(i,1);else seen.add(RECETTES[i].u);}})();
 
+/* ---------- type de plat (calculé depuis le titre) ---------- */
+const _SOUPE=["soupe","veloute","gaspacho","bouillon","chowder","potage","velours","creme de ","minestrone","dahl","dhal"];
+const _SALADE=["salade","taboule","buddha bowl"];
+const _PROT=["poulet","boeuf","porc","veau","agneau","canard","dinde","jambon","lardon","bacon","saucisse","merguez","chorizo","kefta","viande","cordon","burger","tacos","fajitas","empanadas","saumon","cabillaud","colin","lieu","morue","haddock","eglefin","thon","sardine","maquereau","crevette","moule","poisson","brochet","quenelle","oeuf","tortilla","carbo","pizza","quiche","lasagne","tartiflette","parmentier","risotto","gratin","croque","wrap","pate","spaghetti","gnocchi","macaroni","fettucine","tagliatelle","polenta","crozotto","perlotto","spaetzle","riz cantonais","couscous","tajine","curry","chili","fondue","raclette","loubieh","ratatouille","rosti","croquette","boulette"];
+const _DESSERT=["gateau","crepe","madeleine","meringue","cookie","cake","crumble","mousse","riz au lait","flan","glace","sorbet","nectar","compote","brookie","muffin","pancake","gaufre","chouquette","spritz","rocher","zebra","banana","cheesecake","iles flottantes","poires pochees","entremets","smoothie","perles du japon","tiramisu","tartelette","creme brulee","sable","dominos","sundae","quatre-quart","semoule a la noisette","chausson"];
+const _BASE=["sauce","bechamel","mayonnaise","creme patissiere","pain rapide"];
+function typeDe(t){
+  const x=norm(t);
+  if(x.indexOf("sable")>=0&&x.indexOf("parmesan")>=0)return"Bases";
+  for(const k of _SOUPE)if(x.indexOf(k)>=0)return"Soupes";
+  for(const k of _SALADE)if(x.indexOf(k)===0)return"Salades";
+  for(const k of _PROT)if(x.indexOf(k)>=0)return"Plats";
+  for(const k of _DESSERT)if(x.indexOf(k)>=0)return"Desserts";
+  if(x.indexOf("puree")===0)return"Accompagnements";
+  for(const k of _BASE)if(x.indexOf(k)>=0)return"Bases";
+  return"Plats";
+}
+RECETTES.forEach(r=>{r.cat=typeDe(r.t)});
+const TYPES=["Tous","Plats","Soupes","Salades","Desserts","Accompagnements","Bases"];
+
+/* ---------- rayon d'un ingrédient (pour la liste de courses) ---------- */
+function rayonDe(ing){
+  for(const c of CATALOGUE)for(const v of c.l)if(corresp(v,ing))return c;
+  return {c:"Autres",i:"🛒"};
+}
+
 /* ================= ÉTAT ================= */
 function load(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}}
 function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
@@ -740,9 +827,13 @@ let OPTS=new Set(load("ck_opts",[]));
 let OPENCATS=new Set(load("ck_opencats",["Légumes"]));
 let PERSO=load("ck_perso",[]);
 let FAVS_SET=null;
+let CART=load("ck_cart",[]);
+let CHECKED=new Set(load("ck_checked",[]));
+let TYPE=load("ck_type","Tous");
+let QNOM="";
 let CATQ="";
 function persist(){save("ck_ing",ING);save("ck_favs",FAVS);save("ck_opts",[...OPTS]);
-  save("ck_opencats",[...OPENCATS]);save("ck_perso",PERSO)}
+  save("ck_opencats",[...OPENCATS]);save("ck_perso",PERSO);save("ck_cart",CART);save("ck_checked",[...CHECKED]);save("ck_type",TYPE)}
 
 const OPTIONS=[{k:"express",l:"Rapide"},{k:"enfants",l:"Doux enfants"},{k:"congelation",l:"Congelable"},
   {k:"vege",l:"Végétarien"},{k:"complet",l:"Plat complet"},{k:"bebe",l:"Dès bébé"}];
@@ -761,8 +852,37 @@ function addIng(v){
   ING.push(v);persist();refresh();
 }
 function delIng(v){ING=ING.filter(x=>norm(x)!==norm(v));persist();refresh()}
-document.getElementById('addbtn').onclick=()=>{addIng(inp.value);inp.value='';inp.focus()};
-inp.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();addIng(inp.value);inp.value=''}});
+const acBox=document.getElementById('ac');
+let ACLIST=[],ACSEL=-1;
+function tousIngredients(){const o=[];CATALOGUE.forEach(c=>c.l.forEach(v=>o.push({v,r:c.i})));return o}
+const ALLING=tousIngredients();
+function renderAC(){
+  const q=norm(inp.value);
+  if(!q){acBox.classList.remove('on');ACLIST=[];return}
+  ACLIST=ALLING.filter(x=>norm(x.v).includes(q)&&!has(x.v))
+    .sort((a,b)=>norm(a.v).indexOf(q)-norm(b.v).indexOf(q)||a.v.length-b.v.length).slice(0,7);
+  if(!ACLIST.length){acBox.classList.remove('on');return}
+  ACSEL=0;
+  acBox.innerHTML=ACLIST.map((x,i)=>'<button data-i="'+i+'" class="'+(i===0?'sel':'')+'">'+esc(x.v)+'<span class="r">'+x.r+'</span></button>').join('');
+  acBox.querySelectorAll('button').forEach(b=>{
+    b.onmousedown=e=>{e.preventDefault();addIng(ACLIST[+b.dataset.i].v);inp.value='';acBox.classList.remove('on')};
+  });
+  acBox.classList.add('on');
+}
+function majSel(){acBox.querySelectorAll('button').forEach((b,i)=>b.classList.toggle('sel',i===ACSEL))}
+inp.addEventListener('input',renderAC);
+inp.addEventListener('blur',()=>setTimeout(()=>acBox.classList.remove('on'),120));
+inp.addEventListener('focus',renderAC);
+document.getElementById('addbtn').onclick=()=>{addIng(inp.value);inp.value='';acBox.classList.remove('on');inp.focus()};
+inp.addEventListener('keydown',e=>{
+  const open=acBox.classList.contains('on')&&ACLIST.length;
+  if(e.key==='ArrowDown'&&open){e.preventDefault();ACSEL=(ACSEL+1)%ACLIST.length;majSel();return}
+  if(e.key==='ArrowUp'&&open){e.preventDefault();ACSEL=(ACSEL-1+ACLIST.length)%ACLIST.length;majSel();return}
+  if(e.key==='Escape'){acBox.classList.remove('on');return}
+  if(e.key==='Enter'){e.preventDefault();
+    if(open&&ACSEL>=0)addIng(ACLIST[ACSEL].v);else addIng(inp.value);
+    inp.value='';acBox.classList.remove('on');}
+});
 
 function renderIng(){
   const box=document.getElementById('mychips');box.innerHTML="";
@@ -808,6 +928,17 @@ OPTIONS.forEach(o=>{const b=document.createElement('button');
     b.classList.toggle('on',OPTS.has(o.k));chercher()};
   optBox.appendChild(b)});
 
+/* ---------- types de plats ---------- */
+const typeBox=document.getElementById('types');
+function renderTypes(){
+  typeBox.innerHTML="";
+  TYPES.forEach(t=>{const b=document.createElement('button');
+    b.className='type'+(TYPE===t?' on':'');b.textContent=t;
+    b.onclick=()=>{TYPE=t;persist();renderTypes();chercher()};
+    typeBox.appendChild(b)});
+}
+document.getElementById('qnom').addEventListener('input',e=>{QNOM=e.target.value.trim();chercher()});
+
 /* ================= RÉSULTATS ================= */
 function chercher(){
   FAVS_SET=new Set(FAVS);
@@ -819,13 +950,17 @@ function chercher(){
   if(!ING.length){
     liste=base.filter(r=>![...OPTS].length||[...OPTS].every(o=>r.g.includes(o)))
               .map(r=>({r,matched:[],missing:r.i,ratio:0}));
-    rcount.textContent=liste.length+" recettes";
   }else{
     const src=RECETTES;RECETTES.push(...PERSO.filter(p=>!RECETTES.includes(p)));
-    liste=trouver(ING,[...OPTS],50);
+    liste=trouver(ING,[...OPTS],400);
     RECETTES.length=src.length;
-    rcount.textContent=liste.length?liste.length+" recette"+(liste.length>1?"s":"")+" possibles":"";
+    rcount.textContent="";
   }
+  if(TYPE!=="Tous")liste=liste.filter(x=>(x.r.cat||typeDe(x.r.t))===TYPE);
+  if(QNOM){const q=norm(QNOM);liste=liste.filter(x=>norm(x.r.t).includes(q))}
+  const nTot=liste.length;
+  if(nTot>60)liste=liste.slice(0,60);
+  rcount.textContent=nTot?nTot+" recette"+(nTot>1?"s":"")+(ING.length?" possibles":"")+(nTot>60?" · 60 affichées":""):"";
   if(!liste.length){
     res.innerHTML='<div class="placeholder"><b>Rien avec ces critères</b>Retire un filtre, ou coche un ingrédient de plus.</div>';
     return;
@@ -845,8 +980,15 @@ function chercher(){
       '<p class="cooktitle"><span class="badge ok">✓ recette Cookidoo</span></p>'+
       '<div class="acts">'+
         '<a class="cookbtn" href="'+lienDe(r)+'" target="_blank" rel="noopener"><button>Ouvrir la recette</button></a>'+
+        '<button class="cart '+(CART.includes(r.u||r.url)?'on':'')+'" title="Ajouter aux courses" aria-label="Ajouter aux courses">🛒</button>'+
         '<button class="fav '+(isFav?'on':'')+'" title="Garder" aria-label="Garder">'+(isFav?'♥':'♡')+'</button>'+
       '</div>';
+    d.querySelector('.cart').onclick=e=>{
+      const id=r.u||r.url;
+      if(CART.includes(id))CART=CART.filter(c=>c!==id);else CART.push(id);
+      persist();renderCourses();e.target.classList.toggle('on',CART.includes(id));
+      toast(CART.includes(id)?'Ajouté aux courses':'Retiré des courses');
+    };
     d.querySelector('.fav').onclick=e=>{
       const id=r.u||r.url;
       if(FAVS.includes(id))FAVS=FAVS.filter(f=>f!==id);else FAVS.push(id);
@@ -856,6 +998,68 @@ function chercher(){
     };
     res.appendChild(d);
   });
+}
+
+/* ================= LISTE DE COURSES ================= */
+function renderCourses(){
+  const sec=document.getElementById('shopsec');
+  const box=document.getElementById('shoplist');
+  const chips=document.getElementById('cartrecipes');
+  const tools=document.getElementById('shoptools');
+  const items=toutes().filter(r=>CART.includes(r.u||r.url));
+  sec.style.display=items.length?'block':'none';
+  if(!items.length){document.getElementById('shopcount').textContent="";return}
+
+  // recettes du panier
+  chips.innerHTML="";
+  items.forEach(r=>{const id=r.u||r.url;
+    const c=document.createElement('span');c.className='cartchip';
+    c.innerHTML=esc(r.t)+' <button aria-label="Retirer">×</button>';
+    c.querySelector('button').onclick=()=>{CART=CART.filter(x=>x!==id);persist();renderCourses();chercher()};
+    chips.appendChild(c)});
+
+  // agrégation des ingrédients manquants
+  const map={};
+  items.forEach(r=>{
+    r.i.forEach(ing=>{
+      if(ING.some(f=>corresp(f,ing)))return;          // déjà dans le frigo
+      const k=norm(ing);
+      if(!map[k])map[k]={nom:ing,rayon:rayonDe(ing),pour:[]};
+      if(map[k].pour.indexOf(r.t)<0)map[k].pour.push(r.t);
+    });
+  });
+  const cles=Object.keys(map);
+  document.getElementById('shopcount').textContent=items.length+" recette"+(items.length>1?"s":"");
+
+  // groupement par rayon
+  const grp={};
+  cles.forEach(k=>{const nom=map[k].rayon.c;(grp[nom]=grp[nom]||[]).push(k)});
+  box.innerHTML="";
+  let total=0,faits=0;
+  CATALOGUE.concat([{c:"Autres",i:"🛒"}]).forEach(cat=>{
+    const list=grp[cat.c];if(!list||!list.length)return;
+    list.sort((a,b)=>map[a].nom.localeCompare(map[b].nom,'fr'));
+    const g=document.createElement('div');g.className='shopgroup';
+    g.innerHTML='<h4>'+cat.i+' '+cat.c+'</h4>';
+    const ul=document.createElement('div');ul.className='shoplist';
+    list.forEach(k=>{
+      total++;const done=CHECKED.has(k);if(done)faits++;
+      const it=document.createElement('div');it.className='sitem'+(done?' done':'');
+      it.innerHTML='<span class="box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span>'+
+        '<span class="nm">'+esc(map[k].nom)+'</span>'+
+        (map[k].pour.length>1?'<span class="from">×'+map[k].pour.length+'</span>':'');
+      it.onclick=()=>{CHECKED.has(k)?CHECKED.delete(k):CHECKED.add(k);persist();renderCourses()};
+      ul.appendChild(it);
+    });
+    g.appendChild(ul);box.appendChild(g);
+  });
+  tools.innerHTML='<span class="info">'+total+' article'+(total>1?'s':'')+' · '+faits+' coché'+(faits>1?'s':'')+'</span>';
+  const b1=document.createElement('button');b1.className='pinbtn';b1.textContent='tout décocher';
+  b1.onclick=()=>{CHECKED.clear();persist();renderCourses()};
+  const b2=document.createElement('button');b2.className='pinbtn';b2.textContent='vider la liste';
+  b2.onclick=()=>{if(confirm('Vider la liste de courses ?')){CART=[];CHECKED.clear();persist();renderCourses();chercher()}};
+  tools.appendChild(b1);tools.appendChild(b2);
+  if(!total)box.innerHTML='<div class="placeholder"><b>Tu as déjà tout</b>Aucun ingrédient à acheter pour ces recettes.</div>';
 }
 
 /* ================= FAVORIS ================= */
@@ -887,8 +1091,8 @@ document.getElementById('addrecipe').onclick=ajouterPerso;
 /* ================= DIVERS ================= */
 let tT;function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');
   clearTimeout(tT);tT=setTimeout(()=>t.classList.remove('show'),1800)}
-function refresh(){renderIng();renderCats();chercher()}
-refresh();renderFavs();
+function refresh(){renderIng();renderCats();chercher();if(typeof renderCourses==='function')renderCourses()}
+renderTypes();refresh();renderFavs();renderCourses();
 </script>
 </body>
 </html>
