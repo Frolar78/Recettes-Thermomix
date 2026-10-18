@@ -1,0 +1,33 @@
+name: Synchro TimeTree
+
+on:
+  schedule:
+    - cron: "17 2 * * *"   # chaque nuit vers 3h-4h (heure de Paris)
+  workflow_dispatch:        # bouton « Run workflow » pour tester à la main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Installer les outils
+        run: pip install timetree-exporter==0.9.0 icalendar recurring-ical-events requests
+
+      - name: Exporter TimeTree
+        env:
+          TIMETREE_EMAIL: ${{ secrets.TIMETREE_EMAIL }}
+          TIMETREE_PASSWORD: ${{ secrets.TIMETREE_PASSWORD }}
+        run: timetree-exporter -c "${{ secrets.TIMETREE_CALENDAR_CODE }}" -o timetree.ics
+
+      - name: Envoyer au Google Sheet
+        env:
+          ICS_PATH: timetree.ics
+          SHEET_ENDPOINT: ${{ secrets.SHEET_ENDPOINT }}
+          SHEET_TOKEN: ${{ secrets.SHEET_TOKEN }}
+        run: python scripts/timetree_to_sheet.py
