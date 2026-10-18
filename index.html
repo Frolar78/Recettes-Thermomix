@@ -2,351 +2,274 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Qu'est-ce qu'on mange ?</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="On mange ?">
+<meta name="theme-color" content="#F2F4EF">
+<link rel="apple-touch-icon" href="icone-180.png">
+<link rel="manifest" href="manifest.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#FBF9F3;
-    --card:#FFFFFF;
-    --ink:#232B26;
-    --ink-2:#68716A;
-    --ink-3:#98A09A;
-    --sage:#3D6B4C;
-    --sage-soft:#EDF3EE;
-    --sage-line:#D6E2D9;
-    --line:#ECE7DB;
-    --amber:#B07A35;
-    --amber-soft:#F7EFDF;
-    --cook:#0E9488;
-    --r:14px;
+    --bg:#F2F4EF;--card:#FFFFFF;--ink:#1E2A23;--ink-2:#5A665F;--ink-3:#8C968F;--line:#E3E7E0;
+    --vert:#2E6A4C;--vert-doux:#E3EEE7;
+    --orange:#B65A22;--orange-doux:#FBEFE6;--orange-txt:#8A4116;
+    --bleu-doux:#E6EDF7;--bleu-txt:#23406B;
+    --r:20px;--nav:68px;
   }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{
-    font-family:'Figtree',system-ui,sans-serif;background:var(--paper);color:var(--ink);
-    line-height:1.55;-webkit-font-smoothing:antialiased;font-size:15.5px;
-  }
-  .wrap{max-width:660px;margin:0 auto;padding:0 20px}
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html,body{background:var(--bg)}
+  body{font-family:'DM Sans',system-ui,sans-serif;color:var(--ink);font-size:16px;line-height:1.45;
+    -webkit-font-smoothing:antialiased;padding-bottom:calc(var(--nav) + env(safe-area-inset-bottom) + 24px)}
+  button,input{font-family:inherit;font-size:inherit;color:inherit}
+  button{cursor:pointer;border:none;background:none}
+  .ico{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+  .ico.s{width:18px;height:18px}
+  .wrap{max-width:560px;margin:0 auto;padding:calc(env(safe-area-inset-top) + 18px) 16px 0}
 
-  /* ---------- entête ---------- */
-  header{padding:46px 0 8px}
-  .brand{
-    font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sage);
-    font-weight:600;margin-bottom:14px;
-  }
-  h1{
-    font-family:'Fraunces',serif;font-weight:500;font-size:clamp(2rem,6vw,2.9rem);
-    line-height:1.06;letter-spacing:-.015em;
-  }
-  h1 em{font-style:italic;font-weight:400}
-  .sub{margin-top:12px;color:var(--ink-2);max-width:46ch;font-size:.98rem}
+  /* en-tête */
+  .tete{display:flex;align-items:flex-start;gap:12px;margin-bottom:18px}
+  .tete .txt{flex:1;min-width:0}
+  .surtitre{font-size:.86rem;color:var(--ink-2);font-weight:500}
+  h1{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:1.95rem;line-height:1.08;letter-spacing:-.02em;margin-top:2px}
+  h2{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:1.15rem;letter-spacing:-.01em;margin:26px 0 10px}
+  .etat{font-size:.74rem;color:var(--ink-3);display:flex;align-items:center;gap:5px;padding:6px 10px;border-radius:100px;background:var(--card);margin-top:4px;white-space:nowrap;min-height:32px}
+  .etat i{width:7px;height:7px;border-radius:50%;background:var(--ink-3)}
+  .etat.ok i{background:var(--vert)}
+  .etat.hors i,.etat.jeton i{background:var(--orange)}
 
-  /* ---------- sections ---------- */
-  section{padding:30px 0 0}
-  .slabel{
-    font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);
-    font-weight:600;margin-bottom:14px;display:flex;align-items:baseline;gap:10px;
-  }
-  .slabel .count{color:var(--sage);letter-spacing:.04em;font-weight:600}
+  .carte{background:var(--card);border-radius:var(--r);padding:16px}
+  .pastille{display:inline-flex;align-items:center;gap:5px;font-size:.78rem;font-weight:600;padding:4px 10px;border-radius:100px;white-space:nowrap}
+  .p-tm{background:var(--vert-doux);color:var(--vert)}
+  .p-ev{background:var(--bleu-doux);color:var(--bleu-txt);font-weight:500}
+  .p-or{background:var(--orange-doux);color:var(--orange-txt)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 18px;border-radius:14px;font-weight:600;font-size:.95rem;text-decoration:none}
+  .btn-v{background:var(--vert);color:#fff}
+  .btn-l{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+  .btn-o{background:var(--vert-doux);color:var(--vert)}
+  .vide{color:var(--ink-2);font-size:.92rem;padding:6px 2px}
 
-  /* ---------- saisie ---------- */
-  .inputrow{display:flex;gap:8px;margin-bottom:14px}
-  .inputrow input{
-    flex:1;border:1px solid var(--line);border-radius:var(--r);padding:13px 16px;
-    font-family:inherit;font-size:1rem;color:var(--ink);background:var(--card);
-    transition:border-color .15s;
-  }
-  .inputrow input::placeholder{color:var(--ink-3)}
-  .inputrow input:focus{outline:none;border-color:var(--sage)}
-  .inputrow button{
-    border:1px solid var(--sage);background:var(--sage);color:#fff;font-family:inherit;
-    font-weight:600;font-size:1.15rem;width:48px;border-radius:var(--r);cursor:pointer;
-    transition:opacity .15s;
-  }
-  .inputrow button:hover{opacity:.88}
+  /* héros */
+  .heros{background:var(--ink);color:#fff;border-radius:var(--r);padding:20px}
+  .heros .lbl{font-size:.78rem;color:#A9B5AD;font-weight:500;text-transform:uppercase;letter-spacing:.08em}
+  .heros h3{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:1.55rem;line-height:1.15;margin:8px 0 12px;letter-spacing:-.01em}
+  .heros .p-tm{background:#2C3B32;color:#BFE0CC}
+  .heros .lancer{display:flex;align-items:center;gap:8px;margin:14px 0 18px;font-size:.95rem;color:#D8DFDA}
+  .heros .lancer b{color:#fff;font-family:'Bricolage Grotesque',sans-serif;font-size:1.15rem}
+  .heros .acts{display:flex;gap:10px}
+  .heros .acts .btn-v{flex:1;background:#fff;color:var(--ink);padding:0 12px;white-space:nowrap;font-size:.92rem}
+  .heros .rond{width:46px;height:46px;border-radius:14px;background:#2C3B32;color:#fff;display:flex;align-items:center;justify-content:center;flex:none}
 
-  .mychips{display:flex;gap:7px;flex-wrap:wrap;min-height:34px}
-  .mychip{
-    background:var(--sage);color:#fff;padding:6px 8px 6px 13px;border-radius:100px;
-    font-size:.88rem;font-weight:500;display:inline-flex;align-items:center;gap:7px;
-    animation:chip .16s ease;
-  }
-  @keyframes chip{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:none}}
-  .mychip button{
-    background:rgba(255,255,255,.22);border:none;color:#fff;width:18px;height:18px;
-    border-radius:50%;cursor:pointer;font-size:.8rem;line-height:1;
-    display:flex;align-items:center;justify-content:center;
-  }
-  .mychip button:hover{background:rgba(255,255,255,.4)}
-  .noneyet{color:var(--ink-3);font-size:.9rem;font-style:italic}
+  /* listes de recettes */
+  .rangee{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;margin:0 -16px;padding:0 16px 4px;scrollbar-width:none}
+  .rangee::-webkit-scrollbar{display:none}
+  .mini{flex:0 0 72%;max-width:260px;scroll-snap-align:start;background:var(--card);border-radius:var(--r);padding:14px;text-align:left;display:flex;flex-direction:column;gap:10px;min-height:118px}
+  .mini b{font-weight:600;font-size:.97rem;line-height:1.3;flex:1}
+  .mini .pastille{align-self:flex-start}
+  .alerte{background:var(--orange-doux);color:var(--orange-txt);border-radius:var(--r);padding:14px 16px;display:flex;gap:12px;margin-top:14px}
+  .alerte .ico{color:var(--orange);margin-top:1px}
+  .alerte b{display:block;color:var(--orange-txt)}
+  .alerte p{font-size:.92rem}
+  .tuiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+  .tuile{background:var(--card);border-radius:var(--r);padding:14px 16px;text-align:left}
+  .tuile .n{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:1.9rem;line-height:1}
+  .tuile .l{font-size:.85rem;color:var(--ink-2);margin-top:6px;display:block}
+  .tuile.o .n{color:var(--orange)}
 
-  /* ---------- catégories ---------- */
-  .catsearch input{
-    width:100%;border:1px solid var(--line);border-radius:12px;padding:10px 14px;
-    font-family:inherit;font-size:.92rem;background:var(--card);color:var(--ink);margin-bottom:10px;
-  }
-  .catsearch input:focus{outline:none;border-color:var(--sage)}
-  .cat{
-    border-bottom:1px solid var(--line);
-  }
-  .cat:first-of-type{border-top:1px solid var(--line)}
-  .cat>summary{
-    list-style:none;cursor:pointer;padding:13px 4px;font-weight:600;font-size:.93rem;
-    display:flex;align-items:center;gap:10px;user-select:none;color:var(--ink);
-    transition:color .13s;
-  }
-  .cat>summary::-webkit-details-marker{display:none}
-  .cat>summary:hover{color:var(--sage)}
-  .cat>summary .ico{font-size:.95rem;width:22px;text-align:center;filter:saturate(.75)}
-  .cat>summary .n{
-    margin-left:auto;font-size:.76rem;font-weight:600;color:var(--ink-3);
-    font-variant-numeric:tabular-nums;
-  }
-  .cat>summary .n.has{color:var(--sage)}
-  .cat>summary .chev{color:var(--ink-3);font-size:.8rem;transition:transform .18s}
-  .cat[open]>summary .chev{transform:rotate(90deg)}
-  .cat .body{padding:2px 4px 16px}
-  .qchips{display:flex;gap:7px;flex-wrap:wrap}
-  .qchip{
-    border:1px solid var(--line);background:var(--card);color:var(--ink-2);padding:6px 13px;
-    border-radius:100px;font-family:inherit;font-size:.86rem;font-weight:500;cursor:pointer;
-    transition:all .13s;
-  }
-  .qchip:hover{border-color:var(--sage);color:var(--sage)}
-  .qchip.used{background:var(--sage);border-color:var(--sage);color:#fff}
+  /* semaine */
+  .compteurs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .compteurs div{background:var(--card);border-radius:16px;padding:12px 8px;text-align:center}
+  .compteurs b{display:block;font-family:'Bricolage Grotesque',sans-serif;font-size:1.6rem;line-height:1.1}
+  .compteurs span{font-size:.72rem;color:var(--ink-2);line-height:1.2;display:block;margin-top:3px}
+  .compteurs .o b{color:var(--orange)}
+  .synchro{display:flex;align-items:center;gap:10px;margin:14px 0}
+  .synchro .t{flex:1;font-size:.85rem;color:var(--ink-2)}
+  .navsem{display:flex;gap:6px}
+  .navsem button{width:44px;height:44px;border-radius:12px;background:var(--card);display:flex;align-items:center;justify-content:center}
+  .jours{display:flex;flex-direction:column;gap:10px}
+  .jour{background:var(--card);border-radius:var(--r);padding:14px;display:flex;gap:14px;text-align:left;width:100%}
+  .jour.passe{opacity:.55}
+  .jour .j{width:42px;flex:none;text-align:center}
+  .jour .j span{font-size:.78rem;color:var(--ink-2);text-transform:capitalize;display:block}
+  .jour .j b{font-family:'Bricolage Grotesque',sans-serif;font-size:1.5rem;line-height:1.1}
+  .jour.auj .j b{color:var(--vert)}
+  .jour .c{flex:1;min-width:0;display:flex;flex-direction:column;gap:7px}
+  .evs{display:flex;flex-wrap:wrap;gap:5px}
+  .plat{font-weight:600;font-size:.98rem;line-height:1.3}
+  .plat.vide{font-weight:400;color:var(--ink-3)}
+  .meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:.83rem;color:var(--ink-2)}
+  .note{font-size:.83rem;color:var(--orange-txt);background:var(--orange-doux);border-radius:10px;padding:5px 9px;align-self:flex-start}
+  .barre-btn{display:flex;gap:10px;margin-top:14px}
+  .barre-btn .btn{flex:1}
 
-  /* ---------- filtres ---------- */
-  .opts{display:flex;gap:7px;flex-wrap:wrap}
-  .opt{
-    border:1px solid var(--line);background:var(--card);color:var(--ink-2);padding:7px 14px;
-    border-radius:100px;font-family:inherit;font-size:.86rem;font-weight:500;cursor:pointer;
-    transition:all .13s;
-  }
-  .opt:hover{border-color:var(--sage);color:var(--sage)}
-  .opt.on{background:var(--sage-soft);border-color:var(--sage);color:var(--sage);font-weight:600}
+  /* courses */
+  .avatars{display:flex;margin-top:6px}
+  .avatars span{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:.85rem;border:2px solid var(--bg)}
+  .avatars span:first-child{background:var(--vert);color:#fff}
+  .avatars span+span{background:#D9C3A5;color:var(--ink);margin-left:-8px}
+  .ajout{display:flex;gap:8px;position:relative}
+  .ajout input{flex:1;min-width:0;min-height:48px;border:1px solid var(--line);border-radius:14px;padding:0 14px;background:var(--card);outline:none}
+  .ajout input:focus{border-color:var(--vert)}
+  .ajout .carre{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;flex:none}
+  .rayon{margin-top:18px}
+  .rayon h4{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);font-weight:600;margin:0 4px 6px}
+  .rayon .carte{padding:4px 0}
+  .art{display:flex;align-items:center;gap:12px;min-height:50px;padding:0 16px;width:100%;text-align:left}
+  .art+.art{border-top:1px solid var(--line)}
+  .art .case{width:24px;height:24px;border-radius:50%;border:1.7px solid #B9C2BC;flex:none;display:flex;align-items:center;justify-content:center;color:#fff}
+  .art .case .ico{width:14px;height:14px;stroke-width:3;opacity:0}
+  .art.fait .case{background:var(--vert);border-color:var(--vert)}
+  .art.fait .case .ico{opacity:1}
+  .art .nm{flex:1;min-width:0}
+  .art.fait .nm{text-decoration:line-through;color:var(--ink-3)}
+  .art .org{font-size:.75rem;color:var(--ink-3);white-space:nowrap}
+  .lien{font-size:.88rem;color:var(--vert);font-weight:600;padding:12px 4px;min-height:44px}
 
-  /* ---------- idées ---------- */
-  .results{display:grid;gap:12px;padding-top:2px}
-  .idea{
-    background:var(--card);border:1px solid var(--line);border-radius:var(--r);
-    padding:20px 22px;animation:up .25s ease both;
-    transition:border-color .15s;
-  }
-  .idea:hover{border-color:var(--sage-line)}
-  @keyframes up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-  .idea .top{display:flex;align-items:baseline;gap:12px;justify-content:space-between}
-  .idea h3{
-    font-family:'Fraunces',serif;font-weight:500;font-size:1.32rem;line-height:1.15;
-    letter-spacing:-.01em;
-  }
-  .idea .frac{
-    font-size:.82rem;font-weight:600;color:var(--sage);white-space:nowrap;
-    font-variant-numeric:tabular-nums;
-  }
-  .idea .frac.full{color:var(--sage)}
-  .meter{height:3px;border-radius:2px;background:var(--line);overflow:hidden;margin:12px 0 13px}
-  .meter span{display:block;height:100%;background:var(--sage);border-radius:2px;transition:width .3s ease}
-  .uses{display:flex;gap:6px;flex-wrap:wrap;font-size:.84rem}
-  .u{color:var(--sage);background:var(--sage-soft);padding:3px 10px;border-radius:100px;font-weight:500}
-  .u.miss{color:var(--amber);background:var(--amber-soft)}
-  .idea .acts{display:flex;align-items:center;gap:16px;margin-top:16px;flex-wrap:wrap}
-  .cookbtn{text-decoration:none;flex:1;min-width:200px}
-  .cookbtn button{
-    width:100%;border:none;background:var(--cook);color:#fff;font-family:inherit;
-    font-weight:600;font-size:.92rem;padding:12px;border-radius:11px;cursor:pointer;
-    transition:opacity .14s;
-  }
-  .cookbtn button:hover{opacity:.9}
-  .cookbtn.search button{background:var(--card);color:var(--ink-2);border:1px solid var(--line)}
-  .cookbtn.search button:hover{border-color:var(--ink-3);opacity:1}
-  .badge{
-    display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:600;
-    padding:3px 9px;border-radius:100px;letter-spacing:.02em;
-  }
-  .badge.ok{background:#E2F3F0;color:#0B7A70}
-  .badge.pin{background:#EEEAF5;color:#5B4483}
-  .badge.none{background:#F4F1E9;color:#8A8676}
-  .cooktitle{font-size:.83rem;color:var(--ink-3);margin-top:9px}
-  .cooktitle b{color:var(--ink-2);font-weight:500}
-  .pinbtn{
-    background:none;border:none;color:var(--ink-3);font-family:inherit;font-size:.83rem;
-    cursor:pointer;padding:2px;border-bottom:1px solid transparent;white-space:nowrap;
-  }
-  .pinbtn:hover{color:var(--sage);border-bottom-color:var(--sage)}
-  .alt{
-    font-size:.83rem;color:var(--ink-3);text-decoration:none;border-bottom:1px solid transparent;
-    transition:all .13s;white-space:nowrap;
-  }
-  .alt:hover{color:var(--ink-2);border-bottom-color:var(--ink-3)}
-  .fav{
-    background:none;border:none;color:var(--ink-3);font-family:inherit;font-size:1.05rem;
-    cursor:pointer;padding:4px;line-height:1;transition:all .14s;
-  }
-  .fav:hover{color:#C6503C;transform:scale(1.12)}
-  .fav.on{color:#C6503C}
-
-  .placeholder{
-    border:1px dashed var(--line);border-radius:var(--r);padding:34px 24px;text-align:center;
-    color:var(--ink-3);font-size:.93rem;
-  }
-  .placeholder b{color:var(--ink-2);font-weight:600;display:block;font-family:'Fraunces',serif;
-    font-size:1.15rem;margin-bottom:5px;font-weight:500}
-
-  /* ---------- favoris ---------- */
-  .favlist{display:grid;gap:8px}
-  .favitem{
-    background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;
-    display:flex;align-items:center;gap:12px;
-  }
-  .favitem .ft{flex:1;font-weight:500;font-size:.94rem}
-  .favitem a{text-decoration:none}
-  .favitem .go{
-    border:none;background:none;color:var(--cook);font-family:inherit;font-weight:600;
-    font-size:.85rem;cursor:pointer;padding:4px 2px;
-  }
-  .favitem .go:hover{text-decoration:underline}
-  .favitem .rm{border:none;background:none;color:var(--ink-3);cursor:pointer;font-size:1.1rem;line-height:1;padding:2px 4px}
-  .favitem .rm:hover{color:#C6503C}
-
-  footer{margin:44px 0 40px;padding-top:18px;border-top:1px solid var(--line);
-    color:var(--ink-3);font-size:.82rem;line-height:1.6}
-  footer b{color:var(--ink-2);font-weight:600}
-
-
-  /* autocomplétion */
-  .inputwrap{position:relative;flex:1}
-  .ac{position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--card);
-    border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(38,48,42,.12);
-    z-index:40;overflow:hidden;display:none}
+  /* frigo */
+  .bloc{border-radius:var(--r);padding:16px;margin-top:14px}
+  .bloc.o{background:var(--orange-doux)}
+  .bloc.b{background:var(--card)}
+  .bloc h3{font-size:.95rem;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+  .bloc.o h3{color:var(--orange-txt)}
+  .chips{display:flex;flex-wrap:wrap;gap:7px}
+  .chip{display:inline-flex;align-items:center;gap:6px;min-height:38px;padding:0 6px 0 12px;border-radius:100px;font-size:.9rem;font-weight:500;border:1.5px solid var(--line);background:var(--card);color:var(--ink-2)}
+  .chip.on{border-color:var(--vert);background:var(--vert-doux);color:var(--vert)}
+  .bloc.o .chip{border-color:#EFD4C0}
+  .bloc.o .chip.on{border-color:var(--orange);background:#fff;color:var(--orange-txt)}
+  .chip .x{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--ink-3)}
+  .chip .x .ico{width:14px;height:14px}
+  .bascule{display:flex;align-items:center;gap:8px;font-size:.88rem;color:var(--ink-2);margin-top:10px;min-height:44px}
+  .bascule input{width:20px;height:20px;accent-color:var(--orange)}
+  .ac{position:absolute;left:0;right:56px;top:52px;background:var(--card);border-radius:14px;box-shadow:0 8px 30px rgba(30,42,35,.14);z-index:30;overflow:hidden;display:none}
   .ac.on{display:block}
-  .ac button{display:block;width:100%;text-align:left;border:none;background:none;font-family:inherit;
-    font-size:.95rem;color:var(--ink);padding:10px 15px;cursor:pointer;transition:background .1s}
-  .ac button:hover,.ac button.sel{background:var(--sage-soft);color:var(--sage)}
-  .ac button .r{float:right;font-size:.78rem;color:var(--ink-3)}
-  /* recherche par nom + types */
-  .findrow{display:flex;gap:8px;margin-bottom:10px}
-  .findrow input{flex:1;border:1px solid var(--line);border-radius:12px;padding:10px 14px;
-    font-family:inherit;font-size:.94rem;background:var(--card);color:var(--ink)}
-  .findrow input:focus{outline:none;border-color:var(--sage)}
-  .types{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:16px}
-  .type{border:1px solid var(--line);background:var(--card);color:var(--ink-2);padding:6px 13px;
-    border-radius:100px;font-family:inherit;font-size:.85rem;font-weight:500;cursor:pointer;transition:all .13s}
-  .type:hover{border-color:var(--sage);color:var(--sage)}
-  .type.on{background:var(--sage);border-color:var(--sage);color:#fff}
-  /* panier / courses */
-  .cart{background:none;border:none;color:var(--ink-3);font-family:inherit;font-size:1.05rem;
-    cursor:pointer;padding:4px;line-height:1;transition:all .14s}
-  .cart:hover{color:var(--cook);transform:scale(1.12)}
-  .cart.on{color:var(--cook)}
-  .cartrecipes{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:16px}
-  .cartchip{background:var(--sage-soft);color:var(--sage);border:1px solid var(--sage-line);
-    padding:6px 8px 6px 13px;border-radius:100px;font-size:.86rem;font-weight:500;
-    display:inline-flex;align-items:center;gap:7px}
-  .cartchip button{background:none;border:none;color:var(--sage);cursor:pointer;font-size:.9rem;line-height:1;padding:0 2px}
-  .shopgroup{margin-bottom:14px}
-  .shopgroup h4{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);
-    font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:7px}
-  .shoplist{display:grid;gap:6px}
-  .sitem{display:flex;align-items:center;gap:11px;padding:10px 14px;background:var(--card);
-    border:1px solid var(--line);border-radius:11px;cursor:pointer;user-select:none;transition:background .12s}
-  .sitem:hover{border-color:var(--sage-line)}
-  .sitem .box{flex:0 0 20px;height:20px;border:2px solid var(--sage-line);border-radius:6px;
-    display:flex;align-items:center;justify-content:center;transition:all .14s}
-  .sitem.done .box{background:var(--sage);border-color:var(--sage)}
-  .sitem .box svg{opacity:0;color:#fff}.sitem.done .box svg{opacity:1}
-  .sitem .nm{flex:1;font-size:.94rem}
-  .sitem .from{font-size:.76rem;color:var(--ink-3)}
-  .sitem.done .nm{text-decoration:line-through;color:var(--ink-3)}
-  .shoptools{display:flex;gap:14px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
-  .shoptools .info{font-size:.86rem;color:var(--ink-2)}
-  .toast{
-    position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(16px);
-    background:var(--ink);color:#fff;padding:10px 20px;border-radius:100px;font-weight:500;
-    font-size:.87rem;z-index:80;opacity:0;pointer-events:none;transition:all .22s;
-  }
-  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .ac button{display:flex;justify-content:space-between;width:100%;padding:12px 14px;text-align:left;min-height:44px}
+  .ac button+button{border-top:1px solid var(--line)}
+  .ac button span{font-size:.78rem;color:var(--ink-3)}
+  .idee{background:var(--card);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:8px}
+  .idee b{font-weight:600;line-height:1.3}
+  .idee .u{font-size:.86rem;color:var(--vert)}
+  .idee .m{font-size:.86rem;color:var(--ink-2)}
+  .idee .acts{display:flex;gap:8px;margin-top:4px}
+  .idee .acts .btn{flex:1;min-height:44px}
+  .liste{display:flex;flex-direction:column;gap:10px}
 
-  @media(max-width:520px){
-    header{padding:34px 0 4px}
-    .idea{padding:17px 18px}
-    .idea .acts{gap:12px}
-  }
-  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  /* barre du bas */
+  nav{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);
+    display:flex;padding:6px 6px calc(6px + env(safe-area-inset-bottom));z-index:20}
+  nav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;min-height:52px;color:var(--ink-3);font-size:.72rem;font-weight:500;border-radius:14px}
+  nav button.on{color:var(--vert);font-weight:600}
+  nav button.on .ico{stroke-width:2}
+  .ecran{display:none}
+  .ecran.on{display:block}
+
+  /* feuille (choix d'un plat, réglages) */
+  .voile{position:fixed;inset:0;background:rgba(30,42,35,.35);z-index:40;display:none}
+  .voile.on{display:block}
+  .feuille{position:fixed;left:0;right:0;bottom:0;max-height:88vh;background:var(--bg);border-radius:24px 24px 0 0;z-index:41;
+    padding:10px 16px calc(16px + env(safe-area-inset-bottom));transform:translateY(105%);transition:transform .22s ease;display:flex;flex-direction:column;max-width:560px;margin:0 auto}
+  .feuille.on{transform:none}
+  .feuille .poignee{width:40px;height:5px;border-radius:3px;background:#C9D0CB;margin:0 auto 12px}
+  .feuille h3{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:1.25rem;margin-bottom:12px;text-transform:none}
+  .feuille .defile{overflow-y:auto;flex:1;margin:10px -16px 0;padding:0 16px}
+  .choix{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:var(--card);border-radius:14px;padding:12px 14px;min-height:52px;margin-bottom:8px}
+  .choix b{flex:1;font-weight:500;font-size:.95rem;line-height:1.3}
+  .choix span{font-size:.8rem;color:var(--ink-2);white-space:nowrap}
+  .champ{display:block;margin-bottom:12px}
+  .champ span{display:block;font-size:.85rem;color:var(--ink-2);margin-bottom:5px}
+  .champ input{width:100%;min-height:48px;border:1px solid var(--line);border-radius:14px;padding:0 14px;background:var(--card);outline:none}
+  .toast{position:fixed;left:50%;bottom:calc(var(--nav) + env(safe-area-inset-bottom) + 16px);transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;
+    padding:11px 18px;border-radius:100px;font-size:.9rem;opacity:0;transition:all .2s;pointer-events:none;z-index:50;white-space:nowrap}
+  .toast.on{opacity:1;transform:translateX(-50%)}
 </style>
 </head>
 <body>
 
-<header>
-  <div class="wrap">
-    <div class="brand">Frigo · Cookidoo · Thermomix</div>
-    <h1>Qu'est-ce <em>qu'on mange&nbsp;?</em></h1>
-    <p class="sub">Coche ce que tu as : l'app classe les recettes Cookidoo réalisables. Chaque bouton ouvre directement la recette, prête pour le Thermomix.</p>
-  </div>
-</header>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-soir" viewBox="0 0 24 24"><path d="M3 18h18M5 18a7 7 0 0 1 14 0M12 8V6M12 4V3"/></symbol>
+  <symbol id="i-sem" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-courses" viewBox="0 0 24 24"><path d="M4 5h2l2 10h10l2-7H7.2"/><circle cx="9.5" cy="19" r="1.3"/><circle cx="16.5" cy="19" r="1.3"/></symbol>
+  <symbol id="i-frigo" viewBox="0 0 24 24"><rect x="5.5" y="2.5" width="13" height="19" rx="2.5"/><path d="M5.5 10h13M9 6v1.5M9 13v3"/></symbol>
+  <symbol id="i-retour" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.4-5.7M20 4v4h-4"/></symbol>
+  <symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
+  <symbol id="i-horloge" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+  <symbol id="i-alerte" viewBox="0 0 24 24"><path d="M12 3.5 2.8 19.5h18.4zM12 10v4M12 17v.2"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-micro" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></symbol>
+  <symbol id="i-g" viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></symbol>
+  <symbol id="i-d" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+  <symbol id="i-coeur" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.3a4.3 4.3 0 0 1 7.5 2.5C19.5 15.4 12 20 12 20z"/></symbol>
+  <symbol id="i-chercher" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.4-4.4"/></symbol>
+</svg>
 
-<section>
-  <div class="wrap">
-    <div class="slabel">Mon frigo <span class="count" id="pcount"></span></div>
-    <div class="inputrow">
-      <div class="inputwrap">
-        <input id="inp" type="text" placeholder="Ajouter un ingrédient…" autocomplete="off">
-        <div class="ac" id="ac"></div>
-      </div>
-      <button id="addbtn" aria-label="Ajouter">＋</button>
-    </div>
-    <div class="mychips" id="mychips"></div>
+<!-- ============ ÉCRAN 1 — CE SOIR ============ -->
+<section class="ecran" id="e-soir"><div class="wrap">
+  <div class="tete"><div class="txt"><div class="surtitre" id="soir-date"></div><h1>Ce soir on mange</h1></div><button class="etat" data-etat></button></div>
+  <div id="soir-heros"></div>
+  <h2>Pas le temps ? En moins de 20 min</h2>
+  <div class="rangee" id="soir-express"></div>
+  <div id="soir-demain"></div>
+  <div class="tuiles">
+    <button class="tuile" data-aller="courses"><span class="n" id="t-courses">0</span><span class="l">articles de courses restants</span></button>
+    <button class="tuile o" data-aller="frigo"><span class="n" id="t-frigo">0</span><span class="l">produits à finir vite</span></button>
   </div>
-</section>
+</div></section>
 
-<section>
-  <div class="wrap">
-    <div class="slabel">Choisir par rayon</div>
-    <div class="catsearch"><input id="catq" type="search" placeholder="Filtrer les ingrédients…" autocomplete="off"></div>
-    <div id="cats"></div>
+<!-- ============ ÉCRAN 2 — SEMAINE ============ -->
+<section class="ecran" id="e-sem"><div class="wrap">
+  <div class="tete"><div class="txt"><div class="surtitre" id="sem-dates"></div><h1>La semaine</h1></div><button class="etat" data-etat></button></div>
+  <div class="compteurs" id="sem-compteurs"></div>
+  <div class="synchro">
+    <span class="t" id="sem-synchro"></span>
+    <div class="navsem"><button id="sem-prec" aria-label="Semaine précédente"><svg class="ico"><use href="#i-g"/></svg></button><button id="sem-suiv" aria-label="Semaine suivante"><svg class="ico"><use href="#i-d"/></svg></button></div>
   </div>
-</section>
+  <button class="btn btn-v" id="sem-proposer" style="width:100%;margin-bottom:14px">Proposer la semaine</button>
+  <div class="jours" id="sem-jours"></div>
+  <div class="barre-btn"><button class="btn btn-o" id="sem-courses"><svg class="ico s"><use href="#i-courses"/></svg>Générer la liste de courses</button></div>
+</div></section>
 
-<section>
-  <div class="wrap">
-    <div class="slabel">Envie du moment</div>
-    <div class="opts" id="opts"></div>
+<!-- ============ ÉCRAN 3 — COURSES ============ -->
+<section class="ecran" id="e-courses"><div class="wrap">
+  <div class="tete"><div class="txt"><h1>Courses</h1><div class="surtitre" id="c-resume" style="text-transform:none;margin-top:4px"></div><div class="avatars"><span>H</span><span>A</span></div></div><button class="etat" data-etat></button></div>
+  <div class="ajout">
+    <input id="c-inp" placeholder="Ajouter un article…" enterkeyhint="done" autocomplete="off">
+    <button class="carre btn-l" id="c-micro" aria-label="Dicter" style="display:none"><svg class="ico"><use href="#i-micro"/></svg></button>
+    <button class="carre btn-v" id="c-ajout" aria-label="Ajouter"><svg class="ico"><use href="#i-plus"/></svg></button>
   </div>
-</section>
+  <div id="c-liste"></div>
+  <button class="lien" id="c-vider" style="display:none">Retirer les articles cochés</button>
+</div></section>
 
-<section>
-  <div class="wrap">
-    <div class="slabel">Recettes <span class="count" id="rcount"></span></div>
-    <div class="findrow"><input id="qnom" type="search" placeholder="Chercher une recette par son nom…" autocomplete="off"></div>
-    <div class="types" id="types"></div>
-    <div class="results" id="results"></div>
+<!-- ============ ÉCRAN 4 — FRIGO ============ -->
+<section class="ecran" id="e-frigo"><div class="wrap">
+  <div class="tete"><div class="txt"><h1>Qu'est-ce qu'il reste ?</h1></div><button class="etat" data-etat></button></div>
+  <div class="ajout">
+    <input id="f-inp" placeholder="Ajouter un ingrédient…" enterkeyhint="done" autocomplete="off">
+    <button class="carre btn-v" id="f-ajout" aria-label="Ajouter"><svg class="ico"><use href="#i-plus"/></svg></button>
+    <div class="ac" id="f-ac"></div>
   </div>
-</section>
+  <label class="bascule"><input type="checkbox" id="f-vite"> à finir vite</label>
+  <div class="bloc o"><h3><svg class="ico s"><use href="#i-horloge"/></svg>À finir vite</h3><div class="chips" id="f-vite-l"></div></div>
+  <div class="bloc b"><h3>Frigo et placards</h3><div class="chips" id="f-reste-l"></div></div>
+  <h2 id="f-titre-idees">Idées Cookidoo</h2>
+  <div class="liste" id="f-idees"></div>
+</div></section>
 
-<section id="shopsec" style="display:none">
-  <div class="wrap">
-    <div class="slabel">Ma liste de courses <span class="count" id="shopcount"></span></div>
-    <div class="cartrecipes" id="cartrecipes"></div>
-    <div class="shoptools" id="shoptools"></div>
-    <div id="shoplist"></div>
-  </div>
-</section>
+<nav>
+  <button data-onglet="soir"><svg class="ico"><use href="#i-soir"/></svg>Ce soir</button>
+  <button data-onglet="sem"><svg class="ico"><use href="#i-sem"/></svg>Semaine</button>
+  <button data-onglet="courses"><svg class="ico"><use href="#i-courses"/></svg>Courses</button>
+  <button data-onglet="frigo"><svg class="ico"><use href="#i-frigo"/></svg>Frigo</button>
+</nav>
 
-<section id="favsec" style="display:none">
-  <div class="wrap">
-    <div class="slabel">Mes recettes gardées</div>
-    <div class="favlist" id="favlist"></div>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    Toutes les recettes listées ici sont de <b>vraies recettes Cookidoo</b> : le bouton ouvre directement la page, jamais une recherche. <button class='pinbtn' id='addrecipe'>ajouter une recette</button>
-  </div>
-</footer>
-
+<div class="voile" id="voile"></div>
+<div class="feuille" id="feuille"><div class="poignee"></div><div id="feuille-c" style="display:flex;flex-direction:column;min-height:0;flex:1"></div></div>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -360,320 +283,320 @@
    ============================================================ */
 const RECETTES=[
 /* ===== SOUPES & VELOUTÉS ===== */
-{u:"r775302",t:"Velouté de légumes",i:["carotte","poireau","pomme de terre","courgette","oignon"],g:["vege","express","congelation"],n:"4.8"},
-{u:"r54155",t:"Velouté de courgette",i:["courgette","pomme de terre","crème fraîche","bouillon cube"],g:["vege","express","enfants"],n:"4.8"},
-{u:"r96393",t:"Velouté de butternut et patate douce",i:["courge butternut","patate douce","oignon","bouillon cube"],g:["vege","express","congelation"],n:"4.7"},
-{u:"r915839",t:"Velouté de butternut au curry et lait de coco",i:["courge butternut","lait de coco","curry"],g:["vege","express","congelation"],n:"4.7"},
-{u:"r67971",t:"Velouté butternut-poivron rouge",i:["courge butternut","poivron","bouillon cube","persil"],g:["vege","express"],n:""},
-{u:"r538675",t:"Velouté de butternut, bacon et comté",i:["courge butternut","lardons","comté","bouillon cube"],g:[],n:"4.3"},
-{u:"r737671",t:"Velouté de butternut, carottes et poireaux",i:["courge butternut","carotte","poireau","crème liquide"],g:["vege","congelation"],n:"4.7"},
-{u:"r107935",t:"Velouté poireau-curry à la pointe de miel",i:["poireau","pomme de terre","lait","curry","miel"],g:["vege","express"],n:"4.6"},
-{u:"r932241",t:"Velouté carottes, pommes de terre et Vache qui rit®",i:["carotte","pomme de terre","vache qui rit"],g:["vege","express","enfants"],n:""},
-{u:"r784439",t:"Soupe à l'oignon gratinée",i:["oignon","fromage râpé","pain","bouillon cube"],g:["vege"],n:""},
-{u:"r801119",t:"Soupe paysanne",i:["carotte","poireau","pomme de terre","chou","lardons"],g:["congelation"],n:""},
-{u:"r761842",t:"Soupe de légumes et tartines de maroilles",i:["carotte","poireau","pomme de terre","fromage râpé","pain"],g:["vege"],n:""},
-{u:"r766502",t:"Minestrone d'hiver",i:["carotte","chou","haricots blancs","pâtes","tomates concassées"],g:["vege","congelation","complet"],n:""},
-{u:"r727768",t:"Soupe au pistou aux spaghetti",i:["basilic","haricots verts","pâtes","tomate","ail"],g:["vege","complet"],n:""},
-{u:"r801117",t:"Crème de pommes de terre et courgettes, miettes de chèvre frais",i:["pomme de terre","courgette","chèvre"],g:["vege","express"],n:""},
-{u:"r801118",t:"Velouté de carottes au gingembre, feta et amandes grillées",i:["carotte","gingembre","feta","amandes"],g:["vege"],n:""},
-{u:"r761843",t:"Velouté de potiron, vermicelles et parmesan",i:["potiron","pâtes","parmesan"],g:["vege","complet"],n:""},
-{u:"r728987",t:"Velouté de potimarron au lard et aux châtaignes",i:["potiron","lardons","châtaignes"],g:[],n:"4.5"},
-{u:"r761846",t:"Velouté de chou-fleur et tartine au comté",i:["chou-fleur","comté","pain","crème fraîche"],g:["vege"],n:""},
-{u:"r801424",t:"Soupe de brocoli crémeuse au cheddar et croûtons gratinés",i:["brocoli","fromage râpé","crème fraîche","pain"],g:["vege","enfants"],n:""},
-{u:"r801120",t:"Velouté de roquette, pommes de terre et œuf mollet",i:["salade","pomme de terre","œufs"],g:["vege"],n:""},
-{u:"r801433",t:"Soupe de panais aux oignons caramélisés",i:["panais","oignon","bouillon cube"],g:["vege"],n:""},
-{u:"r801434",t:"Soupe de champignons, bacon grillé et fromage frais",i:["champignons","lardons","fromage frais"],g:[],n:""},
-{u:"r801436",t:"Soupe châtaignes-champignons, croûtons de pain d'épice",i:["châtaignes","champignons","pain"],g:["vege"],n:""},
-{u:"r801437",t:"Soupe de pommes de terre et de poireaux au jambon sec",i:["pomme de terre","poireau","jambon","citron","crème fraîche"],g:["complet"],n:""},
-{u:"r801432",t:"Soupe de butternut aux épices et terrine de campagne",i:["courge butternut","pain","oignon"],g:[],n:""},
-{u:"r801430",t:"Soupe de pommes de terre et chou vert, tartines au saumon fumé",i:["pomme de terre","chou","saumon","pain"],g:["complet"],n:""},
-{u:"r801431",t:"Bouillon crémeux de maïs et de pommes de terre, avocat",i:["maïs","pomme de terre","avocat","crème fraîche"],g:["vege","complet"],n:""},
-{u:"r801440",t:"Soupe de poireaux, crème fraîche aux herbes",i:["poireau","crème fraîche","ciboulette","pomme de terre"],g:["vege","express"],n:""},
-{u:"r801438",t:"Soupe de patates douces au garam masala et yaourt",i:["patate douce","yaourt","curry","citron"],g:["vege","express"],n:""},
-{u:"r801429",t:"Soupe de patates douces à la noisette et filets de dinde",i:["patate douce","dinde","noisettes"],g:["complet"],n:""},
-{u:"r801422",t:"Soupe thaïe au lait de coco et au poulet",i:["poulet","lait de coco","gingembre","citron","champignons"],g:["complet"],n:""},
-{u:"r801423",t:"Soupe de lentilles aux épinards et au poulet",i:["lentilles","épinards","poulet","oignon"],g:["complet","congelation"],n:""},
-{u:"r801427",t:"Soupe non mixée au poulet, petites pâtes et légumes",i:["poulet","pâtes","carotte","poireau"],g:["enfants","complet"],n:""},
-{u:"r801426",t:"Soupe de tomates aux tortellinis de viande hachée",i:["tomates concassées","pâtes","bœuf haché"],g:["enfants","complet"],n:""},
-{u:"r801425",t:"Soupe espagnole chorizo, pois chiches et tomates",i:["chorizo","pois chiches","tomates concassées","oignon"],g:["complet","congelation"],n:""},
-{u:"r801421",t:"Soupe de moules au curry",i:["moules","curry","crème fraîche","vin blanc"],g:["complet"],n:""},
-{u:"r728985",t:"Soupe de tomates au jambon et aux œufs",i:["tomates concassées","jambon","œufs"],g:["express","complet"],n:""},
-{u:"r729358",t:"Soupe de haricots blancs à la tomate et magret séché",i:["haricots blancs","tomates concassées","canard"],g:["complet"],n:""},
-{u:"r783412",t:"Soupe aux lentilles corail, légumes et saucisses",i:["lentilles corail","saucisse","carotte","oignon"],g:["complet","congelation","express"],n:""},
-{u:"r731104",t:"Dahl de pois cassés à la patate douce",i:["lentilles","patate douce","curry","lait de coco"],g:["vege","congelation","complet"],n:""},
-{u:"r761850",t:"Bouillon thaï aux légumes",i:["lait de coco","carotte","champignons","gingembre"],g:["vege"],n:""},
-{u:"r761851",t:"Soupe ramen aux légumes et tofu",i:["pâtes","champignons","épinards","sauce soja"],g:["vege","complet"],n:""},
-{u:"r730068",t:"Soupe de nouilles au tofu fumé, épinards et champignons",i:["pâtes","épinards","champignons","sauce soja"],g:["vege","complet"],n:""},
-{u:"r801439",t:"Bouillon de bœuf, légumes et nouilles udon",i:["bœuf","pâtes","carotte","sauce soja"],g:["complet"],n:""},
-{u:"r764659",t:"Soupe persane au yaourt, brochette vapeur de poulet",i:["yaourt","poulet","menthe","oignon"],g:["complet"],n:""},
-{u:"r801111",t:"Gaspacho tomate-fraise-basilic",i:["tomate","fraise","basilic","huile d'olive"],g:["vege","express"],n:""},
-{u:"r801114",t:"Gaspacho tomate-poivron et salsa câpres-abricots",i:["tomate","poivron","câpres","abricot"],g:["vege","express"],n:""},
-{u:"r801115",t:"Soupe froide concombre-menthe et quenelles de chèvre frais",i:["concombre","menthe","chèvre"],g:["vege","express"],n:""},
-{u:"r801116",t:"Soupe froide de poivrons et pain tomates-sardines",i:["poivron","sardine","tomate","pain"],g:["complet"],n:""},
-{u:"r801428",t:"Soupe froide à l'avocat et citron, tartines de chèvre frais",i:["avocat","citron","chèvre","pain"],g:["vege","express"],n:""},
-{u:"r801112",t:"Soupe froide à la carotte et crevettes au citron vert",i:["carotte","crevettes","citron"],g:["complet"],n:""},
-{u:"r801113",t:"Velouté froid de petits pois à la menthe et à la ricotta",i:["petits pois","menthe","ricotta"],g:["vege","express"],n:""},
-{u:"r801435",t:"Soupe froide au cresson et tartines de tapenade",i:["salade","olives","pain","pomme de terre"],g:["vege"],n:""},
+{u:"r775302",t:"Velouté de légumes",i:["carotte","poireau","pomme de terre","courgette","oignon"],g:["vege","express","congelation"],n:"4.8",d:35,p:15},
+{u:"r54155",t:"Velouté de courgette",i:["courgette","pomme de terre","crème fraîche","bouillon cube"],g:["vege","express","enfants"],n:"4.8",d:25,p:10},
+{u:"r96393",t:"Velouté de butternut et patate douce",i:["courge butternut","patate douce","oignon","bouillon cube"],g:["vege","express","congelation"],n:"4.7",d:35,p:10},
+{u:"r915839",t:"Velouté de butternut au curry et lait de coco",i:["courge butternut","lait de coco","curry"],g:["vege","express","congelation"],n:"4.7",d:35,p:10},
+{u:"r67971",t:"Velouté butternut-poivron rouge",i:["courge butternut","poivron","bouillon cube","persil"],g:["vege","express"],n:"",d:30,p:10},
+{u:"r538675",t:"Velouté de butternut, bacon et comté",i:["courge butternut","lardons","comté","bouillon cube"],g:[],n:"4.3",d:35,p:10},
+{u:"r737671",t:"Velouté de butternut, carottes et poireaux",i:["courge butternut","carotte","poireau","crème liquide"],g:["vege","congelation"],n:"4.7",d:40,p:10},
+{u:"r107935",t:"Velouté poireau-curry à la pointe de miel",i:["poireau","pomme de terre","lait","curry","miel"],g:["vege","express"],n:"4.6",d:35,p:10},
+{u:"r932241",t:"Velouté carottes, pommes de terre et Vache qui rit®",i:["carotte","pomme de terre","vache qui rit"],g:["vege","express","enfants"],n:"",d:45,p:15},
+{u:"r784439",t:"Soupe à l'oignon gratinée",i:["oignon","fromage râpé","pain","bouillon cube"],g:["vege"],n:"",d:30,p:5},
+{u:"r801119",t:"Soupe paysanne",i:["carotte","poireau","pomme de terre","chou","lardons"],g:["congelation"],n:"",d:55,p:20},
+{u:"r761842",t:"Soupe de légumes et tartines de maroilles",i:["carotte","poireau","pomme de terre","fromage râpé","pain"],g:["vege"],n:"",d:50,p:20},
+{u:"r766502",t:"Minestrone d'hiver",i:["carotte","chou","haricots blancs","pâtes","tomates concassées"],g:["vege","congelation","complet"],n:"",d:70,p:25},
+{u:"r727768",t:"Soupe au pistou aux spaghetti",i:["basilic","haricots verts","pâtes","tomate","ail"],g:["vege","complet"],n:"",d:75,p:30},
+{u:"r801117",t:"Crème de pommes de terre et courgettes, miettes de chèvre frais",i:["pomme de terre","courgette","chèvre"],g:["vege","express"],n:"",d:50,p:20},
+{u:"r801118",t:"Velouté de carottes au gingembre, feta et amandes grillées",i:["carotte","gingembre","feta","amandes"],g:["vege"],n:"",d:65,p:25},
+{u:"r761843",t:"Velouté de potiron, vermicelles et parmesan",i:["potiron","pâtes","parmesan"],g:["vege","complet"],n:"",d:50,p:15},
+{u:"r728987",t:"Velouté de potimarron au lard et aux châtaignes",i:["potiron","lardons","châtaignes"],g:[],n:"4.5",d:35,p:10},
+{u:"r761846",t:"Velouté de chou-fleur et tartine au comté",i:["chou-fleur","comté","pain","crème fraîche"],g:["vege"],n:"",d:55,p:15},
+{u:"r801424",t:"Soupe de brocoli crémeuse au cheddar et croûtons gratinés",i:["brocoli","fromage râpé","crème fraîche","pain"],g:["vege","enfants"],n:"",d:45,p:10},
+{u:"r801120",t:"Velouté de roquette, pommes de terre et œuf mollet",i:["salade","pomme de terre","œufs"],g:["vege"],n:"",d:55,p:20},
+{u:"r801433",t:"Soupe de panais aux oignons caramélisés",i:["panais","oignon","bouillon cube"],g:["vege"],n:"",d:55,p:20},
+{u:"r801434",t:"Soupe de champignons, bacon grillé et fromage frais",i:["champignons","lardons","fromage frais"],g:[],n:"",d:60,p:20},
+{u:"r801436",t:"Soupe châtaignes-champignons, croûtons de pain d'épice",i:["châtaignes","champignons","pain"],g:["vege"],n:"",d:50,p:20},
+{u:"r801437",t:"Soupe de pommes de terre et de poireaux au jambon sec",i:["pomme de terre","poireau","jambon","citron","crème fraîche"],g:["complet"],n:"",d:50,p:20},
+{u:"r801432",t:"Soupe de butternut aux épices et terrine de campagne",i:["courge butternut","pain","oignon"],g:[],n:"",d:55,p:15},
+{u:"r801430",t:"Soupe de pommes de terre et chou vert, tartines au saumon fumé",i:["pomme de terre","chou","saumon","pain"],g:["complet"],n:"",d:55,p:20},
+{u:"r801431",t:"Bouillon crémeux de maïs et de pommes de terre, avocat",i:["maïs","pomme de terre","avocat","crème fraîche"],g:["vege","complet"],n:"",d:55,p:20},
+{u:"r801440",t:"Soupe de poireaux, crème fraîche aux herbes",i:["poireau","crème fraîche","ciboulette","pomme de terre"],g:["vege","express"],n:"",d:35,p:10},
+{u:"r801438",t:"Soupe de patates douces au garam masala et yaourt",i:["patate douce","yaourt","curry","citron"],g:["vege","express"],n:"",d:35,p:10},
+{u:"r801429",t:"Soupe de patates douces à la noisette et filets de dinde",i:["patate douce","dinde","noisettes"],g:["complet"],n:"",d:55,p:20},
+{u:"r801422",t:"Soupe thaïe au lait de coco et au poulet",i:["poulet","lait de coco","gingembre","citron","champignons"],g:["complet"],n:"",d:40,p:20},
+{u:"r801423",t:"Soupe de lentilles aux épinards et au poulet",i:["lentilles","épinards","poulet","oignon"],g:["complet","congelation"],n:"",d:40,p:10},
+{u:"r801427",t:"Soupe non mixée au poulet, petites pâtes et légumes",i:["poulet","pâtes","carotte","poireau"],g:["enfants","complet"],n:"",d:70,p:15},
+{u:"r801426",t:"Soupe de tomates aux tortellinis de viande hachée",i:["tomates concassées","pâtes","bœuf haché"],g:["enfants","complet"],n:"",d:35,p:10},
+{u:"r801425",t:"Soupe espagnole chorizo, pois chiches et tomates",i:["chorizo","pois chiches","tomates concassées","oignon"],g:["complet","congelation"],n:"",d:50,p:20},
+{u:"r801421",t:"Soupe de moules au curry",i:["moules","curry","crème fraîche","vin blanc"],g:["complet"],n:"",d:45,p:20},
+{u:"r728985",t:"Soupe de tomates au jambon et aux œufs",i:["tomates concassées","jambon","œufs"],g:["express","complet"],n:"",d:25,p:10},
+{u:"r729358",t:"Soupe de haricots blancs à la tomate et magret séché",i:["haricots blancs","tomates concassées","canard"],g:["complet"],n:"",d:775,p:10},
+{u:"r783412",t:"Soupe aux lentilles corail, légumes et saucisses",i:["lentilles corail","saucisse","carotte","oignon"],g:["complet","congelation","express"],n:"",d:30,p:10},
+{u:"r731104",t:"Dahl de pois cassés à la patate douce",i:["lentilles","patate douce","curry","lait de coco"],g:["vege","congelation","complet"],n:"",d:805,p:20},
+{u:"r761850",t:"Bouillon thaï aux légumes",i:["lait de coco","carotte","champignons","gingembre"],g:["vege"],n:"",d:70,p:30},
+{u:"r761851",t:"Soupe ramen aux légumes et tofu",i:["pâtes","champignons","épinards","sauce soja"],g:["vege","complet"],n:"",d:55,p:20},
+{u:"r730068",t:"Soupe de nouilles au tofu fumé, épinards et champignons",i:["pâtes","épinards","champignons","sauce soja"],g:["vege","complet"],n:"",d:35,p:15},
+{u:"r801439",t:"Bouillon de bœuf, légumes et nouilles udon",i:["bœuf","pâtes","carotte","sauce soja"],g:["complet"],n:"",d:45,p:20},
+{u:"r764659",t:"Soupe persane au yaourt, brochette vapeur de poulet",i:["yaourt","poulet","menthe","oignon"],g:["complet"],n:"",d:110,p:30},
+{u:"r801111",t:"Gaspacho tomate-fraise-basilic",i:["tomate","fraise","basilic","huile d'olive"],g:["vege","express"],n:"",d:10,p:10},
+{u:"r801114",t:"Gaspacho tomate-poivron et salsa câpres-abricots",i:["tomate","poivron","câpres","abricot"],g:["vege","express"],n:"",d:10,p:10},
+{u:"r801115",t:"Soupe froide concombre-menthe et quenelles de chèvre frais",i:["concombre","menthe","chèvre"],g:["vege","express"],n:"",d:15,p:15},
+{u:"r801116",t:"Soupe froide de poivrons et pain tomates-sardines",i:["poivron","sardine","tomate","pain"],g:["complet"],n:"",d:60,p:25},
+{u:"r801428",t:"Soupe froide à l'avocat et citron, tartines de chèvre frais",i:["avocat","citron","chèvre","pain"],g:["vege","express"],n:"",d:15,p:10},
+{u:"r801112",t:"Soupe froide à la carotte et crevettes au citron vert",i:["carotte","crevettes","citron"],g:["complet"],n:"",d:170,p:10},
+{u:"r801113",t:"Velouté froid de petits pois à la menthe et à la ricotta",i:["petits pois","menthe","ricotta"],g:["vege","express"],n:"",d:35,p:10},
+{u:"r801435",t:"Soupe froide au cresson et tartines de tapenade",i:["salade","olives","pain","pomme de terre"],g:["vege"],n:"",d:60,p:20},
 
 /* ===== VIANDES & VOLAILLES ===== */
-{u:"r220811",t:"Poulet-champignons",i:["poulet","champignons","crème fraîche","oignon"],g:["complet"],n:""},
-{u:"r164169",t:"Filet de poulet en sauce aux champignons et pommes de terre",i:["poulet","champignons","pomme de terre","échalote","vin blanc","citron"],g:["complet"],n:""},
-{u:"r623425",t:"Curry de poulet à la noix de coco",i:["poulet","lait de coco","curry","oignon"],g:["complet"],n:""},
-{u:"r798764",t:"Poulet au lait de coco et épices",i:["poulet","lait de coco","curry","oignon"],g:["complet"],n:"4.5"},
-{u:"r375653",t:"Curry de poulet aux fruits et riz",i:["poulet","riz","curry","pomme","crème fraîche"],g:["complet"],n:"4.5"},
-{u:"r130220",t:"Poulet au curry, méli-mélo de légumes et velouté au lait de coco",i:["poulet","curry","carotte","courgette","lait de coco"],g:["complet"],n:""},
-{u:"r80826",t:"Poulet au curry, tagliatelle de légumes et velouté au lait de coco",i:["poulet","curry","courgette","carotte","lait de coco"],g:["complet"],n:""},
-{u:"r729356",t:"Curry vert de poulet à la patate douce et aux pois chiches",i:["poulet","patate douce","pois chiches","lait de coco","curry"],g:["complet","congelation"],n:""},
-{u:"r20078",t:"Tajine de poulet au miel et aux pruneaux",i:["poulet","miel","oignon","semoule"],g:["complet"],n:"4.0"},
-{u:"r375105",t:"Poulet aux courgettes, au citron et au miel",i:["poulet","courgette","citron","miel"],g:["express","complet"],n:""},
-{u:"r375657",t:"Poulet au citron, olives et boulgour",i:["poulet","citron","olives","boulgour"],g:["complet"],n:"4.0"},
-{u:"r375661",t:"Poulet sauce Alfredo au brocoli",i:["poulet","brocoli","crème fraîche","parmesan","pâtes"],g:["express","enfants","complet"],n:""},
-{u:"r375101",t:"Crumble de poulet aux poireaux",i:["poulet","poireau","farine","beurre","crème fraîche"],g:["complet"],n:""},
-{u:"r376533",t:"Poulet à l'ananas, pois gourmands et riz",i:["poulet","ananas","riz","petits pois"],g:["complet"],n:""},
-{u:"r375665",t:"Émincé de dinde, châtaignes et champignons",i:["dinde","champignons","châtaignes","crème fraîche"],g:["express","complet"],n:""},
-{u:"r375669",t:"Émincé de dinde, haricots plats et chorizo",i:["dinde","haricots verts","chorizo"],g:["complet"],n:""},
-{u:"r369394",t:"Bœuf aux oignons, paprika et gnocchis",i:["bœuf","oignon","paprika","gnocchi"],g:["express","complet"],n:""},
-{u:"r369397",t:"Bœuf au pain d'épices et pommes vapeur",i:["bœuf","pomme","oignon"],g:["complet"],n:""},
-{u:"r369996",t:"Émincé de bœuf à la mexicaine",i:["bœuf","poivron","haricots rouges","tomates concassées"],g:["express","complet"],n:""},
-{u:"r370000",t:"Légumes farcis au bœuf",i:["bœuf haché","courgette","tomate","poivron","riz"],g:["complet"],n:""},
-{u:"r370008",t:"Boulettes suédoises aux courgettes",i:["bœuf haché","courgette","crème fraîche","pomme de terre"],g:["enfants","complet"],n:""},
-{u:"r376546",t:"Pain de viande à l'orientale",i:["bœuf haché","œufs","semoule","oignon","cumin"],g:["complet","congelation"],n:""},
-{u:"r370004",t:"Ratatouille aux merguez",i:["merguez","courgette","aubergine","poivron","tomate"],g:["complet","congelation"],n:""},
-{u:"r376542",t:"Saucisses chipolatas, lentilles et carottes",i:["saucisse","lentilles","carotte","oignon"],g:["complet","congelation"],n:""},
-{u:"r374913",t:"Veau aux champignons, moutarde et tagliatelle",i:["veau","champignons","moutarde","pâtes","crème fraîche"],g:["complet"],n:""},
-{u:"r38594",t:"Veau aux olives",i:["veau","olives","tomates concassées","oignon"],g:["complet","congelation"],n:""},
-{u:"r374917",t:"Porc barbecue et épis de maïs",i:["porc","maïs","miel"],g:["complet"],n:""},
-{u:"r374921",t:"Porc aux navets, au miel et à l'orange",i:["porc","navet","miel","orange"],g:["complet"],n:""},
-{u:"r374925",t:"Porc aigre-doux à la purée",i:["porc","pomme de terre","miel","vinaigre"],g:["complet"],n:""},
-{u:"r374929",t:"Jarret de porc, patate douce et poireau",i:["porc","patate douce","poireau"],g:["complet"],n:""},
-{u:"r375097",t:"Couscous d'agneau express",i:["agneau","semoule","carotte","courgette","pois chiches"],g:["complet"],n:""},
-{u:"r376538",t:"Parmentier de canard aux oignons",i:["canard","pomme de terre","oignon","beurre"],g:["complet"],n:""},
-{u:"r375093",t:"Fondue-raclette au mont-d'or",i:["fromage râpé","pomme de terre","vin blanc","ail"],g:["complet"],n:""},
-{u:"r912854",t:"Hachis parmentier",i:["bœuf haché","pomme de terre","lait","beurre","oignon"],g:["enfants","congelation","complet"],n:"4.3"},
-{u:"r767813",t:"Mon petit hachis Parmentier",i:["bœuf haché","pomme de terre","oignon","lait","beurre"],g:["enfants","complet"],n:"4.2"},
-{u:"r821282",t:"Hachis parmentier aux herbes, purée au paprika",i:["bœuf haché","pomme de terre","paprika","persil","beurre"],g:["complet"],n:"4.5"},
-{u:"r209629",t:"Tartiflette",i:["pomme de terre","lardons","oignon","crème fraîche","fromage râpé"],g:["complet"],n:"4.6"},
-{u:"r346897",t:"Patoto petits pois jambon",i:["pomme de terre","petits pois","jambon"],g:["enfants","express","complet"],n:""},
+{u:"r220811",t:"Poulet-champignons",i:["poulet","champignons","crème fraîche","oignon"],g:["complet"],n:"",d:30,p:10},
+{u:"r164169",t:"Filet de poulet en sauce aux champignons et pommes de terre",i:["poulet","champignons","pomme de terre","échalote","vin blanc","citron"],g:["complet"],n:"",d:60,p:15},
+{u:"r623425",t:"Curry de poulet à la noix de coco",i:["poulet","lait de coco","curry","oignon"],g:["complet"],n:"",d:45,p:10},
+{u:"r798764",t:"Poulet au lait de coco et épices",i:["poulet","lait de coco","curry","oignon"],g:["complet"],n:"4.5",d:50,p:20},
+{u:"r375653",t:"Curry de poulet aux fruits et riz",i:["poulet","riz","curry","pomme","crème fraîche"],g:["complet"],n:"4.5",d:45,p:10},
+{u:"r130220",t:"Poulet au curry, méli-mélo de légumes et velouté au lait de coco",i:["poulet","curry","carotte","courgette","lait de coco"],g:["complet"],n:"",d:50,p:20},
+{u:"r80826",t:"Poulet au curry, tagliatelle de légumes et velouté au lait de coco",i:["poulet","curry","courgette","carotte","lait de coco"],g:["complet"],n:"",d:50,p:20},
+{u:"r729356",t:"Curry vert de poulet à la patate douce et aux pois chiches",i:["poulet","patate douce","pois chiches","lait de coco","curry"],g:["complet","congelation"],n:"",d:45,p:10},
+{u:"r20078",t:"Tajine de poulet au miel et aux pruneaux",i:["poulet","miel","oignon","semoule"],g:["complet"],n:"4.0",d:40,p:10},
+{u:"r375105",t:"Poulet aux courgettes, au citron et au miel",i:["poulet","courgette","citron","miel"],g:["express","complet"],n:"",d:30,p:10},
+{u:"r375657",t:"Poulet au citron, olives et boulgour",i:["poulet","citron","olives","boulgour"],g:["complet"],n:"4.0",d:50,p:15},
+{u:"r375661",t:"Poulet sauce Alfredo au brocoli",i:["poulet","brocoli","crème fraîche","parmesan","pâtes"],g:["express","enfants","complet"],n:"",d:30,p:20},
+{u:"r375101",t:"Crumble de poulet aux poireaux",i:["poulet","poireau","farine","beurre","crème fraîche"],g:["complet"],n:"",d:50,p:15},
+{u:"r376533",t:"Poulet à l'ananas, pois gourmands et riz",i:["poulet","ananas","riz","petits pois"],g:["complet"],n:"",d:45,p:10},
+{u:"r375665",t:"Émincé de dinde, châtaignes et champignons",i:["dinde","champignons","châtaignes","crème fraîche"],g:["express","complet"],n:"",d:25,p:10},
+{u:"r375669",t:"Émincé de dinde, haricots plats et chorizo",i:["dinde","haricots verts","chorizo"],g:["complet"],n:"",d:45,p:10},
+{u:"r369394",t:"Bœuf aux oignons, paprika et gnocchis",i:["bœuf","oignon","paprika","gnocchi"],g:["express","complet"],n:"",d:30,p:10},
+{u:"r369397",t:"Bœuf au pain d'épices et pommes vapeur",i:["bœuf","pomme","oignon"],g:["complet"],n:"",d:45,p:10},
+{u:"r369996",t:"Émincé de bœuf à la mexicaine",i:["bœuf","poivron","haricots rouges","tomates concassées"],g:["express","complet"],n:"",d:30,p:10},
+{u:"r370000",t:"Légumes farcis au bœuf",i:["bœuf haché","courgette","tomate","poivron","riz"],g:["complet"],n:"",d:75,p:20},
+{u:"r370008",t:"Boulettes suédoises aux courgettes",i:["bœuf haché","courgette","crème fraîche","pomme de terre"],g:["enfants","complet"],n:"",d:40,p:15},
+{u:"r376546",t:"Pain de viande à l'orientale",i:["bœuf haché","œufs","semoule","oignon","cumin"],g:["complet","congelation"],n:"",d:60,p:15},
+{u:"r370004",t:"Ratatouille aux merguez",i:["merguez","courgette","aubergine","poivron","tomate"],g:["complet","congelation"],n:"",d:40,p:15},
+{u:"r376542",t:"Saucisses chipolatas, lentilles et carottes",i:["saucisse","lentilles","carotte","oignon"],g:["complet","congelation"],n:"",d:45,p:10},
+{u:"r374913",t:"Veau aux champignons, moutarde et tagliatelle",i:["veau","champignons","moutarde","pâtes","crème fraîche"],g:["complet"],n:"",d:35,p:10},
+{u:"r38594",t:"Veau aux olives",i:["veau","olives","tomates concassées","oignon"],g:["complet","congelation"],n:"",d:60,p:5},
+{u:"r374917",t:"Porc barbecue et épis de maïs",i:["porc","maïs","miel"],g:["complet"],n:"",d:40,p:10},
+{u:"r374921",t:"Porc aux navets, au miel et à l'orange",i:["porc","navet","miel","orange"],g:["complet"],n:"",d:40,p:10},
+{u:"r374925",t:"Porc aigre-doux à la purée",i:["porc","pomme de terre","miel","vinaigre"],g:["complet"],n:"",d:40,p:10},
+{u:"r374929",t:"Jarret de porc, patate douce et poireau",i:["porc","patate douce","poireau"],g:["complet"],n:"",d:35,p:15},
+{u:"r375097",t:"Couscous d'agneau express",i:["agneau","semoule","carotte","courgette","pois chiches"],g:["complet"],n:"",d:55,p:20},
+{u:"r376538",t:"Parmentier de canard aux oignons",i:["canard","pomme de terre","oignon","beurre"],g:["complet"],n:"",d:50,p:15},
+{u:"r375093",t:"Fondue-raclette au mont-d'or",i:["fromage râpé","pomme de terre","vin blanc","ail"],g:["complet"],n:"",d:35,p:5},
+{u:"r912854",t:"Hachis parmentier",i:["bœuf haché","pomme de terre","lait","beurre","oignon"],g:["enfants","congelation","complet"],n:"4.3",d:50,p:5},
+{u:"r767813",t:"Mon petit hachis Parmentier",i:["bœuf haché","pomme de terre","oignon","lait","beurre"],g:["enfants","complet"],n:"4.2",d:60,p:10},
+{u:"r821282",t:"Hachis parmentier aux herbes, purée au paprika",i:["bœuf haché","pomme de terre","paprika","persil","beurre"],g:["complet"],n:"4.5",d:105,p:20},
+{u:"r209629",t:"Tartiflette",i:["pomme de terre","lardons","oignon","crème fraîche","fromage râpé"],g:["complet"],n:"4.6",d:75,p:10},
+{u:"r346897",t:"Patoto petits pois jambon",i:["pomme de terre","petits pois","jambon"],g:["enfants","express","complet"],n:"",d:30,p:10},
 
 /* ===== POISSONS & FRUITS DE MER ===== */
-{u:"r376847",t:"Pavés de saumon, riz coriandre et citron",i:["saumon","riz","coriandre","citron"],g:["express","complet"],n:""},
-{u:"r377313",t:"Saumon japonais, vermicelles et légumes",i:["saumon","pâtes","carotte","sauce soja"],g:["express","complet"],n:""},
-{u:"r38816",t:"Palmiers saumon aneth",i:["saumon","pâte feuilletée","crème fraîche"],g:["express"],n:""},
-{u:"r376550",t:"Crumble de cabillaud au citron et au parmesan",i:["cabillaud","citron","parmesan","farine","beurre"],g:["complet"],n:""},
-{u:"r80827",t:"Brochettes de cabillaud et chorizo, semoule aux légumes",i:["cabillaud","chorizo","semoule","poivron","feta"],g:["complet"],n:""},
-{u:"r377317",t:"Brandade de morue et persillade",i:["morue","pomme de terre","ail","persil","lait"],g:["complet"],n:""},
-{u:"r377321",t:"Thon au pesto rouge et purée d'artichauts",i:["thon","artichaut","tomate"],g:["express","complet"],n:""},
-{u:"r44679",t:"Quiche sans pâte au thon",i:["thon","œufs","farine","lait","fromage râpé"],g:["express","enfants"],n:""},
-{u:"r377326",t:"Filets de colin, carottes, beurre aux fanes",i:["colin","carotte","beurre"],g:["express","complet"],n:""},
-{u:"r377330",t:"Filets de colin, purée de haricots plats",i:["colin","haricots verts","pomme de terre"],g:["express","complet"],n:""},
-{u:"r383162",t:"Gratin de lieu et de poireaux au cheddar",i:["lieu","poireau","fromage râpé","crème fraîche"],g:["complet"],n:""},
-{u:"r383166",t:"Dos d'églefin et purée de petits pois",i:["haddock","petits pois","pomme de terre"],g:["express","complet"],n:""},
-{u:"r383171",t:"Riz espagnol aux fruits de mer",i:["riz","crevettes","moules","poivron"],g:["complet"],n:""},
-{u:"r383177",t:"Curry de crevettes, légumes et nouilles",i:["crevettes","pâtes","curry","lait de coco","carotte"],g:["express","complet"],n:""},
-{u:"r730062",t:"Curry de crevettes et courgettes",i:["crevettes","courgette","lait de coco","curry"],g:["express","complet"],n:""},
-{u:"r730066",t:"Mijoté de crevettes aux haricots rouges",i:["crevettes","haricots rouges","tomates concassées"],g:["complet"],n:""},
+{u:"r376847",t:"Pavés de saumon, riz coriandre et citron",i:["saumon","riz","coriandre","citron"],g:["express","complet"],n:"",d:30,p:10},
+{u:"r377313",t:"Saumon japonais, vermicelles et légumes",i:["saumon","pâtes","carotte","sauce soja"],g:["express","complet"],n:"",d:35,p:10},
+{u:"r38816",t:"Palmiers saumon aneth",i:["saumon","pâte feuilletée","crème fraîche"],g:["express"],n:"",d:40,p:20},
+{u:"r376550",t:"Crumble de cabillaud au citron et au parmesan",i:["cabillaud","citron","parmesan","farine","beurre"],g:["complet"],n:"",d:45,p:10},
+{u:"r80827",t:"Brochettes de cabillaud et chorizo, semoule aux légumes",i:["cabillaud","chorizo","semoule","poivron","feta"],g:["complet"],n:"",d:45,p:15},
+{u:"r377317",t:"Brandade de morue et persillade",i:["morue","pomme de terre","ail","persil","lait"],g:["complet"],n:"",d:50,p:10},
+{u:"r377321",t:"Thon au pesto rouge et purée d'artichauts",i:["thon","artichaut","tomate"],g:["express","complet"],n:"",d:35,p:10},
+{u:"r44679",t:"Quiche sans pâte au thon",i:["thon","œufs","farine","lait","fromage râpé"],g:["express","enfants"],n:"",d:50,p:5},
+{u:"r377326",t:"Filets de colin, carottes, beurre aux fanes",i:["colin","carotte","beurre"],g:["express","complet"],n:"",d:30,p:10},
+{u:"r377330",t:"Filets de colin, purée de haricots plats",i:["colin","haricots verts","pomme de terre"],g:["express","complet"],n:"",d:35,p:15},
+{u:"r383162",t:"Gratin de lieu et de poireaux au cheddar",i:["lieu","poireau","fromage râpé","crème fraîche"],g:["complet"],n:"",d:45,p:10},
+{u:"r383166",t:"Dos d'églefin et purée de petits pois",i:["haddock","petits pois","pomme de terre"],g:["express","complet"],n:"",d:35,p:10},
+{u:"r383171",t:"Riz espagnol aux fruits de mer",i:["riz","crevettes","moules","poivron"],g:["complet"],n:"",d:40,p:10},
+{u:"r383177",t:"Curry de crevettes, légumes et nouilles",i:["crevettes","pâtes","curry","lait de coco","carotte"],g:["express","complet"],n:"",d:35,p:10},
+{u:"r730062",t:"Curry de crevettes et courgettes",i:["crevettes","courgette","lait de coco","curry"],g:["express","complet"],n:"",d:45,p:15},
+{u:"r730066",t:"Mijoté de crevettes aux haricots rouges",i:["crevettes","haricots rouges","tomates concassées"],g:["complet"],n:"",d:80,p:10},
 
 /* ===== ŒUFS, GRATINS, PÂTES & RIZ ===== */
-{u:"r354350",t:"Œufs mollets, ratatouille et jambon",i:["œufs","courgette","aubergine","tomate","jambon"],g:["complet"],n:""},
-{u:"r354353",t:"Œufs en cocotte d'avocat, crevettes et taboulé",i:["œufs","avocat","crevettes","semoule"],g:["express","complet"],n:""},
-{u:"r354356",t:"Tortilla aux oignons et aux lardons",i:["œufs","oignon","lardons","pomme de terre"],g:["complet"],n:""},
-{u:"r354359",t:"Tortilla à la courgette et à la mimolette",i:["œufs","courgette","fromage râpé"],g:["vege","complet"],n:""},
-{u:"r354363",t:"Tortilla antigaspi du lendemain",i:["œufs","pomme de terre","oignon"],g:["vege","express","complet"],n:""},
-{u:"r357298",t:"Œufs brouillés aux merguez, tomates et pita grillés",i:["œufs","merguez","tomate","pain"],g:["express","complet"],n:""},
-{u:"r357301",t:"Œufs à la mexicaine et au guacamole",i:["œufs","avocat","tomate","poivron"],g:["vege","express","complet"],n:""},
-{u:"r358592",t:"Œufs brouillés, asperges et tartines",i:["œufs","asperge","pain","beurre"],g:["vege","express"],n:""},
-{u:"r358595",t:"Sandwichs d'œufs aux champignons",i:["œufs","champignons","pain"],g:["vege","express"],n:""},
-{u:"r99393",t:"Gratin dauphinois",i:["pomme de terre","crème liquide","ail","muscade","comté"],g:["vege","enfants"],n:"4.8"},
-{u:"r825146",t:"Gratin dauphinois au pesto rouge et comté",i:["pomme de terre","comté","crème liquide","ail"],g:["vege"],n:""},
-{u:"r54158",t:"Quiche lorraine",i:["lardons","œufs","crème fraîche","lait","pâte brisée"],g:["enfants"],n:"4.7"},
-{u:"r752207",t:"Quiche Lorraine (variante)",i:["lardons","œufs","crème fraîche","farine","beurre"],g:["enfants"],n:"4.8"},
-{u:"r54116",t:"Lasagne à la bolognaise",i:["bœuf haché","tomates concassées","lasagnes","lait","fromage râpé"],g:["enfants","congelation","complet"],n:"4.6"},
-{u:"r828547",t:"Lasagne fraîches à la bolognaise",i:["bœuf haché","tomates concassées","lasagnes","farine","œufs"],g:["congelation","complet"],n:"4.8"},
-{u:"r545066",t:"Lasagnes",i:["lasagnes","bœuf haché","tomates concassées","fromage râpé","lait"],g:["congelation","complet"],n:""},
-{u:"r808471",t:"Riz cantonais",i:["riz","œufs","jambon","petits pois","oignon"],g:["enfants","express","complet"],n:"4.3"},
-{u:"r912658",t:"Risotto sain à la tomate et au parmesan",i:["riz arborio","tomate","parmesan","oignon"],g:["vege","complet"],n:""},
-{u:"r762543",t:"Korma veggie aux noix de cajou",i:["lait de coco","curry","carotte","petits pois","noix"],g:["vege","complet"],n:""},
-{u:"r783411",t:"Mijoté de haricots rouges au chorizo façon minestrone",i:["haricots rouges","chorizo","tomates concassées"],g:["express","complet","congelation"],n:""},
+{u:"r354350",t:"Œufs mollets, ratatouille et jambon",i:["œufs","courgette","aubergine","tomate","jambon"],g:["complet"],n:"",d:40,p:10},
+{u:"r354353",t:"Œufs en cocotte d'avocat, crevettes et taboulé",i:["œufs","avocat","crevettes","semoule"],g:["express","complet"],n:"",d:30,p:15},
+{u:"r354356",t:"Tortilla aux oignons et aux lardons",i:["œufs","oignon","lardons","pomme de terre"],g:["complet"],n:"",d:50,p:15},
+{u:"r354359",t:"Tortilla à la courgette et à la mimolette",i:["œufs","courgette","fromage râpé"],g:["vege","complet"],n:"",d:45,p:15},
+{u:"r354363",t:"Tortilla antigaspi du lendemain",i:["œufs","pomme de terre","oignon"],g:["vege","express","complet"],n:"",d:35,p:10},
+{u:"r357298",t:"Œufs brouillés aux merguez, tomates et pita grillés",i:["œufs","merguez","tomate","pain"],g:["express","complet"],n:"",d:30,p:10},
+{u:"r357301",t:"Œufs à la mexicaine et au guacamole",i:["œufs","avocat","tomate","poivron"],g:["vege","express","complet"],n:"",d:30,p:15},
+{u:"r358592",t:"Œufs brouillés, asperges et tartines",i:["œufs","asperge","pain","beurre"],g:["vege","express"],n:"",d:25,p:10},
+{u:"r358595",t:"Sandwichs d'œufs aux champignons",i:["œufs","champignons","pain"],g:["vege","express"],n:"",d:35,p:10},
+{u:"r99393",t:"Gratin dauphinois",i:["pomme de terre","crème liquide","ail","muscade","comté"],g:["vege","enfants"],n:"4.8",d:50,p:15},
+{u:"r825146",t:"Gratin dauphinois au pesto rouge et comté",i:["pomme de terre","comté","crème liquide","ail"],g:["vege"],n:"",d:60,p:10},
+{u:"r54158",t:"Quiche lorraine",i:["lardons","œufs","crème fraîche","lait","pâte brisée"],g:["enfants"],n:"4.7",d:50,p:25},
+{u:"r752207",t:"Quiche Lorraine (variante)",i:["lardons","œufs","crème fraîche","farine","beurre"],g:["enfants"],n:"4.8",d:45,p:20},
+{u:"r54116",t:"Lasagne à la bolognaise",i:["bœuf haché","tomates concassées","lasagnes","lait","fromage râpé"],g:["enfants","congelation","complet"],n:"4.6",d:150,p:40},
+{u:"r828547",t:"Lasagne fraîches à la bolognaise",i:["bœuf haché","tomates concassées","lasagnes","farine","œufs"],g:["congelation","complet"],n:"4.8",d:150,p:40},
+{u:"r545066",t:"Lasagnes",i:["lasagnes","bœuf haché","tomates concassées","fromage râpé","lait"],g:["congelation","complet"],n:"",d:120,p:40},
+{u:"r808471",t:"Riz cantonais",i:["riz","œufs","jambon","petits pois","oignon"],g:["enfants","express","complet"],n:"4.3",d:30,p:10},
+{u:"r912658",t:"Risotto sain à la tomate et au parmesan",i:["riz arborio","tomate","parmesan","oignon"],g:["vege","complet"],n:"",d:30,p:5},
+{u:"r762543",t:"Korma veggie aux noix de cajou",i:["lait de coco","curry","carotte","petits pois","noix"],g:["vege","complet"],n:"",d:55,p:20},
+{u:"r783411",t:"Mijoté de haricots rouges au chorizo façon minestrone",i:["haricots rouges","chorizo","tomates concassées"],g:["express","complet","congelation"],n:"",d:25,p:10},
 
 /* ===== ACCOMPAGNEMENTS ===== */
-{u:"r54193",t:"Purée de pommes de terre et de légumes",i:["pomme de terre","carotte","lait","beurre"],g:["vege","enfants","express"],n:"4.5"},
-{u:"r121209",t:"Purée carotte-pomme de terre",i:["carotte","pomme de terre","beurre","lait"],g:["vege","enfants","express"],n:""},
-{u:"r919985",t:"Purée de pommes de terre et de petits pois",i:["pomme de terre","petits pois","beurre","lait"],g:["vege","enfants","express"],n:""},
-{u:"r139507",t:"Purée de pommes de terre-betterave",i:["betterave","pomme de terre","beurre"],g:["vege","express"],n:""},
-{u:"r750083",t:"Purée de légumes racines au romarin",i:["carotte","navet","pomme de terre","romarin"],g:["vege"],n:""},
+{u:"r54193",t:"Purée de pommes de terre et de légumes",i:["pomme de terre","carotte","lait","beurre"],g:["vege","enfants","express"],n:"4.5",d:45,p:15},
+{u:"r121209",t:"Purée carotte-pomme de terre",i:["carotte","pomme de terre","beurre","lait"],g:["vege","enfants","express"],n:"",d:25,p:5},
+{u:"r919985",t:"Purée de pommes de terre et de petits pois",i:["pomme de terre","petits pois","beurre","lait"],g:["vege","enfants","express"],n:"",d:50,p:10},
+{u:"r139507",t:"Purée de pommes de terre-betterave",i:["betterave","pomme de terre","beurre"],g:["vege","express"],n:"",d:45,p:15},
+{u:"r750083",t:"Purée de légumes racines au romarin",i:["carotte","navet","pomme de terre","romarin"],g:["vege"],n:"",d:45,p:15},
 
 /* ===== SAUCES & BASES ===== */
-{u:"r554072",t:"Sauce béchamel",i:["lait","beurre","farine","muscade"],g:["vege","express"],n:"4.9"},
-{u:"r567840",t:"Béchamel inratable",i:["lait","beurre","farine","muscade"],g:["vege","express"],n:"4.7"},
-{u:"r917828",t:"Sauce béchamel (variante)",i:["lait","beurre","farine"],g:["vege","express"],n:""},
-{u:"r67832",t:"Mayonnaise",i:["œufs","huile d'olive","moutarde","citron"],g:["vege","express"],n:"4.2"},
-{u:"r554665",t:"Crème pâtissière",i:["lait","œufs","sucre","farine","vanille"],g:["vege"],n:"4.4"},
-{u:"r73158",t:"Pain rapide aux trois graines",i:["farine","levure de boulanger"],g:["vege"],n:""},
-{u:"r64997",t:"Sablés au parmesan",i:["parmesan","farine","beurre"],g:["vege","express"],n:""},
+{u:"r554072",t:"Sauce béchamel",i:["lait","beurre","farine","muscade"],g:["vege","express"],n:"4.9",d:15,p:5},
+{u:"r567840",t:"Béchamel inratable",i:["lait","beurre","farine","muscade"],g:["vege","express"],n:"4.7",d:15,p:5},
+{u:"r917828",t:"Sauce béchamel (variante)",i:["lait","beurre","farine"],g:["vege","express"],n:"",d:15,p:5},
+{u:"r67832",t:"Mayonnaise",i:["œufs","huile d'olive","moutarde","citron"],g:["vege","express"],n:"4.2",d:5,p:5},
+{u:"r554665",t:"Crème pâtissière",i:["lait","œufs","sucre","farine","vanille"],g:["vege"],n:"4.4",d:15,p:5},
+{u:"r73158",t:"Pain rapide aux trois graines",i:["farine","levure de boulanger"],g:["vege"],n:"",d:85,p:10},
+{u:"r64997",t:"Sablés au parmesan",i:["parmesan","farine","beurre"],g:["vege","express"],n:"",d:60,p:10},
 
 /* ===== DESSERTS & GOÛTERS ===== */
-{u:"r54103",t:"Pâte à crêpe",i:["farine","lait","œufs","sucre","beurre"],g:["vege","enfants","express"],n:"4.6"},
-{u:"r775301",t:"Pâte à crêpe (variante)",i:["farine","lait","œufs","sucre"],g:["vege","enfants","express"],n:"4.6"},
-{u:"r66931",t:"Crêpes",i:["farine","lait","œufs","sucre","beurre"],g:["vege","enfants","express"],n:"4.8"},
-{u:"r918521",t:"Crêpes (variante)",i:["farine","lait","œufs","sucre"],g:["vege","enfants","express"],n:"5.0"},
-{u:"r766510",t:"Crêpes au lait de coco et à la farine de riz",i:["lait de coco","farine","œufs","sucre"],g:["vege","enfants","express"],n:""},
-{u:"r314204",t:"Crêpes à la semoule (Beghrir)",i:["semoule","farine","levure de boulanger","œufs"],g:["vege","enfants"],n:"4.3"},
-{u:"r545018",t:"Riz au lait",i:["riz","lait","sucre","vanille"],g:["vege","enfants"],n:"4.5"},
-{u:"r778044",t:"Compote de fraises - Gâteau au yaourt",i:["yaourt","œufs","farine","sucre","fraise"],g:["vege","enfants"],n:""},
-{u:"r825790",t:"Madeleines",i:["farine","œufs","sucre","beurre","levure chimique"],g:["vege","enfants"],n:"4.8"},
-{u:"r83804",t:"Meringues",i:["œufs","sucre"],g:["vege","enfants"],n:"3.8"},
-{u:"r53341",t:"Gâteau renversé à l'ananas",i:["ananas","farine","œufs","sucre","beurre"],g:["vege","enfants"],n:""},
-{u:"r38565",t:"Sorbet aux 3 agrumes",i:["orange","citron","sucre"],g:["vege","express"],n:""},
-{u:"r32676",t:"Nectar de pomme",i:["pomme","sucre"],g:["vege","express","enfants"],n:""},
-{u:"r638234",t:"Crème brûlée traditionnelle",i:["crème liquide","œufs","sucre","vanille"],g:["vege"],n:""},
-{u:"r921435",t:"Fondant au chocolat",i:["chocolat","beurre","œufs","sucre","farine"],g:["vege","enfants"],n:""},
-{u:"r922070",t:"Cheesecake de base",i:["fromage frais","œufs","sucre","biscuits","beurre"],g:["vege"],n:""},
-{u:"r917431",t:"Îles flottantes au chocolat blanc",i:["œufs","lait","sucre","chocolat"],g:["vege"],n:""},
-{u:"r917449",t:"Poires pochées, crème anglaise et crumble d'amandes",i:["poire","lait","œufs","sucre","amandes"],g:["vege"],n:""}
+{u:"r54103",t:"Pâte à crêpe",i:["farine","lait","œufs","sucre","beurre"],g:["vege","enfants","express"],n:"4.6",d:75,p:45},
+{u:"r775301",t:"Pâte à crêpe (variante)",i:["farine","lait","œufs","sucre"],g:["vege","enfants","express"],n:"4.6",d:90,p:60},
+{u:"r66931",t:"Crêpes",i:["farine","lait","œufs","sucre","beurre"],g:["vege","enfants","express"],n:"4.8",d:75,p:45},
+{u:"r918521",t:"Crêpes (variante)",i:["farine","lait","œufs","sucre"],g:["vege","enfants","express"],n:"5.0",d:75,p:45},
+{u:"r766510",t:"Crêpes au lait de coco et à la farine de riz",i:["lait de coco","farine","œufs","sucre"],g:["vege","enfants","express"],n:"",d:75,p:5},
+{u:"r314204",t:"Crêpes à la semoule (Beghrir)",i:["semoule","farine","levure de boulanger","œufs"],g:["vege","enfants"],n:"4.3",d:60,p:20},
+{u:"r545018",t:"Riz au lait",i:["riz","lait","sucre","vanille"],g:["vege","enfants"],n:"4.5",d:60,p:5},
+{u:"r778044",t:"Compote de fraises - Gâteau au yaourt",i:["yaourt","œufs","farine","sucre","fraise"],g:["vege","enfants"],n:"",d:55,p:15},
+{u:"r825790",t:"Madeleines",i:["farine","œufs","sucre","beurre","levure chimique"],g:["vege","enfants"],n:"4.8",d:1470,p:10},
+{u:"r83804",t:"Meringues",i:["œufs","sucre"],g:["vege","enfants"],n:"3.8",d:300,p:20},
+{u:"r53341",t:"Gâteau renversé à l'ananas",i:["ananas","farine","œufs","sucre","beurre"],g:["vege","enfants"],n:"",d:60,p:10},
+{u:"r38565",t:"Sorbet aux 3 agrumes",i:["orange","citron","sucre"],g:["vege","express"],n:"",d:95,p:5},
+{u:"r32676",t:"Nectar de pomme",i:["pomme","sucre"],g:["vege","express","enfants"],n:"",d:5,p:5},
+{u:"r638234",t:"Crème brûlée traditionnelle",i:["crème liquide","œufs","sucre","vanille"],g:["vege"],n:"",d:1500,p:10},
+{u:"r921435",t:"Fondant au chocolat",i:["chocolat","beurre","œufs","sucre","farine"],g:["vege","enfants"],n:"",d:50,p:10},
+{u:"r922070",t:"Cheesecake de base",i:["fromage frais","œufs","sucre","biscuits","beurre"],g:["vege"],n:"",d:600,p:30},
+{u:"r917431",t:"Îles flottantes au chocolat blanc",i:["œufs","lait","sucre","chocolat"],g:["vege"],n:"",d:65,p:20},
+{u:"r917449",t:"Poires pochées, crème anglaise et crumble d'amandes",i:["poire","lait","œufs","sucre","amandes"],g:["vege"],n:"",d:80,p:15}
 ,
 
-{u:"r351255",t:"Soupe de potiron et pomme au comté",i:["potiron","pomme","comté"],g:["vege"],n:""},
-{u:"r351258",t:"Soupe de potimarron aux épices",i:["potiron","cumin","crème fraîche","oignon"],g:["vege","express"],n:""},
-{u:"r351261",t:"Crème de butternut aux châtaignes",i:["courge butternut","châtaignes","crème fraîche"],g:["vege"],n:""},
-{u:"r351264",t:"Soupe poireaux, brie et pommes de terre",i:["poireau","pomme de terre","fromage frais"],g:["vege"],n:""},
-{u:"r351267",t:"Soupe de cresson aux œufs mollets",i:["salade","œufs","pomme de terre"],g:["vege","express"],n:""},
-{u:"r351270",t:"Soupe de tomates au poulet et aux pâtes",i:["tomates concassées","poulet","pâtes"],g:["enfants","complet"],n:""},
-{u:"r351993",t:"Soupe mexicaine du placard",i:["haricots rouges","maïs","tomates concassées","cumin"],g:["vege","express","complet"],n:""},
-{u:"r351996",t:"Soupe de fruits de mer provençale",i:["moules","crevettes","tomates concassées","ail"],g:["complet","express"],n:""},
-{u:"r352010",t:"Soupe façon couscous",i:["semoule","carotte","courgette","pois chiches","merguez"],g:["complet"],n:""},
-{u:"r352035",t:"Soupe de haricots blancs, jambon et persillade",i:["haricots blancs","jambon","persil","ail"],g:["express","complet"],n:""},
-{u:"r352039",t:"Soupe de maïs à l'œuf et au jambon",i:["maïs","œufs","jambon"],g:["express","enfants","complet"],n:""},
-{u:"r352043",t:"Chowder à la dinde",i:["dinde","maïs","pomme de terre","crème fraîche"],g:["complet"],n:""},
-{u:"r352047",t:"Chowder au saumon",i:["saumon","pomme de terre","maïs","crème fraîche"],g:["complet"],n:""},
-{u:"r352051",t:"Soupe chinoise crevettes et vermicelles",i:["crevettes","pâtes","gingembre","sauce soja"],g:["express","complet"],n:""},
-{u:"r352495",t:"Tortellini au bouillon, tomate et basilic",i:["pâtes","tomate","basilic","bouillon cube"],g:["express","enfants","complet"],n:""},
-{u:"r352499",t:"Tortellini au fromage, bouillon aux petits pois",i:["pâtes","petits pois","parmesan","bouillon cube"],g:["express","enfants","complet"],n:""},
-{u:"r336592",t:"Salade de riz au saumon, avocat et tarama",i:["riz","saumon","avocat","citron"],g:["express","complet"],n:""},
-{u:"r343704",t:"Riz au maquereau et à l'orange",i:["riz","sardine","orange"],g:["express","complet"],n:""},
-{u:"r343709",t:"Salade de quinoa, carottes et clémentines",i:["quinoa","carotte","orange"],g:["vege","express"],n:""},
-{u:"r343713",t:"Taboulé de quinoa exotique aux crevettes",i:["quinoa","crevettes","ananas","menthe"],g:["express","complet"],n:""},
-{u:"r344476",t:"Blé, lentilles, cranberries, noix et mimolette",i:["boulgour","lentilles","noix","fromage râpé"],g:["vege","complet"],n:""},
-{u:"r349018",t:"Salade de blé printanière au chèvre et au pesto",i:["boulgour","chèvre","basilic","petits pois"],g:["vege","express"],n:""},
-{u:"r349022",t:"Salade de lentilles, feta et tomates",i:["lentilles","feta","tomate","échalote"],g:["vege","express","complet"],n:""},
-{u:"r349026",t:"Salade César aux œufs et pommes de terre",i:["salade","œufs","pomme de terre","parmesan","moutarde"],g:["complet"],n:""},
-{u:"r349030",t:"Salade de pommes de terre au poulet",i:["pomme de terre","poulet","moutarde","cornichons"],g:["express","complet"],n:""},
-{u:"r349034",t:"Haricots, pommes de terre, betterave et chèvre",i:["haricots verts","pomme de terre","betterave","chèvre"],g:["vege","complet"],n:""},
-{u:"r351055",t:"Pommes de terre, haddock et épinards",i:["pomme de terre","haddock","épinards"],g:["complet"],n:""},
-{u:"r351059",t:"Salade de patates douces, sauce moutarde",i:["patate douce","moutarde","salade"],g:["vege","express"],n:""},
-{u:"r351063",t:"Salade de carottes, crumble aux noisettes",i:["carotte","noisettes","farine","beurre"],g:["vege","express"],n:""},
-{u:"r351067",t:"Céleri et pommes aux gésiers de canard",i:["céleri","pomme","canard"],g:["express"],n:""},
-{u:"r351072",t:"Salade de chou rouge et patate douce aux noix",i:["chou","patate douce","noix"],g:["vege","express"],n:""},
-{u:"r351236",t:"Salade de farfalle à la grecque",i:["pâtes","feta","olives","concombre","tomate"],g:["vege","express","complet"],n:""},
-{u:"r351240",t:"Salade de pâtes au thon et aux olives",i:["pâtes","thon","olives","tomate"],g:["express","complet"],n:""},
-{u:"r351246",t:"Salade de pâtes italienne",i:["pâtes","tomate","mozzarella","basilic","olives"],g:["vege","express","complet"],n:""},
-{u:"r351250",t:"Salade vietnamienne, crevettes et nouilles",i:["crevettes","pâtes","carotte","menthe","citron"],g:["express","complet"],n:""}
+{u:"r351255",t:"Soupe de potiron et pomme au comté",i:["potiron","pomme","comté"],g:["vege"],n:"",d:40,p:10},
+{u:"r351258",t:"Soupe de potimarron aux épices",i:["potiron","cumin","crème fraîche","oignon"],g:["vege","express"],n:"",d:45,p:15},
+{u:"r351261",t:"Crème de butternut aux châtaignes",i:["courge butternut","châtaignes","crème fraîche"],g:["vege"],n:"",d:35,p:15},
+{u:"r351264",t:"Soupe poireaux, brie et pommes de terre",i:["poireau","pomme de terre","fromage frais"],g:["vege"],n:"",d:35,p:10},
+{u:"r351267",t:"Soupe de cresson aux œufs mollets",i:["salade","œufs","pomme de terre"],g:["vege","express"],n:"",d:25,p:10},
+{u:"r351270",t:"Soupe de tomates au poulet et aux pâtes",i:["tomates concassées","poulet","pâtes"],g:["enfants","complet"],n:"",d:50,p:10},
+{u:"r351993",t:"Soupe mexicaine du placard",i:["haricots rouges","maïs","tomates concassées","cumin"],g:["vege","express","complet"],n:"",d:25,p:5},
+{u:"r351996",t:"Soupe de fruits de mer provençale",i:["moules","crevettes","tomates concassées","ail"],g:["complet","express"],n:"",d:25,p:5},
+{u:"r352010",t:"Soupe façon couscous",i:["semoule","carotte","courgette","pois chiches","merguez"],g:["complet"],n:"",d:40,p:5},
+{u:"r352035",t:"Soupe de haricots blancs, jambon et persillade",i:["haricots blancs","jambon","persil","ail"],g:["express","complet"],n:"",d:20,p:5},
+{u:"r352039",t:"Soupe de maïs à l'œuf et au jambon",i:["maïs","œufs","jambon"],g:["express","enfants","complet"],n:"",d:15,p:5},
+{u:"r352043",t:"Chowder à la dinde",i:["dinde","maïs","pomme de terre","crème fraîche"],g:["complet"],n:"",d:25,p:5},
+{u:"r352047",t:"Chowder au saumon",i:["saumon","pomme de terre","maïs","crème fraîche"],g:["complet"],n:"",d:30,p:10},
+{u:"r352051",t:"Soupe chinoise crevettes et vermicelles",i:["crevettes","pâtes","gingembre","sauce soja"],g:["express","complet"],n:"",d:25,p:10},
+{u:"r352495",t:"Tortellini au bouillon, tomate et basilic",i:["pâtes","tomate","basilic","bouillon cube"],g:["express","enfants","complet"],n:"",d:25,p:5},
+{u:"r352499",t:"Tortellini au fromage, bouillon aux petits pois",i:["pâtes","petits pois","parmesan","bouillon cube"],g:["express","enfants","complet"],n:"",d:25,p:5},
+{u:"r336592",t:"Salade de riz au saumon, avocat et tarama",i:["riz","saumon","avocat","citron"],g:["express","complet"],n:"",d:35,p:10},
+{u:"r343704",t:"Riz au maquereau et à l'orange",i:["riz","sardine","orange"],g:["express","complet"],n:"",d:35,p:15},
+{u:"r343709",t:"Salade de quinoa, carottes et clémentines",i:["quinoa","carotte","orange"],g:["vege","express"],n:"",d:25,p:10},
+{u:"r343713",t:"Taboulé de quinoa exotique aux crevettes",i:["quinoa","crevettes","ananas","menthe"],g:["express","complet"],n:"",d:45,p:15},
+{u:"r344476",t:"Blé, lentilles, cranberries, noix et mimolette",i:["boulgour","lentilles","noix","fromage râpé"],g:["vege","complet"],n:"",d:25,p:10},
+{u:"r349018",t:"Salade de blé printanière au chèvre et au pesto",i:["boulgour","chèvre","basilic","petits pois"],g:["vege","express"],n:"",d:25,p:10},
+{u:"r349022",t:"Salade de lentilles, feta et tomates",i:["lentilles","feta","tomate","échalote"],g:["vege","express","complet"],n:"",d:30,p:10},
+{u:"r349026",t:"Salade César aux œufs et pommes de terre",i:["salade","œufs","pomme de terre","parmesan","moutarde"],g:["complet"],n:"",d:40,p:15},
+{u:"r349030",t:"Salade de pommes de terre au poulet",i:["pomme de terre","poulet","moutarde","cornichons"],g:["express","complet"],n:"",d:35,p:15},
+{u:"r349034",t:"Haricots, pommes de terre, betterave et chèvre",i:["haricots verts","pomme de terre","betterave","chèvre"],g:["vege","complet"],n:"",d:50,p:15},
+{u:"r351055",t:"Pommes de terre, haddock et épinards",i:["pomme de terre","haddock","épinards"],g:["complet"],n:"",d:35,p:10},
+{u:"r351059",t:"Salade de patates douces, sauce moutarde",i:["patate douce","moutarde","salade"],g:["vege","express"],n:"",d:30,p:10},
+{u:"r351063",t:"Salade de carottes, crumble aux noisettes",i:["carotte","noisettes","farine","beurre"],g:["vege","express"],n:"",d:25,p:15},
+{u:"r351067",t:"Céleri et pommes aux gésiers de canard",i:["céleri","pomme","canard"],g:["express"],n:"",d:15,p:10},
+{u:"r351072",t:"Salade de chou rouge et patate douce aux noix",i:["chou","patate douce","noix"],g:["vege","express"],n:"",d:20,p:15},
+{u:"r351236",t:"Salade de farfalle à la grecque",i:["pâtes","feta","olives","concombre","tomate"],g:["vege","express","complet"],n:"",d:25,p:10},
+{u:"r351240",t:"Salade de pâtes au thon et aux olives",i:["pâtes","thon","olives","tomate"],g:["express","complet"],n:"",d:25,p:5},
+{u:"r351246",t:"Salade de pâtes italienne",i:["pâtes","tomate","mozzarella","basilic","olives"],g:["vege","express","complet"],n:"",d:35,p:10},
+{u:"r351250",t:"Salade vietnamienne, crevettes et nouilles",i:["crevettes","pâtes","carotte","menthe","citron"],g:["express","complet"],n:"",d:20,p:10}
 ,
-{u:"r379866",t:"Spaghetti au saumon fumé et pesto de roquette",i:["pâtes","saumon","basilic","parmesan"],g:["express","complet"],n:""},
-{u:"r381897",t:"Spaghetti complets aux épinards et à l'ail",i:["pâtes","épinards","ail","parmesan"],g:["vege","express","complet"],n:""},
-{u:"r383221",t:"Macaroni aux tomates, olives et piment",i:["pâtes","tomates concassées","olives","ail"],g:["vege","express","complet"],n:""},
-{u:"r383225",t:"Pâtes aux moules, raisins et pignons",i:["pâtes","moules","ail"],g:["complet"],n:""},
-{u:"r383230",t:"Fettucines aux carottes et crème au brie",i:["pâtes","carotte","fromage frais","crème fraîche"],g:["vege","complet"],n:""},
-{u:"r384701",t:"Pâtes carbonara au chou romanesco",i:["pâtes","lardons","œufs","chou-fleur","parmesan"],g:["complet"],n:""},
-{u:"r384705",t:"Pâtes à l'aubergine, ricotta et basilic",i:["pâtes","aubergine","ricotta","basilic"],g:["vege","complet"],n:""},
-{u:"r384709",t:"Tagliatelles au basilic, courgette et pignons",i:["pâtes","courgette","basilic","parmesan"],g:["vege","express","complet"],n:""},
-{u:"r384719",t:"Pâtes à la feta, tomates et olives",i:["pâtes","feta","tomate","olives"],g:["vege","express","complet"],n:""},
-{u:"r384863",t:"Spaetzles à l'alsacienne",i:["farine","œufs","fromage râpé","oignon"],g:["vege","complet"],n:""},
-{u:"r384868",t:"Gnocchis à la carbonara",i:["gnocchi","lardons","crème fraîche","parmesan"],g:["express","complet"],n:""},
-{u:"r383641",t:"Risotto aux saucisses et aux petits pois",i:["riz arborio","saucisse","petits pois","parmesan"],g:["complet"],n:""},
-{u:"r383645",t:"Risotto aux asperges",i:["riz arborio","asperge","parmesan","oignon"],g:["vege","complet"],n:""},
-{u:"r383649",t:"Crozotto aux girolles, jambon et beaufort",i:["pâtes","champignons","jambon","fromage râpé"],g:["complet"],n:""},
-{u:"r383653",t:"Perlotto express, petits pois et jambon",i:["pâtes","petits pois","jambon","parmesan"],g:["express","enfants","complet"],n:""},
-{u:"r383657",t:"Riz cantonais Frenchy",i:["riz","œufs","jambon","petits pois"],g:["enfants","express","complet"],n:""},
-{u:"r383661",t:"Polenta, oignons confits et chèvre doux",i:["polenta","oignon","chèvre"],g:["vege"],n:""},
-{u:"r383665",t:"Veau bolognaise et polenta",i:["veau","tomates concassées","polenta"],g:["complet"],n:""},
-{u:"r383669",t:"Polenta aux champignons et à la mozzarella",i:["polenta","champignons","mozzarella"],g:["vege","complet"],n:""},
-{u:"r383673",t:"Curry d'aubergines, tomates et pois chiches",i:["aubergine","tomates concassées","pois chiches","curry"],g:["vege","congelation","complet"],n:""},
-{u:"r383677",t:"Quenelles de brochet, riz à paëlla et tomate",i:["riz","tomate","poivron"],g:["complet"],n:""},
-{u:"r383862",t:"Quenelles nature, comté et épinards",i:["farine","œufs","comté","épinards"],g:["vege","complet"],n:""},
-{u:"r766520",t:"Crêpes fourrées choco-noisette",i:["farine","lait","œufs","chocolat","noisettes"],g:["vege","enfants"],n:""},
-{u:"r767161",t:"Gaufres, sauce au chocolat",i:["farine","lait","œufs","beurre","chocolat"],g:["vege","enfants"],n:""},
-{u:"r767162",t:"Pancakes aux myrtilles",i:["farine","lait","œufs","sucre"],g:["vege","enfants","express"],n:""},
-{u:"r767163",t:"Muffins aux fruits rouges",i:["farine","œufs","sucre","beurre","fraise"],g:["vege","enfants","express"],n:""},
-{u:"r767164",t:"Madeleines marbrées choco-vanille",i:["farine","œufs","sucre","beurre","chocolat","vanille"],g:["vege","enfants"],n:""},
-{u:"r767166",t:"Sablés dominos",i:["farine","beurre","sucre","chocolat"],g:["vege","enfants"],n:""},
-{u:"r767167",t:"Spritz au chocolat",i:["farine","beurre","sucre","chocolat"],g:["vege","enfants"],n:""},
-{u:"r767169",t:"Rochers coco et chocolat",i:["œufs","sucre","chocolat","noix de coco"],g:["vege","enfants","express"],n:""},
-{u:"r767170",t:"Chouquettes aux pépites de chocolat",i:["farine","œufs","beurre","chocolat","sucre"],g:["vege","enfants"],n:""},
-{u:"r767171",t:"Minitartelettes à la pomme, pistache et cannelle",i:["pomme","pâte brisée","sucre","cannelle"],g:["vege","enfants"],n:""},
-{u:"r767172",t:"Crumble croustillant aux pommes et aux fruits rouges",i:["pomme","fraise","farine","beurre","sucre"],g:["vege","enfants"],n:""},
-{u:"r767174",t:"Mousse au chocolat aux crêpes dentelle",i:["chocolat","œufs","crème liquide","biscuits"],g:["vege","enfants"],n:""},
-{u:"r767175",t:"Quatre-quarts aux pépites de chocolat",i:["farine","beurre","sucre","œufs","chocolat"],g:["vege","enfants"],n:""},
-{u:"r767176",t:"Zebra cake",i:["farine","œufs","sucre","beurre","cacao"],g:["vege","enfants"],n:""},
-{u:"r767177",t:"Banana bread",i:["banane","farine","œufs","sucre","beurre"],g:["vege","enfants"],n:""},
-{u:"r767178",t:"Flan pâtissier au chocolat au lait",i:["lait","œufs","sucre","chocolat","pâte brisée"],g:["vege","enfants"],n:""},
-{u:"r767179",t:"Brookie aux noix",i:["chocolat","beurre","farine","œufs","noix"],g:["vege","enfants"],n:""},
-{u:"r767180",t:"Cookie géant aux 3 chocolats",i:["farine","beurre","sucre","œufs","chocolat"],g:["vege","enfants","express"],n:""},
-{u:"r767801",t:"Glace sundae nappage caramel",i:["lait","crème liquide","sucre","vanille"],g:["vege","enfants"],n:""},
-{u:"r767803",t:"Nectar pomme-poire",i:["pomme","poire","sucre"],g:["vege","enfants","express"],n:""},
-{u:"r767810",t:"Minipizzas ourson",i:["farine","levure de boulanger","tomates concassées","mozzarella","jambon"],g:["enfants"],n:""},
-{u:"r767811",t:"Quiche lorraine individuelle",i:["lardons","œufs","crème fraîche","farine","beurre"],g:["enfants"],n:"4.8"},
-{u:"r767812",t:"Croque-messieurs en étoiles",i:["pain","jambon","fromage râpé","beurre","lait"],g:["enfants","express"],n:""},
-{u:"r767814",t:"Gratin de coquillettes, lardons et petits pois",i:["pâtes","lardons","petits pois","fromage râpé","lait"],g:["enfants","complet"],n:""},
-{u:"r767815",t:"Spaghetti aux légumes et boulettes de viande",i:["pâtes","bœuf haché","courgette","carotte","tomates concassées"],g:["enfants","complet"],n:""},
-{u:"r767816",t:"Cordons bleus et purée de légumes",i:["poulet","jambon","fromage râpé","pomme de terre","carotte"],g:["enfants","complet"],n:"4.7"},
-{u:"r767817",t:"Petits cakes au bacon et au fromage",i:["farine","œufs","lardons","fromage râpé","lait"],g:["enfants"],n:""},
-{u:"r767818",t:"Röstis de carottes et pommes de terre",i:["carotte","pomme de terre","œufs","farine"],g:["vege","enfants","express"],n:""},
-{u:"r767819",t:"Soupe de courgette, fromage et pâtes alphabet",i:["courgette","pâtes","vache qui rit"],g:["enfants","express"],n:"4.7"},
-{u:"r767820",t:"Tomates farcies au chèvre et au poulet",i:["tomate","chèvre","poulet","riz"],g:["complet"],n:""},
-{u:"r768261",t:"Risotto aux petits pois et au jambon",i:["riz arborio","petits pois","jambon","parmesan"],g:["enfants","express","complet"],n:""},
-{u:"r768262",t:"Croquettes de poisson et purée maison",i:["cabillaud","pomme de terre","œufs","farine"],g:["enfants","complet"],n:""},
-{u:"r768263",t:"Mon petit bol de riz cantonais",i:["riz","œufs","jambon","petits pois"],g:["enfants","express","complet"],n:""},
-{u:"r768264",t:"Boulettes de porc, courgettes et sauce au yaourt",i:["porc","courgette","yaourt","menthe"],g:["complet"],n:""},
-{u:"r768265",t:"Tacos au bœuf, tomates et cheddar",i:["bœuf haché","tomate","fromage râpé","pain"],g:["enfants","express","complet"],n:""},
-{u:"r768266",t:"Fajitas au poulet, cheddar et poivron",i:["poulet","poivron","fromage râpé","pain"],g:["enfants","express","complet"],n:""},
-{u:"r768267",t:"Wraps au jambon et au fromage",i:["farine","jambon","fromage râpé"],g:["enfants"],n:""},
-{u:"r768268",t:"Monster-burgers au cheddar",i:["farine","levure de boulanger","bœuf haché","fromage râpé","tomate"],g:["enfants","complet"],n:""},
-{u:"r768269",t:"Empanadas au bœuf et aux poivrons",i:["farine","beurre","bœuf haché","poivron","œufs"],g:["complet"],n:""}
+{u:"r379866",t:"Spaghetti au saumon fumé et pesto de roquette",i:["pâtes","saumon","basilic","parmesan"],g:["express","complet"],n:"",d:30,p:10},
+{u:"r381897",t:"Spaghetti complets aux épinards et à l'ail",i:["pâtes","épinards","ail","parmesan"],g:["vege","express","complet"],n:"",d:35,p:10},
+{u:"r383221",t:"Macaroni aux tomates, olives et piment",i:["pâtes","tomates concassées","olives","ail"],g:["vege","express","complet"],n:"",d:25,p:10},
+{u:"r383225",t:"Pâtes aux moules, raisins et pignons",i:["pâtes","moules","ail"],g:["complet"],n:"",d:20,p:5},
+{u:"r383230",t:"Fettucines aux carottes et crème au brie",i:["pâtes","carotte","fromage frais","crème fraîche"],g:["vege","complet"],n:"",d:30,p:10},
+{u:"r384701",t:"Pâtes carbonara au chou romanesco",i:["pâtes","lardons","œufs","chou-fleur","parmesan"],g:["complet"],n:"",d:35,p:15},
+{u:"r384705",t:"Pâtes à l'aubergine, ricotta et basilic",i:["pâtes","aubergine","ricotta","basilic"],g:["vege","complet"],n:"",d:35,p:15},
+{u:"r384709",t:"Tagliatelles au basilic, courgette et pignons",i:["pâtes","courgette","basilic","parmesan"],g:["vege","express","complet"],n:"",d:35,p:10},
+{u:"r384719",t:"Pâtes à la feta, tomates et olives",i:["pâtes","feta","tomate","olives"],g:["vege","express","complet"],n:"",d:25,p:10},
+{u:"r384863",t:"Spaetzles à l'alsacienne",i:["farine","œufs","fromage râpé","oignon"],g:["vege","complet"],n:"",d:40,p:10},
+{u:"r384868",t:"Gnocchis à la carbonara",i:["gnocchi","lardons","crème fraîche","parmesan"],g:["express","complet"],n:"",d:15,p:5},
+{u:"r383641",t:"Risotto aux saucisses et aux petits pois",i:["riz arborio","saucisse","petits pois","parmesan"],g:["complet"],n:"",d:50,p:10},
+{u:"r383645",t:"Risotto aux asperges",i:["riz arborio","asperge","parmesan","oignon"],g:["vege","complet"],n:"",d:35,p:10},
+{u:"r383649",t:"Crozotto aux girolles, jambon et beaufort",i:["pâtes","champignons","jambon","fromage râpé"],g:["complet"],n:"",d:35,p:10},
+{u:"r383653",t:"Perlotto express, petits pois et jambon",i:["pâtes","petits pois","jambon","parmesan"],g:["express","enfants","complet"],n:"",d:15,p:5},
+{u:"r383657",t:"Riz cantonais Frenchy",i:["riz","œufs","jambon","petits pois"],g:["enfants","express","complet"],n:"",d:40,p:10},
+{u:"r383661",t:"Polenta, oignons confits et chèvre doux",i:["polenta","oignon","chèvre"],g:["vege"],n:"",d:40,p:10},
+{u:"r383665",t:"Veau bolognaise et polenta",i:["veau","tomates concassées","polenta"],g:["complet"],n:"",d:35,p:10},
+{u:"r383669",t:"Polenta aux champignons et à la mozzarella",i:["polenta","champignons","mozzarella"],g:["vege","complet"],n:"",d:30,p:10},
+{u:"r383673",t:"Curry d'aubergines, tomates et pois chiches",i:["aubergine","tomates concassées","pois chiches","curry"],g:["vege","congelation","complet"],n:"",d:35,p:10},
+{u:"r383677",t:"Quenelles de brochet, riz à paëlla et tomate",i:["riz","tomate","poivron"],g:["complet"],n:"",d:40,p:10},
+{u:"r383862",t:"Quenelles nature, comté et épinards",i:["farine","œufs","comté","épinards"],g:["vege","complet"],n:"",d:45,p:10},
+{u:"r766520",t:"Crêpes fourrées choco-noisette",i:["farine","lait","œufs","chocolat","noisettes"],g:["vege","enfants"],n:"",d:115,p:15},
+{u:"r767161",t:"Gaufres, sauce au chocolat",i:["farine","lait","œufs","beurre","chocolat"],g:["vege","enfants"],n:"",d:65,p:15},
+{u:"r767162",t:"Pancakes aux myrtilles",i:["farine","lait","œufs","sucre"],g:["vege","enfants","express"],n:"",d:45,p:10},
+{u:"r767163",t:"Muffins aux fruits rouges",i:["farine","œufs","sucre","beurre","fraise"],g:["vege","enfants","express"],n:"",d:30,p:5},
+{u:"r767164",t:"Madeleines marbrées choco-vanille",i:["farine","œufs","sucre","beurre","chocolat","vanille"],g:["vege","enfants"],n:"",d:85,p:10},
+{u:"r767166",t:"Sablés dominos",i:["farine","beurre","sucre","chocolat"],g:["vege","enfants"],n:"",d:120,p:20},
+{u:"r767167",t:"Spritz au chocolat",i:["farine","beurre","sucre","chocolat"],g:["vege","enfants"],n:"",d:50,p:15},
+{u:"r767169",t:"Rochers coco et chocolat",i:["œufs","sucre","chocolat","noix de coco"],g:["vege","enfants","express"],n:"",d:35,p:10},
+{u:"r767170",t:"Chouquettes aux pépites de chocolat",i:["farine","œufs","beurre","chocolat","sucre"],g:["vege","enfants"],n:"",d:35,p:10},
+{u:"r767171",t:"Minitartelettes à la pomme, pistache et cannelle",i:["pomme","pâte brisée","sucre","cannelle"],g:["vege","enfants"],n:"",d:100,p:30},
+{u:"r767172",t:"Crumble croustillant aux pommes et aux fruits rouges",i:["pomme","fraise","farine","beurre","sucre"],g:["vege","enfants"],n:"",d:50,p:15},
+{u:"r767174",t:"Mousse au chocolat aux crêpes dentelle",i:["chocolat","œufs","crème liquide","biscuits"],g:["vege","enfants"],n:"",d:260,p:10},
+{u:"r767175",t:"Quatre-quarts aux pépites de chocolat",i:["farine","beurre","sucre","œufs","chocolat"],g:["vege","enfants"],n:"",d:55,p:10},
+{u:"r767176",t:"Zebra cake",i:["farine","œufs","sucre","beurre","cacao"],g:["vege","enfants"],n:"",d:55,p:10},
+{u:"r767177",t:"Banana bread",i:["banane","farine","œufs","sucre","beurre"],g:["vege","enfants"],n:"",d:55,p:10},
+{u:"r767178",t:"Flan pâtissier au chocolat au lait",i:["lait","œufs","sucre","chocolat","pâte brisée"],g:["vege","enfants"],n:"",d:100,p:15},
+{u:"r767179",t:"Brookie aux noix",i:["chocolat","beurre","farine","œufs","noix"],g:["vege","enfants"],n:"",d:55,p:15},
+{u:"r767180",t:"Cookie géant aux 3 chocolats",i:["farine","beurre","sucre","œufs","chocolat"],g:["vege","enfants","express"],n:"",d:30,p:10},
+{u:"r767801",t:"Glace sundae nappage caramel",i:["lait","crème liquide","sucre","vanille"],g:["vege","enfants"],n:"",d:215,p:30},
+{u:"r767803",t:"Nectar pomme-poire",i:["pomme","poire","sucre"],g:["vege","enfants","express"],n:"",d:25,p:10},
+{u:"r767810",t:"Minipizzas ourson",i:["farine","levure de boulanger","tomates concassées","mozzarella","jambon"],g:["enfants"],n:"",d:195,p:15},
+{u:"r767811",t:"Quiche lorraine individuelle",i:["lardons","œufs","crème fraîche","farine","beurre"],g:["enfants"],n:"4.8",d:120,p:15},
+{u:"r767812",t:"Croque-messieurs en étoiles",i:["pain","jambon","fromage râpé","beurre","lait"],g:["enfants","express"],n:"",d:40,p:10},
+{u:"r767814",t:"Gratin de coquillettes, lardons et petits pois",i:["pâtes","lardons","petits pois","fromage râpé","lait"],g:["enfants","complet"],n:"",d:50,p:10},
+{u:"r767815",t:"Spaghetti aux légumes et boulettes de viande",i:["pâtes","bœuf haché","courgette","carotte","tomates concassées"],g:["enfants","complet"],n:"",d:45,p:10},
+{u:"r767816",t:"Cordons bleus et purée de légumes",i:["poulet","jambon","fromage râpé","pomme de terre","carotte"],g:["enfants","complet"],n:"4.7",d:65,p:15},
+{u:"r767817",t:"Petits cakes au bacon et au fromage",i:["farine","œufs","lardons","fromage râpé","lait"],g:["enfants"],n:"",d:50,p:10},
+{u:"r767818",t:"Röstis de carottes et pommes de terre",i:["carotte","pomme de terre","œufs","farine"],g:["vege","enfants","express"],n:"",d:40,p:10},
+{u:"r767819",t:"Soupe de courgette, fromage et pâtes alphabet",i:["courgette","pâtes","vache qui rit"],g:["enfants","express"],n:"4.7",d:40,p:10},
+{u:"r767820",t:"Tomates farcies au chèvre et au poulet",i:["tomate","chèvre","poulet","riz"],g:["complet"],n:"",d:60,p:10},
+{u:"r768261",t:"Risotto aux petits pois et au jambon",i:["riz arborio","petits pois","jambon","parmesan"],g:["enfants","express","complet"],n:"",d:25,p:5},
+{u:"r768262",t:"Croquettes de poisson et purée maison",i:["cabillaud","pomme de terre","œufs","farine"],g:["enfants","complet"],n:"",d:80,p:20},
+{u:"r768263",t:"Mon petit bol de riz cantonais",i:["riz","œufs","jambon","petits pois"],g:["enfants","express","complet"],n:"",d:30,p:10},
+{u:"r768264",t:"Boulettes de porc, courgettes et sauce au yaourt",i:["porc","courgette","yaourt","menthe"],g:["complet"],n:"",d:40,p:10},
+{u:"r768265",t:"Tacos au bœuf, tomates et cheddar",i:["bœuf haché","tomate","fromage râpé","pain"],g:["enfants","express","complet"],n:"",d:35,p:10},
+{u:"r768266",t:"Fajitas au poulet, cheddar et poivron",i:["poulet","poivron","fromage râpé","pain"],g:["enfants","express","complet"],n:"",d:25,p:10},
+{u:"r768267",t:"Wraps au jambon et au fromage",i:["farine","jambon","fromage râpé"],g:["enfants"],n:"",d:90,p:15},
+{u:"r768268",t:"Monster-burgers au cheddar",i:["farine","levure de boulanger","bœuf haché","fromage râpé","tomate"],g:["enfants","complet"],n:"",d:225,p:15},
+{u:"r768269",t:"Empanadas au bœuf et aux poivrons",i:["farine","beurre","bœuf haché","poivron","œufs"],g:["complet"],n:"",d:50,p:15}
 ,
-{u:"r446582",t:"Poulet à la courge et au sarrasin",i:["poulet","courge butternut","oignon"],g:["bebe","complet"],n:""},
-{u:"r452691",t:"Colin, haricots verts et purée de petits pois à la menthe",i:["colin","haricots verts","petits pois","menthe"],g:["bebe","complet"],n:""},
-{u:"r454324",t:"Saumon au lait de coco et wasabi, purée de betterave",i:["saumon","lait de coco","betterave"],g:["bebe","complet"],n:""},
-{u:"r454327",t:"Œuf cocotte aux champignons et lardons, purée de carotte",i:["œufs","champignons","lardons","carotte"],g:["bebe","complet"],n:""},
-{u:"r469504",t:"Courgettes farcies à l'orientale",i:["courgette","bœuf haché","semoule","cumin"],g:["bebe","complet"],n:""},
-{u:"r469336",t:"Keftas de bœuf et garniture persillée au citron",i:["bœuf haché","persil","citron","oignon"],g:["bebe","complet"],n:""},
-{u:"r457114",t:"Chili de bœuf et muffins de maïs",i:["bœuf haché","haricots rouges","maïs","tomates concassées"],g:["bebe","complet"],n:""},
-{u:"r456695",t:"Sauté de veau au curry, pommes de terre et choux de Bruxelles",i:["veau","curry","pomme de terre","chou"],g:["bebe","complet"],n:""},
-{u:"r469344",t:"Comme une envie de carbo",i:["pâtes","lardons","œufs","parmesan"],g:["bebe","complet"],n:""},
-{u:"r452465",t:"Tajine de dinde aux dattes, épices et chou romanesco",i:["dinde","chou-fleur","cannelle","semoule"],g:["bebe","complet"],n:""},
-{u:"r470465",t:"Boulettes de porc aux herbes, bouillon parfumé aux dumplings",i:["porc","ciboulette","gingembre"],g:["bebe","complet"],n:""},
-{u:"r469902",t:"Poulet aux pommes façon Vallée d'Auge, riz noir complet",i:["poulet","pomme","riz","crème fraîche"],g:["bebe","complet"],n:""},
-{u:"r454166",t:"Crêpes roses à mille trous et dip à l'échalote",i:["farine","betterave","échalote","yaourt"],g:["bebe","vege"],n:""},
-{u:"r463541",t:"Croquettes au cresson et dip au yaourt",i:["salade","pomme de terre","yaourt","œufs"],g:["bebe","vege"],n:""},
-{u:"r454337",t:"Boulettes d'asperges au gruyère, dip de carotte cumin-sésame",i:["asperge","fromage râpé","carotte","cumin"],g:["bebe","vege"],n:""},
-{u:"r452425",t:"Salade de boulgour, chou-fleur et brocoli en deux textures",i:["boulgour","chou-fleur","brocoli","citron"],g:["bebe","vege"],n:""},
-{u:"r470473",t:"Chaussons aux épinards, dip vert",i:["épinards","farine","beurre","yaourt"],g:["bebe","vege"],n:""},
-{u:"r460397",t:"Velouté anisé à la courge et au fenouil",i:["courge butternut","fenouil","crème fraîche"],g:["bebe","vege"],n:""},
-{u:"r469338",t:"Potage rouge tomate-poivron et croûtons à l'ail",i:["tomate","poivron","ail","pain"],g:["bebe","vege","express"],n:""},
-{u:"r456699",t:"Velours d'endive à l'orange",i:["endive","orange","crème fraîche"],g:["bebe","vege"],n:""},
-{u:"r460404",t:"Velouté d'asperges noisetté",i:["asperge","noisettes","crème fraîche"],g:["bebe","vege"],n:""},
-{u:"r457117",t:"Velouté de céleri-rave aux châtaignes, lard croustillant",i:["céleri","châtaignes","lardons"],g:["bebe"],n:""},
-{u:"r469907",t:"Œuf mollet, purée de carottes et petit pain coco vapeur",i:["œufs","carotte","farine","lait de coco"],g:["bebe","vege"],n:""},
-{u:"r467050",t:"Smoothie bowl à la mangue et au lait d'avoine",i:["banane","lait"],g:["bebe","vege","express"],n:""},
-{u:"r452423",t:"Perles du Japon coco-banane",i:["lait de coco","banane","sucre"],g:["bebe","vege","enfants"],n:""},
-{u:"r469499",t:"Semoule à la noisette, compotée d'abricots au romarin",i:["semoule","noisettes","abricot","romarin"],g:["bebe","vege"],n:""},
-{u:"r467054",t:"Pancakes aux flocons d'avoine",i:["farine","lait","œufs","banane"],g:["bebe","vege","enfants","express"],n:""},
-{u:"r454331",t:"Compote pomme-carotte à la cannelle",i:["pomme","carotte","cannelle"],g:["bebe","vege","enfants","express","congelation"],n:""},
-{u:"r490958",t:"Compote poire-fenouil à l'anis étoilé",i:["poire","fenouil"],g:["bebe","vege","congelation"],n:""},
-{u:"r463547",t:"Riz au lait à la vanille (grands et tout-petits)",i:["riz","lait","vanille","sucre"],g:["bebe","vege","enfants"],n:""},
-{u:"r467038",t:"Crumble à la pomme et aux cerises",i:["pomme","farine","beurre","sucre"],g:["bebe","vege","enfants"],n:""},
-{u:"r473776",t:"Entremets fraise-framboise comme un tiramisu",i:["fraise","fromage frais","biscuits","sucre"],g:["bebe","vege"],n:""},
-{u:"r456692",t:"Cake à la banane et au chocolat blanc",i:["banane","chocolat","farine","œufs","beurre"],g:["bebe","vege","enfants"],n:""},
-{u:"r469508",t:"Mousse à la fraise sans œufs",i:["fraise","crème liquide","sucre"],g:["bebe","vege","enfants"],n:""},
-{u:"r463437",t:"Gratin de pâtes au brocoli, poire et bleu",i:["pâtes","brocoli","poire","fromage râpé"],g:["bebe","vege","complet"],n:""},
-{u:"r463440",t:"Lentilles vertes à la badiane et panais, craquants d'emmental",i:["lentilles","panais","fromage râpé"],g:["bebe","vege","complet"],n:""},
-{u:"r463434",t:"Gratin de crozets aux blettes et champignons",i:["pâtes","épinards","champignons","fromage râpé"],g:["bebe","vege","complet"],n:""},
-{u:"r463537",t:"Risotto de quinoa à l'aubergine",i:["quinoa","aubergine","parmesan","oignon"],g:["bebe","vege","complet"],n:""},
-{u:"r473799",t:"Ratatouille d'aubergines aux pois chiches, semoule parfumée",i:["aubergine","pois chiches","semoule","tomate"],g:["bebe","vege","complet"],n:""},
-{u:"r457967",t:"Crêpes garnies au lait de coco",i:["farine","lait de coco","œufs","courgette"],g:["bebe","vege"],n:""},
-{u:"r454329",t:"Dhal de lentilles corail, chou-fleur et patate douce",i:["lentilles corail","chou-fleur","patate douce","lait de coco"],g:["bebe","vege","congelation","complet"],n:""},
-{u:"r469512",t:"Buddha bowl au quinoa et légumes variés",i:["quinoa","carotte","betterave","avocat","pois chiches"],g:["bebe","vege","complet"],n:""},
-{u:"r457971",t:"Crumble à la courge butternut et au comté",i:["courge butternut","comté","farine","beurre"],g:["bebe","vege"],n:""},
-{u:"r473778",t:"Loubieh (ragoût de haricots verts libanais)",i:["haricots verts","tomates concassées","ail","oignon"],g:["bebe","vege","congelation"],n:""}
+{u:"r446582",t:"Poulet à la courge et au sarrasin",i:["poulet","courge butternut","oignon"],g:["bebe","complet"],n:"",d:45,p:20},
+{u:"r452691",t:"Colin, haricots verts et purée de petits pois à la menthe",i:["colin","haricots verts","petits pois","menthe"],g:["bebe","complet"],n:"",d:50,p:20},
+{u:"r454324",t:"Saumon au lait de coco et wasabi, purée de betterave",i:["saumon","lait de coco","betterave"],g:["bebe","complet"],n:"",d:65,p:30},
+{u:"r454327",t:"Œuf cocotte aux champignons et lardons, purée de carotte",i:["œufs","champignons","lardons","carotte"],g:["bebe","complet"],n:"",d:75,p:25},
+{u:"r469504",t:"Courgettes farcies à l'orientale",i:["courgette","bœuf haché","semoule","cumin"],g:["bebe","complet"],n:"",d:55,p:20},
+{u:"r469336",t:"Keftas de bœuf et garniture persillée au citron",i:["bœuf haché","persil","citron","oignon"],g:["bebe","complet"],n:"",d:55,p:30},
+{u:"r457114",t:"Chili de bœuf et muffins de maïs",i:["bœuf haché","haricots rouges","maïs","tomates concassées"],g:["bebe","complet"],n:"",d:60,p:20},
+{u:"r456695",t:"Sauté de veau au curry, pommes de terre et choux de Bruxelles",i:["veau","curry","pomme de terre","chou"],g:["bebe","complet"],n:"",d:60,p:20},
+{u:"r469344",t:"Comme une envie de carbo",i:["pâtes","lardons","œufs","parmesan"],g:["bebe","complet"],n:"",d:50,p:15},
+{u:"r452465",t:"Tajine de dinde aux dattes, épices et chou romanesco",i:["dinde","chou-fleur","cannelle","semoule"],g:["bebe","complet"],n:"",d:45,p:15},
+{u:"r470465",t:"Boulettes de porc aux herbes, bouillon parfumé aux dumplings",i:["porc","ciboulette","gingembre"],g:["bebe","complet"],n:"",d:70,p:15},
+{u:"r469902",t:"Poulet aux pommes façon Vallée d'Auge, riz noir complet",i:["poulet","pomme","riz","crème fraîche"],g:["bebe","complet"],n:"",d:60,p:10},
+{u:"r454166",t:"Crêpes roses à mille trous et dip à l'échalote",i:["farine","betterave","échalote","yaourt"],g:["bebe","vege"],n:"",d:80,p:15},
+{u:"r463541",t:"Croquettes au cresson et dip au yaourt",i:["salade","pomme de terre","yaourt","œufs"],g:["bebe","vege"],n:"",d:80,p:20},
+{u:"r454337",t:"Boulettes d'asperges au gruyère, dip de carotte cumin-sésame",i:["asperge","fromage râpé","carotte","cumin"],g:["bebe","vege"],n:"",d:75,p:30},
+{u:"r452425",t:"Salade de boulgour, chou-fleur et brocoli en deux textures",i:["boulgour","chou-fleur","brocoli","citron"],g:["bebe","vege"],n:"",d:70,p:30},
+{u:"r470473",t:"Chaussons aux épinards, dip vert",i:["épinards","farine","beurre","yaourt"],g:["bebe","vege"],n:"",d:130,p:30},
+{u:"r460397",t:"Velouté anisé à la courge et au fenouil",i:["courge butternut","fenouil","crème fraîche"],g:["bebe","vege"],n:"",d:55,p:10},
+{u:"r469338",t:"Potage rouge tomate-poivron et croûtons à l'ail",i:["tomate","poivron","ail","pain"],g:["bebe","vege","express"],n:"",d:35,p:10},
+{u:"r456699",t:"Velours d'endive à l'orange",i:["endive","orange","crème fraîche"],g:["bebe","vege"],n:"",d:35,p:10},
+{u:"r460404",t:"Velouté d'asperges noisetté",i:["asperge","noisettes","crème fraîche"],g:["bebe","vege"],n:"",d:65,p:15},
+{u:"r457117",t:"Velouté de céleri-rave aux châtaignes, lard croustillant",i:["céleri","châtaignes","lardons"],g:["bebe"],n:"",d:40,p:20},
+{u:"r469907",t:"Œuf mollet, purée de carottes et petit pain coco vapeur",i:["œufs","carotte","farine","lait de coco"],g:["bebe","vege"],n:"",d:120,p:20},
+{u:"r467050",t:"Smoothie bowl à la mangue et au lait d'avoine",i:["banane","lait"],g:["bebe","vege","express"],n:"",d:15,p:15},
+{u:"r452423",t:"Perles du Japon coco-banane",i:["lait de coco","banane","sucre"],g:["bebe","vege","enfants"],n:"",d:30,p:10},
+{u:"r469499",t:"Semoule à la noisette, compotée d'abricots au romarin",i:["semoule","noisettes","abricot","romarin"],g:["bebe","vege"],n:"",d:30,p:20},
+{u:"r467054",t:"Pancakes aux flocons d'avoine",i:["farine","lait","œufs","banane"],g:["bebe","vege","enfants","express"],n:"",d:45,p:10},
+{u:"r454331",t:"Compote pomme-carotte à la cannelle",i:["pomme","carotte","cannelle"],g:["bebe","vege","enfants","express","congelation"],n:"",d:60,p:30},
+{u:"r490958",t:"Compote poire-fenouil à l'anis étoilé",i:["poire","fenouil"],g:["bebe","vege","congelation"],n:"",d:45,p:30},
+{u:"r463547",t:"Riz au lait à la vanille (grands et tout-petits)",i:["riz","lait","vanille","sucre"],g:["bebe","vege","enfants"],n:"",d:40,p:5},
+{u:"r467038",t:"Crumble à la pomme et aux cerises",i:["pomme","farine","beurre","sucre"],g:["bebe","vege","enfants"],n:"",d:60,p:30},
+{u:"r473776",t:"Entremets fraise-framboise comme un tiramisu",i:["fraise","fromage frais","biscuits","sucre"],g:["bebe","vege"],n:"",d:40,p:20},
+{u:"r456692",t:"Cake à la banane et au chocolat blanc",i:["banane","chocolat","farine","œufs","beurre"],g:["bebe","vege","enfants"],n:"",d:55,p:10},
+{u:"r469508",t:"Mousse à la fraise sans œufs",i:["fraise","crème liquide","sucre"],g:["bebe","vege","enfants"],n:"",d:180,p:10},
+{u:"r463437",t:"Gratin de pâtes au brocoli, poire et bleu",i:["pâtes","brocoli","poire","fromage râpé"],g:["bebe","vege","complet"],n:"",d:60,p:15},
+{u:"r463440",t:"Lentilles vertes à la badiane et panais, craquants d'emmental",i:["lentilles","panais","fromage râpé"],g:["bebe","vege","complet"],n:"",d:50,p:20},
+{u:"r463434",t:"Gratin de crozets aux blettes et champignons",i:["pâtes","épinards","champignons","fromage râpé"],g:["bebe","vege","complet"],n:"",d:55,p:15},
+{u:"r463537",t:"Risotto de quinoa à l'aubergine",i:["quinoa","aubergine","parmesan","oignon"],g:["bebe","vege","complet"],n:"",d:180,p:20},
+{u:"r473799",t:"Ratatouille d'aubergines aux pois chiches, semoule parfumée",i:["aubergine","pois chiches","semoule","tomate"],g:["bebe","vege","complet"],n:"",d:60,p:15},
+{u:"r457967",t:"Crêpes garnies au lait de coco",i:["farine","lait de coco","œufs","courgette"],g:["bebe","vege"],n:"",d:70,p:30},
+{u:"r454329",t:"Dhal de lentilles corail, chou-fleur et patate douce",i:["lentilles corail","chou-fleur","patate douce","lait de coco"],g:["bebe","vege","congelation","complet"],n:"",d:50,p:15},
+{u:"r469512",t:"Buddha bowl au quinoa et légumes variés",i:["quinoa","carotte","betterave","avocat","pois chiches"],g:["bebe","vege","complet"],n:"",d:1440,p:30},
+{u:"r457971",t:"Crumble à la courge butternut et au comté",i:["courge butternut","comté","farine","beurre"],g:["bebe","vege"],n:"",d:70,p:20},
+{u:"r473778",t:"Loubieh (ragoût de haricots verts libanais)",i:["haricots verts","tomates concassées","ail","oignon"],g:["bebe","vege","congelation"],n:"",d:50,p:15}
 ];
 
 /* ================= CATALOGUE D'INGRÉDIENTS ================= */
@@ -818,281 +741,474 @@ function rayonDe(ing){
   return {c:"Autres",i:"🛒"};
 }
 
-/* ================= ÉTAT ================= */
+
+/* ================= OUTILS ================= */
 function load(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}}
 function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
-let ING=load("ck_ing",[]);
-let FAVS=load("ck_favs",[]);
-let OPTS=new Set(load("ck_opts",[]));
-let OPENCATS=new Set(load("ck_opencats",["Légumes"]));
-let PERSO=load("ck_perso",[]);
-let FAVS_SET=null;
-let CART=load("ck_cart",[]);
-let CHECKED=new Set(load("ck_checked",[]));
-let TYPE=load("ck_type","Tous");
-let QNOM="";
-let CATQ="";
-function persist(){save("ck_ing",ING);save("ck_favs",FAVS);save("ck_opts",[...OPTS]);
-  save("ck_opencats",[...OPENCATS]);save("ck_perso",PERSO);save("ck_cart",CART);save("ck_checked",[...CHECKED]);save("ck_type",TYPE)}
-
-const OPTIONS=[{k:"express",l:"Rapide"},{k:"enfants",l:"Doux enfants"},{k:"congelation",l:"Congelable"},
-  {k:"vege",l:"Végétarien"},{k:"complet",l:"Plat complet"},{k:"bebe",l:"Dès bébé"}];
 const RECIPE_BASE="https://cookidoo.fr/recipes/recipe/fr-FR/";
-const lienDe=r=>r.url?r.url:RECIPE_BASE+r.u;
-const esc=s=>(''+s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
-const has=v=>ING.some(x=>norm(x)===norm(v));
-function toutes(){return RECETTES.concat(PERSO)}
+const lienDe=r=>RECIPE_BASE+r.u;
+const esc=s=>(''+s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const $=id=>document.getElementById(id);
+const PAR_ID=Object.fromEntries(RECETTES.map(r=>[r.u,r]));
+const ico=(n,c)=>'<svg class="ico'+(c?' '+c:'')+'"><use href="#i-'+n+'"/></svg>';
+const JOURS_C=['dim.','lun.','mar.','mer.','jeu.','ven.','sam.'];
+const JOURS_L=['dimanche','lundi','mardi','mercredi','jeudi','vendredi','samedi'];
+const MOIS=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+function iso(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function deIso(s){const[a,m,j]=s.split('-').map(Number);return new Date(a,m-1,j)}
+function plusJours(s,n){const d=deIso(s);d.setDate(d.getDate()+n);return iso(d)}
+const AUJ=()=>iso(new Date());
+function hh(t){return t?t.replace(':','h'):''}           // 18:30 -> 18h30
+function duree(r){return r&&r.d?r.d:null}
+function txtDuree(m){if(!m)return'';if(m<60)return m+' min';const h=Math.floor(m/60),r=m%60;return h+' h'+(r?' '+String(r).padStart(2,'0'):'')}
+function hachage(s){let h=2166136261;for(const c of s){h^=c.charCodeAt(0);h=Math.imul(h,16777619)}return (h>>>0)/4294967296}
+let tT;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(tT);tT=setTimeout(()=>t.classList.remove('on'),2000)}
 
-/* ================= SAISIE ================= */
-const inp=document.getElementById('inp');
-function addIng(v){
-  v=(v||'').trim().replace(/\s+/g,' ');
-  if(!v)return;
-  if(has(v)){toast('Déjà dans la liste');return}
-  ING.push(v);persist();refresh();
+/* ================= DONNÉES PARTAGÉES (Google Sheet via Apps Script) =================
+   CFG = {url, token} : saisi une fois (ou via le lien d'installation #cfg=…), jamais dans le code.
+   DATA = dernière copie connue ; FILE = modifications pas encore envoyées.            */
+let CFG=load('qm_cfg',null);
+let DATA=Object.assign({agenda:[],derniere_synchro:'',menu:[],courses:[],frigo:[]},load('qm_data',{}));
+let FILE=load('qm_file',[]);
+let ETAT=CFG&&CFG.url?'hors':'local';
+let FAVS=load('ck_favs',[]);
+let FAVS_SET=new Set(FAVS);
+const CLE={Menu:'date',Courses:'article',Frigo:'ingredient'};
+const LISTE={Menu:'menu',Courses:'courses',Frigo:'frigo'};
+
+(function lienInstallation(){
+  const m=location.hash.match(/^#cfg=(.+)$/);if(!m)return;
+  try{const o=JSON.parse(decodeURIComponent(escape(atob(decodeURIComponent(m[1])))));
+    if(o.u&&o.t){CFG={url:o.u,token:o.t};save('qm_cfg',CFG);ETAT='hors'}}catch(e){}
+  history.replaceState(null,'',location.pathname+location.search);
+})();
+
+function appliquerLocal(op){
+  const l=DATA[LISTE[op.onglet]],k=CLE[op.onglet];
+  const i=l.findIndex(x=>String(x[k])===String(op.cle));
+  if(op.suppr){if(i>=0)l.splice(i,1);return}
+  const ligne=Object.assign({},op.ligne,{[k]:op.cle});
+  if(i>=0)l[i]=ligne;else l.push(ligne);
 }
-function delIng(v){ING=ING.filter(x=>norm(x)!==norm(v));persist();refresh()}
-const acBox=document.getElementById('ac');
-let ACLIST=[],ACSEL=-1;
-function tousIngredients(){const o=[];CATALOGUE.forEach(c=>c.l.forEach(v=>o.push({v,r:c.i})));return o}
-const ALLING=tousIngredients();
-function renderAC(){
-  const q=norm(inp.value);
-  if(!q){acBox.classList.remove('on');ACLIST=[];return}
-  ACLIST=ALLING.filter(x=>norm(x.v).includes(q)&&!has(x.v))
-    .sort((a,b)=>norm(a.v).indexOf(q)-norm(b.v).indexOf(q)||a.v.length-b.v.length).slice(0,7);
-  if(!ACLIST.length){acBox.classList.remove('on');return}
-  ACSEL=0;
-  acBox.innerHTML=ACLIST.map((x,i)=>'<button data-i="'+i+'" class="'+(i===0?'sel':'')+'">'+esc(x.v)+'<span class="r">'+x.r+'</span></button>').join('');
-  acBox.querySelectorAll('button').forEach(b=>{
-    b.onmousedown=e=>{e.preventDefault();addIng(ACLIST[+b.dataset.i].v);inp.value='';acBox.classList.remove('on')};
+function ecrire(ops){
+  if(!ops.length)return;
+  ops.forEach(appliquerLocal);FILE.push(...ops);
+  save('qm_file',FILE);save('qm_data',DATA);rendre();envoyer();
+}
+async function appel(body){
+  const r=await fetch(CFG.url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},
+    body:JSON.stringify(Object.assign({token:CFG.token},body))});
+  const j=await r.json();
+  if(!j.ok)throw new Error(j.erreur||'erreur');
+  return j;
+}
+let enCours=false;
+async function envoyer(){
+  if(!CFG||!CFG.url||enCours)return;
+  enCours=true;
+  const lot=FILE.slice();
+  try{
+    const j=await appel(lot.length?{action:'lot',ops:lot}:{action:'lire'});
+    FILE=FILE.slice(lot.length);
+    DATA={agenda:j.agenda||[],derniere_synchro:j.derniere_synchro||'',menu:j.menu||[],courses:j.courses||[],frigo:j.frigo||[]};
+    FILE.forEach(appliquerLocal);           // modifications faites pendant l'envoi
+    ETAT='ok';
+  }catch(e){ETAT=/jeton/.test(e.message)?'jeton':'hors'}
+  enCours=false;
+  save('qm_file',FILE);save('qm_data',DATA);rendre();
+  if(ETAT==='ok'&&FILE.length)envoyer();
+}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)envoyer()});
+setInterval(()=>{if(!document.hidden)envoyer()},60000);
+
+/* ---------- lecture pratique des données ---------- */
+const menuDu=d=>DATA.menu.find(m=>m.date===d);
+function statutDe(m){const s=(m&&m.statut)||'';const i=s.indexOf('|');return{type:i<0?s:s.slice(0,i),note:i<0?'':s.slice(i+1)}}
+const frigoNoms=()=>DATA.frigo.map(f=>f.ingredient);
+const viteNoms=()=>DATA.frigo.filter(f=>f.a_finir_vite==='1').map(f=>f.ingredient);
+const coursesRestantes=()=>DATA.courses.filter(c=>c.coche!=='1');
+function manquants(r){
+  const fr=frigoNoms();
+  return r.i.filter(k=>!fr.some(f=>corresp(f,k)));
+}
+function ajouterCourses(items){    // items : [{nom, origine}]
+  const ops=[],vus=new Set();
+  items.forEach(({nom,origine})=>{
+    const n=norm(nom);if(!n||vus.has(n))return;vus.add(n);
+    const ex=DATA.courses.find(c=>norm(c.article)===n||corresp(c.article,nom));
+    if(ex){if(ex.coche==='1')ops.push({onglet:'Courses',cle:ex.article,ligne:Object.assign({},ex,{coche:''})});return}
+    ops.push({onglet:'Courses',cle:nom,ligne:{rayon:rayonDe(nom).c,origine:origine||'',coche:''}});
   });
-  acBox.classList.add('on');
+  ecrire(ops);return ops.length;
 }
-function majSel(){acBox.querySelectorAll('button').forEach((b,i)=>b.classList.toggle('sel',i===ACSEL))}
-inp.addEventListener('input',renderAC);
-inp.addEventListener('blur',()=>setTimeout(()=>acBox.classList.remove('on'),120));
-inp.addEventListener('focus',renderAC);
-document.getElementById('addbtn').onclick=()=>{addIng(inp.value);inp.value='';acBox.classList.remove('on');inp.focus()};
-inp.addEventListener('keydown',e=>{
-  const open=acBox.classList.contains('on')&&ACLIST.length;
-  if(e.key==='ArrowDown'&&open){e.preventDefault();ACSEL=(ACSEL+1)%ACLIST.length;majSel();return}
-  if(e.key==='ArrowUp'&&open){e.preventDefault();ACSEL=(ACSEL-1+ACLIST.length)%ACLIST.length;majSel();return}
-  if(e.key==='Escape'){acBox.classList.remove('on');return}
-  if(e.key==='Enter'){e.preventDefault();
-    if(open&&ACSEL>=0)addIng(ACLIST[ACSEL].v);else addIng(inp.value);
-    inp.value='';acBox.classList.remove('on');}
-});
-
-function renderIng(){
-  const box=document.getElementById('mychips');box.innerHTML="";
-  if(!ING.length)box.innerHTML='<span class="noneyet">Rien pour l\'instant — coche dans les rayons ci-dessous.</span>';
-  ING.forEach(v=>{const c=document.createElement('span');c.className='mychip';
-    c.innerHTML=esc(v)+' <button aria-label="Retirer">×</button>';
-    c.querySelector('button').onclick=()=>delIng(v);
-    box.appendChild(c)});
-  document.getElementById('pcount').textContent=ING.length?ING.length+' ingrédient'+(ING.length>1?'s':''):'';
+function mettreAuMenu(date,r,statut){
+  ecrire([{onglet:'Menu',cle:date,ligne:{id_recette:r?r.u:'',titre:r?r.t:'',statut:statut||'normal'}}]);
 }
 
-/* ================= RAYONS ================= */
-function renderCats(){
-  const box=document.getElementById('cats');box.innerHTML="";
-  const q=norm(CATQ);
-  CATALOGUE.forEach(cat=>{
-    const items=q?cat.l.filter(x=>norm(x).includes(q)):cat.l;
-    if(!items.length)return;
-    const nSel=cat.l.filter(has).length;
-    const d=document.createElement('details');d.className='cat';
-    d.open=q?true:OPENCATS.has(cat.c);
-    d.innerHTML='<summary><span class="ico">'+cat.i+'</span>'+cat.c+
-      '<span class="n'+(nSel?' has':'')+'">'+(nSel?nSel+' choisi'+(nSel>1?'s':''):items.length)+'</span>'+
-      '<span class="chev">›</span></summary>';
-    const body=document.createElement('div');body.className='body';
-    const chips=document.createElement('div');chips.className='qchips';
-    items.forEach(v=>{const b=document.createElement('button');
-      b.className='qchip'+(has(v)?' used':'');b.textContent=v;
-      b.onclick=()=>{has(v)?delIng(v):addIng(v)};chips.appendChild(b)});
-    body.appendChild(chips);d.appendChild(body);
-    d.addEventListener('toggle',()=>{if(!q){d.open?OPENCATS.add(cat.c):OPENCATS.delete(cat.c);persist()}});
-    box.appendChild(d);
-  });
-  if(!box.children.length)box.innerHTML='<p class="noneyet">Aucun ingrédient ne correspond.</p>';
+/* ================= TYPE DE SOIRÉE (événements TimeTree) ================= */
+const estJournee=e=>e.journee===true||String(e.journee).toUpperCase()==='TRUE';
+const evenementsDu=(agenda,d)=>agenda.filter(e=>e.date<=d&&(e.date_fin||e.date)>=d);
+function typeSoir(agenda,d){
+  const evs=evenementsDu(agenda,d);
+  for(const e of evs){const t=norm(e.titre);
+    if(/\b(diner|resto|restaurant|anniversaire)\b/.test(t)&&e.date===d&&(e.debut||'')>='18:00')
+      return{type:'dehors',note:'Dîner dehors → rien à prévoir'}}
+  for(const e of evs)if(/\bgarde\b/.test(norm(e.titre)))return{type:'garde',note:'Garde → plat préparé la veille'};
+  for(const e of evs){if(estJournee(e)||(e.date_fin||e.date)!==d)continue;
+    if(e.fin>='17:00'&&e.fin<='19:30')return{type:'presse',note:'Retour '+hh(e.fin)+' → 20 min max'}}
+  return{type:'normal',note:''};
 }
-document.getElementById('catq').addEventListener('input',e=>{CATQ=e.target.value;renderCats()});
 
-/* ================= FILTRES ================= */
-const optBox=document.getElementById('opts');
-OPTIONS.forEach(o=>{const b=document.createElement('button');
-  b.className='opt'+(OPTS.has(o.k)?' on':'');b.textContent=o.l;
-  b.onclick=()=>{OPTS.has(o.k)?OPTS.delete(o.k):OPTS.add(o.k);persist();
-    b.classList.toggle('on',OPTS.has(o.k));chercher()};
-  optBox.appendChild(b)});
-
-/* ---------- types de plats ---------- */
-const typeBox=document.getElementById('types');
-function renderTypes(){
-  typeBox.innerHTML="";
-  TYPES.forEach(t=>{const b=document.createElement('button');
-    b.className='type'+(TYPE===t?' on':'');b.textContent=t;
-    b.onclick=()=>{TYPE=t;persist();renderTypes();chercher()};
-    typeBox.appendChild(b)});
+/* ================= CHOIX D'UN PLAT ================= */
+const _FAM=[
+  ['poisson',['saumon','cabillaud','colin','lieu','thon','crevette','moule','poisson','haddock','eglefin','morue','sardine','maquereau','merlu','brochet','quenelle','gambas']],
+  ['viande',['poulet','boeuf','porc','veau','agneau','canard','dinde','jambon','lardon','saucisse','merguez','chorizo','viande','steak','bacon','kefta','boulette','cordon','burger','hache']],
+  ['oeufs',['oeuf','quiche','omelette','tortilla','frittata','flan']],
+  ['pates/riz',['pate','spaghetti','risotto','riz','gnocchi','lasagne','macaroni','tagliatelle','penne','coquillette','crozotto','perlotto','nouille','polenta','semoule','couscous','quinoa','boulgour']]];
+function familleDe(r){
+  if(r.cat==='Soupes')return'soupe';
+  const t=' '+norm(r.t)+' ',ing=' '+r.i.map(norm).join(' ')+' ';
+  for(const[f,mots]of _FAM)if(mots.some(m=>t.includes(m)))return f;
+  for(const[f,mots]of _FAM)if(mots.some(m=>ing.includes(' '+m)))return f;
+  return'légumes';
 }
-document.getElementById('qnom').addEventListener('input',e=>{QNOM=e.target.value.trim();chercher()});
+const LIB_FAM={'poisson':'du poisson','viande':'de la viande','oeufs':'des œufs','pates/riz':'pâtes ou riz','soupe':'une soupe','légumes':'des légumes'};
+RECETTES.forEach(r=>{r.fam=familleDe(r)});
+const DINERS=RECETTES.filter(r=>(r.cat==='Plats'||r.cat==='Soupes')&&!/gaspacho|froide?/.test(norm(r.t)));
 
-/* ================= RÉSULTATS ================= */
-function chercher(){
-  FAVS_SET=new Set(FAVS);
-  const res=document.getElementById('results');
-  const rcount=document.getElementById('rcount');
-  res.innerHTML="";
-  const base=toutes();
-  let liste;
-  if(!ING.length){
-    liste=base.filter(r=>![...OPTS].length||[...OPTS].every(o=>r.g.includes(o)))
-              .map(r=>({r,matched:[],missing:r.i,ratio:0}));
+/* Choisit la meilleure recette pour un soir. ctx = {date, soir:{type,note}, exclus:Set, familles:[], frigo:[], vite:[], favoris:Set} */
+function choisirPlat(ctx){
+  let cands=DINERS.filter(r=>!ctx.exclus.has(r.u));
+  if(ctx.soir.type==='presse')cands=cands.filter(r=>r.d&&r.d<=25);
+  else if(ctx.soir.type==='garde'){const c=cands.filter(r=>r.g.includes('congelation'));if(c.length)cands=c}
+  if(!cands.length)return null;
+  let meilleur=null;
+  for(const r of cands){
+    const mV=ctx.vite.filter(f=>r.i.some(k=>corresp(f,k)));
+    const mF=ctx.frigo.filter(f=>r.i.some(k=>corresp(f,k)));
+    const fav=ctx.favoris.has(r.u),enf=r.g.includes('enfants');
+    const usage=ctx.usage||{};
+    let s=mV.reduce((t,f)=>t+6/(1+2*(usage[f]||0)),0)+mF.length*1.5+(fav?3:0)+(enf?2:0)+(r.g.includes('complet')?1:0)
+      -(r.i.length-mF.length)*.3+hachage(ctx.date+r.u)*3.5;
+    if(ctx.familles.slice(-2).includes(r.fam))s-=5;
+    if(r.fam==='soupe')s-=1.5;
+    if(ctx.soir.type==='normal'&&r.d>90)s-=4;
+    if(!meilleur||s>meilleur.s)meilleur={r,s,mV:mV.filter(f=>!usage[f]),fav,enf};
+  }
+  const m=meilleur;
+  let note=ctx.soir.note;
+  if(!note)note=m.mV.length?'Utilise '+m.mV[0]+' à finir vite':m.fav?'Un de vos favoris':m.enf?'Doux pour les enfants':'Pour varier : '+LIB_FAM[m.r.fam];
+  return{r:m.r,note};
+}
+function recettesRecentes(autour,sauf){
+  const a=plusJours(autour,-14),b=plusJours(autour,14);
+  return new Set(DATA.menu.filter(m=>m.date>=a&&m.date<=b&&!(sauf&&sauf.has(m.date))).map(m=>m.id_recette).filter(Boolean));
+}
+
+/* Logique « Proposer la semaine » — version 1, sans API externe.
+   Isolée ici pour être remplacée plus tard par un appel IA (Claude) qui piochera dans le même catalogue.
+   Entrée : {jours:[dates ISO], agenda, menu, frigo:[noms], vite:[noms], favoris:Set}
+   Sortie : [{date, id_recette, titre, statut:'type|explication'}] */
+function proposerSemaine({jours,agenda,menu,frigo,vite,favoris}){
+  const sauf=new Set(jours);
+  const exclus=new Set(menu.filter(m=>!sauf.has(m.date)&&m.date>=plusJours(jours[0],-14)&&m.date<=plusJours(jours[jours.length-1],14))
+    .map(m=>m.id_recette).filter(Boolean));
+  const familles=[],sortie=[],usage={};
+  for(const d of jours){
+    const soir=typeSoir(agenda,d);
+    if(soir.type==='dehors'){sortie.push({date:d,id_recette:'',titre:'',statut:'dehors|'+soir.note});continue}
+    const c=choisirPlat({date:d,soir,exclus,familles,frigo,vite,favoris,usage});
+    if(!c){sortie.push({date:d,id_recette:'',titre:'',statut:soir.type+'|Aucune recette compatible'});continue}
+    exclus.add(c.r.u);familles.push(c.r.fam);
+    vite.filter(f=>c.r.i.some(k=>corresp(f,k))).forEach(f=>{usage[f]=(usage[f]||0)+1});
+    sortie.push({date:d,id_recette:c.r.u,titre:c.r.t,statut:soir.type+'|'+c.note});
+  }
+  return sortie;
+}
+
+/* ================= NAVIGATION ================= */
+let ONGLET=load('qm_onglet','soir');
+function aller(o){ONGLET=o;save('qm_onglet',o);
+  document.querySelectorAll('.ecran').forEach(e=>e.classList.toggle('on',e.id==='e-'+o));
+  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.onglet===o));
+  window.scrollTo(0,0);rendre()}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>aller(b.dataset.onglet));
+document.querySelectorAll('[data-aller]').forEach(b=>b.onclick=()=>aller(b.dataset.aller));
+document.querySelectorAll('[data-etat]').forEach(b=>b.onclick=ouvrirReglages);
+
+function rendreEtat(){
+  const t={ok:'Synchronisé',hors:'Hors ligne · copie locale',jeton:'Code famille refusé',local:'Sur ce téléphone'}[ETAT];
+  document.querySelectorAll('[data-etat]').forEach(b=>{b.className='etat '+ETAT;b.innerHTML='<i></i>'+t});
+}
+function rendre(){
+  rendreEtat();
+  ({soir:rendreSoir,sem:rendreSemaine,courses:rendreCourses,frigo:rendreFrigo})[ONGLET]();
+}
+
+/* ================= ÉCRAN 1 — CE SOIR ================= */
+let REFUS=new Set();
+function lancerA(r){const m=19*60-(duree(r)||30);return Math.floor(m/60)+'h'+String(m%60).padStart(2,'0')}
+function autreChose(){
+  const d=AUJ(),actuel=menuDu(d);
+  if(actuel&&actuel.id_recette)REFUS.add(actuel.id_recette);
+  const exclus=recettesRecentes(d,new Set([d]));REFUS.forEach(u=>exclus.add(u));
+  const soir=typeSoir(DATA.agenda,d);
+  const c=choisirPlat({date:d+REFUS.size,soir:soir.type==='dehors'?{type:'normal',note:''}:soir,exclus,familles:[],frigo:frigoNoms(),vite:viteNoms(),favoris:FAVS_SET});
+  if(!c){toast('Plus d\'autre idée compatible');return}
+  mettreAuMenu(d,c.r,(soir.type==='dehors'?'normal':soir.type)+'|'+c.note);
+}
+function rendreSoir(){
+  const now=new Date(),d=AUJ();
+  $('soir-date').textContent=JOURS_L[now.getDay()]+' '+now.getDate()+' '+MOIS[now.getMonth()];
+  const m=menuDu(d),st=statutDe(m),r=m&&PAR_ID[m.id_recette];
+  const h=$('soir-heros');
+  if(st.type==='dehors'){
+    h.innerHTML='<div class="heros"><div class="lbl">Ce soir</div><h3>Dîner dehors</h3><p style="color:#D8DFDA">Rien à préparer.</p>'+
+      '<div class="acts" style="margin-top:16px"><button class="btn btn-v" id="h-autre">Finalement on mange à la maison</button></div></div>';
+    $('h-autre').onclick=autreChose;
+  }else if(r){
+    const fav=FAVS_SET.has(r.u);
+    h.innerHTML='<div class="heros"><div class="lbl">Plat du soir</div><h3>'+esc(r.t)+'</h3>'+
+      '<span class="pastille p-tm">'+ico('horloge','s')+'Thermomix · '+txtDuree(duree(r))+'</span>'+
+      (st.note?' <span class="pastille p-or" style="margin-top:6px">'+esc(st.note)+'</span>':'')+
+      '<div class="lancer">'+ico('soir','s')+'<span>Lancer à <b>'+lancerA(r)+'</b> pour passer à table à 19h</span></div>'+
+      '<div class="acts"><a class="btn btn-v" href="'+lienDe(r)+'" target="_blank" rel="noopener">'+ico('ext','s')+'Ouvrir dans Cookidoo</a>'+
+      '<button class="rond" id="h-fav" aria-label="Favori" style="color:'+(fav?'#F3A37A':'#fff')+'">'+ico('coeur')+'</button>'+
+      '<button class="rond" id="h-autre" aria-label="Proposer autre chose">'+ico('retour')+'</button></div></div>';
+    $('h-autre').onclick=autreChose;
+    $('h-fav').onclick=()=>basculerFavori(r.u);
   }else{
-    const src=RECETTES;RECETTES.push(...PERSO.filter(p=>!RECETTES.includes(p)));
-    liste=trouver(ING,[...OPTS],400);
-    RECETTES.length=src.length;
-    rcount.textContent="";
+    h.innerHTML='<div class="heros"><div class="lbl">Ce soir</div><h3>Rien de prévu pour l\'instant</h3>'+
+      '<div class="acts" style="margin-top:6px"><button class="btn btn-v" id="h-autre">Proposer un plat</button>'+
+      '<button class="rond" id="h-cherche" aria-label="Choisir dans le catalogue">'+ico('chercher')+'</button></div></div>';
+    $('h-autre').onclick=autreChose;
+    $('h-cherche').onclick=()=>ouvrirChoix(d);
   }
-  if(TYPE!=="Tous")liste=liste.filter(x=>(x.r.cat||typeDe(x.r.t))===TYPE);
-  if(QNOM){const q=norm(QNOM);liste=liste.filter(x=>norm(x.r.t).includes(q))}
-  const nTot=liste.length;
-  if(nTot>60)liste=liste.slice(0,60);
-  rcount.textContent=nTot?nTot+" recette"+(nTot>1?"s":"")+(ING.length?" possibles":"")+(nTot>60?" · 60 affichées":""):"";
-  if(!liste.length){
-    res.innerHTML='<div class="placeholder"><b>Rien avec ces critères</b>Retire un filtre, ou coche un ingrédient de plus.</div>';
-    return;
+
+  // express : < 20 min, différents du plat du soir, en privilégiant le frigo
+  const fr=frigoNoms();
+  let base=DINERS.filter(x=>x.d&&x.d<=20&&(!r||x.u!==r.u));
+  if(base.length<6)base=DINERS.filter(x=>x.d&&x.d<=25&&(!r||x.u!==r.u));
+  const ex=base.map(x=>({x,s:x.i.filter(k=>fr.some(f=>corresp(f,k))).length*3+hachage(d+x.u)*2}))
+    .sort((a,b)=>b.s-a.s).slice(0,3).map(o=>o.x);
+  $('soir-express').innerHTML=ex.map(x=>'<button class="mini" data-u="'+x.u+'"><b>'+esc(x.t)+'</b>'+
+    '<span class="pastille p-tm">'+ico('horloge','s')+txtDuree(x.d)+'</span></button>').join('');
+  $('soir-express').querySelectorAll('.mini').forEach(b=>b.onclick=()=>{
+    mettreAuMenu(d,PAR_ID[b.dataset.u],'presse|Choisi en express');toast('Au menu ce soir');window.scrollTo({top:0,behavior:'smooth'})});
+
+  // alerte pour demain
+  const dm=plusJours(d,1),md=menuDu(dm),rd=md&&PAR_ID[md.id_recette];
+  let html='';
+  if(rd){
+    const manque=manquants(rd);
+    const cleAuto=dm+'|'+rd.u,auto=new Set(load('qm_auto',[]));
+    const aAjouter=manque.filter(k=>!DATA.courses.some(c=>corresp(c.article,k)));
+    if(aAjouter.length&&!auto.has(cleAuto)){
+      auto.add(cleAuto);save('qm_auto',[...auto].slice(-60));
+      ajouterCourses(aAjouter.map(k=>({nom:k,origine:'menu '+JOURS_C[deIso(dm).getDay()]})));
+      return; // ecrire() relance l'affichage
+    }
+    html='<div class="alerte">'+ico('alerte')+'<div><b>Demain : '+esc(rd.t)+'</b><p>'+
+      (manque.length?'Il manque '+esc(manque.join(', '))+' → ajouté aux courses':'Tout est déjà au frigo')+'</p></div></div>';
   }
-  liste.forEach((x,i)=>{
-    const r=x.r;
-    const isFav=FAVS.includes(r.u||r.url);
-    const tot=r.i.length;
-    const pct=Math.round((x.ratio||0)*100);
-    const d=document.createElement('div');d.className='idea';d.style.animationDelay=(Math.min(i,12)*.03)+'s';
-    d.innerHTML='<div class="top"><h3>'+esc(r.t)+'</h3>'+
-      (ING.length?'<span class="frac'+(x.missing.length?'':' full')+'">'+x.matched.length+'/'+tot+(x.missing.length?'':' ✓')+'</span>':
-        (r.n?'<span class="frac">★ '+r.n+'</span>':''))+'</div>'+
-      (ING.length?'<div class="meter"><span style="width:'+pct+'%"></span></div>':'')+
-      '<div class="uses">'+x.matched.map(u=>'<span class="u">'+esc(u)+'</span>').join('')+
-        x.missing.map(u=>'<span class="u miss">'+(ING.length?'+ ':'')+esc(u)+'</span>').join('')+'</div>'+
-      '<p class="cooktitle"><span class="badge ok">✓ recette Cookidoo</span></p>'+
-      '<div class="acts">'+
-        '<a class="cookbtn" href="'+lienDe(r)+'" target="_blank" rel="noopener"><button>Ouvrir la recette</button></a>'+
-        '<button class="cart '+(CART.includes(r.u||r.url)?'on':'')+'" title="Ajouter aux courses" aria-label="Ajouter aux courses">🛒</button>'+
-        '<button class="fav '+(isFav?'on':'')+'" title="Garder" aria-label="Garder">'+(isFav?'♥':'♡')+'</button>'+
-      '</div>';
-    d.querySelector('.cart').onclick=e=>{
-      const id=r.u||r.url;
-      if(CART.includes(id))CART=CART.filter(c=>c!==id);else CART.push(id);
-      persist();renderCourses();e.target.classList.toggle('on',CART.includes(id));
-      toast(CART.includes(id)?'Ajouté aux courses':'Retiré des courses');
-    };
-    d.querySelector('.fav').onclick=e=>{
-      const id=r.u||r.url;
-      if(FAVS.includes(id))FAVS=FAVS.filter(f=>f!==id);else FAVS.push(id);
-      persist();renderFavs();
-      e.target.classList.toggle('on',FAVS.includes(id));
-      e.target.textContent=FAVS.includes(id)?'♥':'♡';
-    };
-    res.appendChild(d);
-  });
+  $('soir-demain').innerHTML=html;
+  $('t-courses').textContent=coursesRestantes().length;
+  $('t-frigo').textContent=viteNoms().length;
+}
+function basculerFavori(u){
+  if(FAVS_SET.has(u))FAVS=FAVS.filter(f=>f!==u);else FAVS.push(u);
+  FAVS_SET=new Set(FAVS);save('ck_favs',FAVS);rendre();
+  toast(FAVS_SET.has(u)?'Ajouté aux favoris':'Retiré des favoris');
 }
 
-/* ================= LISTE DE COURSES ================= */
-function renderCourses(){
-  const sec=document.getElementById('shopsec');
-  const box=document.getElementById('shoplist');
-  const chips=document.getElementById('cartrecipes');
-  const tools=document.getElementById('shoptools');
-  const items=toutes().filter(r=>CART.includes(r.u||r.url));
-  sec.style.display=items.length?'block':'none';
-  if(!items.length){document.getElementById('shopcount').textContent="";return}
+/* ================= ÉCRAN 2 — SEMAINE ================= */
+let DECALAGE=new Date().getDay()===0?1:0; // semaines (le dimanche, on prépare déjà la suivante)
+function lundiDe(s){const d=deIso(s);const j=(d.getDay()+6)%7;d.setDate(d.getDate()-j);return iso(d)}
+function joursSemaine(){const l=plusJours(lundiDe(AUJ()),7*DECALAGE);return [0,1,2,3,4,5,6].map(i=>plusJours(l,i))}
+function ilYa(s){
+  if(!s)return'TimeTree pas encore synchronisé';
+  const t=new Date(s);if(isNaN(t))return'TimeTree synchronisé le '+s;
+  const h=Math.round((Date.now()-t)/36e5);
+  return'TimeTree synchronisé '+(h<1?'il y a moins d\'une heure':h<48?'il y a '+h+' h':'il y a '+Math.round(h/24)+' jours');
+}
+function rendreSemaine(){
+  const js=joursSemaine(),auj=AUJ();
+  const a=deIso(js[0]),b=deIso(js[6]);
+  $('sem-dates').textContent='du '+a.getDate()+(a.getMonth()!==b.getMonth()?' '+MOIS[a.getMonth()]:'')+' au '+b.getDate()+' '+MOIS[b.getMonth()];
+  let cuisiner=0,presses=0,dehors=0;
+  js.forEach(d=>{const m=menuDu(d),st=statutDe(m),soir=typeSoir(DATA.agenda,d);
+    if(st.type==='dehors'||(!m&&soir.type==='dehors'))dehors++;else{if(m&&m.id_recette)cuisiner++;if(['presse','garde'].includes(st.type||soir.type))presses++}});
+  $('sem-compteurs').innerHTML='<div><b>'+cuisiner+'</b><span>repas à cuisiner</span></div><div class="o"><b>'+presses+'</b><span>soirs pressés</span></div>'+
+    '<div><b>'+dehors+'</b><span>dîners dehors</span></div><div><b>'+coursesRestantes().length+'</b><span>articles de courses</span></div>';
+  $('sem-synchro').textContent=ilYa(DATA.derniere_synchro);
+  $('sem-jours').innerHTML=js.map(d=>{
+    const dt=deIso(d),m=menuDu(d),st=statutDe(m),r=m&&PAR_ID[m.id_recette];
+    const evs=evenementsDu(DATA.agenda,d).map(e=>'<span class="pastille p-ev">'+(estJournee(e)||!e.debut?'':hh(e.debut)+' ')+esc(e.titre)+'</span>').join('');
+    let corps;
+    if(st.type==='dehors')corps='<div class="plat">Dîner dehors</div>';
+    else if(r)corps='<div class="plat">'+esc(r.t)+'</div><div class="meta"><span class="pastille p-tm">TM7</span>'+txtDuree(duree(r))+'</div>';
+    else corps='<div class="plat vide">Pas encore de dîner — toucher pour choisir</div>';
+    let note=st.note;
+    if(!m){const s=typeSoir(DATA.agenda,d);note=s.note}
+    return'<button class="jour'+(d<auj?' passe':'')+(d===auj?' auj':'')+'" data-d="'+d+'"><div class="j"><span>'+JOURS_C[dt.getDay()]+'</span><b>'+dt.getDate()+'</b></div>'+
+      '<div class="c">'+(evs?'<div class="evs">'+evs+'</div>':'')+corps+(note?'<span class="note">'+esc(note)+'</span>':'')+'</div></button>';
+  }).join('');
+  $('sem-jours').querySelectorAll('.jour').forEach(b=>b.onclick=()=>ouvrirChoix(b.dataset.d));
+}
+$('sem-prec').onclick=()=>{DECALAGE--;rendre()};
+$('sem-suiv').onclick=()=>{DECALAGE++;rendre()};
+$('sem-proposer').onclick=()=>{
+  const jours=joursSemaine().filter(d=>d>=AUJ());
+  if(!jours.length){toast('Cette semaine est passée');return}
+  if(jours.some(d=>menuDu(d))&&!confirm('Remplacer les dîners déjà prévus de '+jours.length+' soir(s) ?'))return;
+  const prop=proposerSemaine({jours,agenda:DATA.agenda,menu:DATA.menu,frigo:frigoNoms(),vite:viteNoms(),favoris:FAVS_SET});
+  ecrire(prop.map(p=>({onglet:'Menu',cle:p.date,ligne:{id_recette:p.id_recette,titre:p.titre,statut:p.statut}})));
+  toast('Semaine proposée');
+};
+$('sem-courses').onclick=()=>{
+  const items=[];
+  joursSemaine().filter(d=>d>=AUJ()).forEach(d=>{const m=menuDu(d),r=m&&PAR_ID[m.id_recette];
+    if(r&&statutDe(m).type!=='dehors')manquants(r).forEach(k=>items.push({nom:k,origine:'menu '+JOURS_C[deIso(d).getDay()]}))});
+  const n=ajouterCourses(items);
+  toast(n?n+' article'+(n>1?'s':'')+' ajouté'+(n>1?'s':'')+' aux courses':'Rien de nouveau à acheter');
+};
 
-  // recettes du panier
-  chips.innerHTML="";
-  items.forEach(r=>{const id=r.u||r.url;
-    const c=document.createElement('span');c.className='cartchip';
-    c.innerHTML=esc(r.t)+' <button aria-label="Retirer">×</button>';
-    c.querySelector('button').onclick=()=>{CART=CART.filter(x=>x!==id);persist();renderCourses();chercher()};
-    chips.appendChild(c)});
+/* ---------- feuille : choisir le plat d'un soir ---------- */
+function ouvrirFeuille(html){$('feuille-c').innerHTML=html;$('voile').classList.add('on');$('feuille').classList.add('on')}
+function fermerFeuille(){$('voile').classList.remove('on');$('feuille').classList.remove('on')}
+$('voile').onclick=fermerFeuille;
+function ouvrirChoix(d){
+  const dt=deIso(d),m=menuDu(d);
+  ouvrirFeuille('<h3>'+JOURS_L[dt.getDay()].replace(/^./,c=>c.toUpperCase())+' '+dt.getDate()+' — dîner</h3>'+
+    '<div class="ajout"><input id="ch-q" placeholder="Chercher une recette…" autocomplete="off"></div>'+
+    '<div style="display:flex;gap:8px;margin-top:10px"><button class="btn btn-l" id="ch-dehors" style="flex:1">Dîner dehors</button>'+
+    (m?'<button class="btn btn-l" id="ch-eff" style="flex:1">Effacer</button>':'')+'</div>'+
+    '<div class="defile" id="ch-l"></div>');
+  const liste=()=>{
+    const q=norm($('ch-q').value);
+    let l=q?RECETTES.filter(r=>norm(r.t).includes(q)):DINERS.slice().sort((a,b)=>(FAVS_SET.has(b.u)-FAVS_SET.has(a.u))||a.t.localeCompare(b.t,'fr'));
+    $('ch-l').innerHTML=l.slice(0,80).map(r=>'<button class="choix" data-u="'+r.u+'"><b>'+esc(r.t)+'</b><span>'+txtDuree(duree(r))+'</span></button>').join('')||'<p class="vide">Aucune recette du catalogue ne correspond.</p>';
+    $('ch-l').querySelectorAll('.choix').forEach(b=>b.onclick=()=>{mettreAuMenu(d,PAR_ID[b.dataset.u],'normal');fermerFeuille();toast('Dîner modifié')});
+  };
+  $('ch-q').oninput=liste;liste();
+  $('ch-dehors').onclick=()=>{mettreAuMenu(d,null,'dehors|Dîner dehors → rien à prévoir');fermerFeuille()};
+  if(m)$('ch-eff').onclick=()=>{ecrire([{onglet:'Menu',cle:d,suppr:true}]);fermerFeuille()};
+}
 
-  // agrégation des ingrédients manquants
-  const map={};
-  items.forEach(r=>{
-    r.i.forEach(ing=>{
-      if(ING.some(f=>corresp(f,ing)))return;          // déjà dans le frigo
-      const k=norm(ing);
-      if(!map[k])map[k]={nom:ing,rayon:rayonDe(ing),pour:[]};
-      if(map[k].pour.indexOf(r.t)<0)map[k].pour.push(r.t);
-    });
-  });
-  const cles=Object.keys(map);
-  document.getElementById('shopcount').textContent=items.length+" recette"+(items.length>1?"s":"");
+/* ---------- feuille : réglages (code famille) ---------- */
+function ouvrirReglages(){
+  ouvrirFeuille('<h3>Partage entre nos téléphones</h3>'+
+    '<p class="vide" style="margin-bottom:12px">Le plus simple : ouvrez une fois le lien d\'installation reçu. Sinon, saisissez les deux champs.</p>'+
+    '<label class="champ"><span>Code famille</span><input id="rg-t" type="password" autocomplete="off" value="'+esc(CFG&&CFG.token||'')+'"></label>'+
+    '<label class="champ"><span>Adresse du service (Apps Script, se termine par /exec)</span><input id="rg-u" autocomplete="off" value="'+esc(CFG&&CFG.url||'')+'"></label>'+
+    '<button class="btn btn-v" id="rg-ok">Enregistrer</button>'+
+    (CFG?'<button class="lien" id="rg-off" style="margin-top:6px">Utiliser seulement sur ce téléphone</button>':''));
+  $('rg-ok').onclick=()=>{
+    const t=$('rg-t').value.trim(),u=$('rg-u').value.trim();
+    if(!t||!/^https:\/\/script\.google\.com\//.test(u)){toast('Code ou adresse incomplets');return}
+    CFG={url:u,token:t};save('qm_cfg',CFG);ETAT='hors';fermerFeuille();envoyer();
+  };
+  if(CFG)$('rg-off').onclick=()=>{CFG=null;save('qm_cfg',null);ETAT='local';fermerFeuille();rendre()};
+}
 
-  // groupement par rayon
+/* ================= ÉCRAN 3 — COURSES ================= */
+const RAYONS=CATALOGUE.map(c=>c.c).concat(['Autres']);
+function rendreCourses(){
+  const rest=coursesRestantes().length;
+  $('c-resume').textContent=rest+' article'+(rest>1?'s':'')+' restant'+(rest>1?'s':'')+(CFG?' · partagée':'');
   const grp={};
-  cles.forEach(k=>{const nom=map[k].rayon.c;(grp[nom]=grp[nom]||[]).push(k)});
-  box.innerHTML="";
-  let total=0,faits=0;
-  CATALOGUE.concat([{c:"Autres",i:"🛒"}]).forEach(cat=>{
-    const list=grp[cat.c];if(!list||!list.length)return;
-    list.sort((a,b)=>map[a].nom.localeCompare(map[b].nom,'fr'));
-    const g=document.createElement('div');g.className='shopgroup';
-    g.innerHTML='<h4>'+cat.i+' '+cat.c+'</h4>';
-    const ul=document.createElement('div');ul.className='shoplist';
-    list.forEach(k=>{
-      total++;const done=CHECKED.has(k);if(done)faits++;
-      const it=document.createElement('div');it.className='sitem'+(done?' done':'');
-      it.innerHTML='<span class="box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span>'+
-        '<span class="nm">'+esc(map[k].nom)+'</span>'+
-        (map[k].pour.length>1?'<span class="from">×'+map[k].pour.length+'</span>':'');
-      it.onclick=()=>{CHECKED.has(k)?CHECKED.delete(k):CHECKED.add(k);persist();renderCourses()};
-      ul.appendChild(it);
-    });
-    g.appendChild(ul);box.appendChild(g);
+  DATA.courses.forEach(c=>{const ry=RAYONS.includes(c.rayon)?c.rayon:rayonDe(c.article).c;(grp[ry]=grp[ry]||[]).push(c)});
+  $('c-liste').innerHTML=DATA.courses.length?RAYONS.filter(ry=>grp[ry]).map(ry=>{
+    const l=grp[ry].sort((a,b)=>(a.coche==='1')-(b.coche==='1')||a.article.localeCompare(b.article,'fr'));
+    return'<div class="rayon"><h4>'+ry+'</h4><div class="carte">'+l.map(c=>
+      '<button class="art'+(c.coche==='1'?' fait':'')+'" data-a="'+esc(c.article)+'"><span class="case">'+ico('check')+'</span>'+
+      '<span class="nm">'+esc(c.article)+'</span><span class="org">'+esc(c.origine||'')+'</span></button>').join('')+'</div></div>';
+  }).join(''):'<p class="vide" style="margin-top:18px">La liste est vide.</p>';
+  $('c-liste').querySelectorAll('.art').forEach(b=>b.onclick=()=>{
+    const c=DATA.courses.find(x=>x.article===b.dataset.a);if(!c)return;
+    ecrire([{onglet:'Courses',cle:c.article,ligne:Object.assign({},c,{coche:c.coche==='1'?'':'1'})}]);
   });
-  tools.innerHTML='<span class="info">'+total+' article'+(total>1?'s':'')+' · '+faits+' coché'+(faits>1?'s':'')+'</span>';
-  const b1=document.createElement('button');b1.className='pinbtn';b1.textContent='tout décocher';
-  b1.onclick=()=>{CHECKED.clear();persist();renderCourses()};
-  const b2=document.createElement('button');b2.className='pinbtn';b2.textContent='vider la liste';
-  b2.onclick=()=>{if(confirm('Vider la liste de courses ?')){CART=[];CHECKED.clear();persist();renderCourses();chercher()}};
-  tools.appendChild(b1);tools.appendChild(b2);
-  if(!total)box.innerHTML='<div class="placeholder"><b>Tu as déjà tout</b>Aucun ingrédient à acheter pour ces recettes.</div>';
+  $('c-vider').style.display=DATA.courses.some(c=>c.coche==='1')?'block':'none';
 }
+function ajoutManuel(){const v=$('c-inp').value.trim().replace(/\s+/g,' ');if(!v)return;
+  $('c-inp').value='';if(!ajouterCourses([{nom:v,origine:''}]))toast('Déjà dans la liste')}
+$('c-ajout').onclick=ajoutManuel;
+$('c-inp').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();ajoutManuel()}});
+$('c-vider').onclick=()=>ecrire(DATA.courses.filter(c=>c.coche==='1').map(c=>({onglet:'Courses',cle:c.article,suppr:true})));
+(function dictee(){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR)return;
+  const b=$('c-micro');b.style.display='flex';
+  b.onclick=()=>{const rec=new SR();rec.lang='fr-FR';rec.interimResults=false;
+    rec.onresult=e=>{const t=e.results[0][0].transcript.trim();
+      const items=t.split(/\s*(?:,| et )\s*/).filter(Boolean).map(x=>({nom:x.replace(/^./,c=>c.toLowerCase()),origine:''}));
+      const n=ajouterCourses(items);toast(n?'Ajouté : '+t:'Déjà dans la liste')};
+    rec.onerror=()=>toast('Dictée indisponible');rec.start();toast('Je vous écoute…')};
+})();
 
-/* ================= FAVORIS ================= */
-function renderFavs(){
-  const sec=document.getElementById('favsec'),list=document.getElementById('favlist');
-  const items=toutes().filter(r=>FAVS.includes(r.u||r.url));
-  sec.style.display=items.length?'block':'none';list.innerHTML="";
-  items.forEach(r=>{const d=document.createElement('div');d.className='favitem';
-    d.innerHTML='<span class="ft">'+esc(r.t)+'</span>'+
-      '<a href="'+lienDe(r)+'" target="_blank" rel="noopener"><button class="go">Ouvrir</button></a>'+
-      '<button class="rm" aria-label="Retirer">×</button>';
-    d.querySelector('.rm').onclick=()=>{FAVS=FAVS.filter(f=>f!==(r.u||r.url));persist();renderFavs();chercher()};
-    list.appendChild(d)});
+/* ================= ÉCRAN 4 — FRIGO ================= */
+let EXCLUS_IDEES=new Set(load('qm_exclus',[]));   // pastilles décochées (propre à ce téléphone)
+const ALLING=[];CATALOGUE.forEach(c=>c.l.forEach(v=>ALLING.push({v,r:c.c})));
+function ajouterFrigo(v){
+  v=(v||'').trim().replace(/\s+/g,' ');if(!v)return;
+  const ex=DATA.frigo.find(f=>norm(f.ingredient)===norm(v));
+  const vite=$('f-vite').checked?'1':'';
+  if(ex&&ex.a_finir_vite===vite){toast('Déjà dans le frigo');return}
+  ecrire([{onglet:'Frigo',cle:ex?ex.ingredient:v,ligne:{a_finir_vite:vite}}]);
 }
-
-/* ================= AJOUTER SES RECETTES ================= */
-function ajouterPerso(){
-  const url=(prompt("Colle l'adresse d'une recette Cookidoo :")||"").trim();
-  if(!url)return;
-  if(!/^https?:\/\//i.test(url)){toast("Adresse invalide");return}
-  const t=(prompt("Nom de la recette :")||"").trim();
-  if(!t)return;
-  const ings=(prompt("Ingrédients principaux, séparés par des virgules :")||"").trim();
-  const i=ings?ings.split(',').map(s=>s.trim()).filter(Boolean):[];
-  PERSO.push({url,t,i,g:[],n:""});persist();refresh();toast("Recette ajoutée ✓");
+function rendreFrigo(){
+  const pastille=f=>{const on=!EXCLUS_IDEES.has(f.ingredient);
+    return'<span class="chip'+(on?' on':'')+'" data-i="'+esc(f.ingredient)+'">'+(on?ico('check','s'):'')+esc(f.ingredient)+
+      '<button class="x" aria-label="Retirer">'+ico('x')+'</button></span>'};
+  const vite=DATA.frigo.filter(f=>f.a_finir_vite==='1'),reste=DATA.frigo.filter(f=>f.a_finir_vite!=='1');
+  $('f-vite-l').innerHTML=vite.map(pastille).join('')||'<span class="vide">Rien d\'urgent.</span>';
+  $('f-reste-l').innerHTML=reste.map(pastille).join('')||'<span class="vide">Ajoutez ce qu\'il y a au frigo et dans les placards.</span>';
+  document.querySelectorAll('#e-frigo .chip').forEach(c=>{
+    const nom=c.dataset.i;
+    c.onclick=e=>{
+      if(e.target.closest('.x')){ecrire([{onglet:'Frigo',cle:nom,suppr:true}]);return}
+      EXCLUS_IDEES.has(nom)?EXCLUS_IDEES.delete(nom):EXCLUS_IDEES.add(nom);save('qm_exclus',[...EXCLUS_IDEES]);rendreFrigo();
+    };
+  });
+  const choisis=DATA.frigo.map(f=>f.ingredient).filter(n=>!EXCLUS_IDEES.has(n));
+  $('f-titre-idees').textContent='Idées Cookidoo avec '+choisis.length+' ingrédient'+(choisis.length>1?'s':'');
+  if(!choisis.length){$('f-idees').innerHTML='<p class="vide">Cochez au moins un ingrédient.</p>';return}
+  const res=trouver(choisis,[],120).filter(x=>x.r.cat!=='Desserts'&&x.r.cat!=='Bases').slice(0,10);
+  $('f-idees').innerHTML=res.map(x=>{const r=x.r;
+    return'<div class="idee"><b>'+esc(r.t)+'</b><div class="meta"><span class="pastille p-tm">TM7</span>'+txtDuree(duree(r))+'</div>'+
+      '<span class="u">Utilise '+esc(x.matched.join(', '))+'</span>'+
+      (x.missing.length?'<span class="m">Il manque : '+esc(x.missing.join(', '))+'</span>':'<span class="m">Rien ne manque</span>')+
+      '<div class="acts"><a class="btn btn-l" href="'+lienDe(r)+'" target="_blank" rel="noopener">'+ico('ext','s')+'Cookidoo</a>'+
+      '<button class="btn btn-v" data-u="'+r.u+'">Au menu</button></div></div>'}).join('')||'<p class="vide">Aucune recette du catalogue avec ces ingrédients.</p>';
+  $('f-idees').querySelectorAll('[data-u]').forEach(b=>b.onclick=()=>{
+    let d=AUJ();
+    for(let i=0;i<30;i++){const m=menuDu(d);if(!m&&typeSoir(DATA.agenda,d).type!=='dehors')break;d=plusJours(d,1)}
+    mettreAuMenu(d,PAR_ID[b.dataset.u],'normal|Avec ce qu\'il reste au frigo');
+    const dt=deIso(d);toast('Au menu '+(d===AUJ()?'ce soir':JOURS_L[dt.getDay()]+' '+dt.getDate()));
+  });
 }
-document.getElementById('addrecipe').onclick=ajouterPerso;
+(function autocompletion(){
+  const inp=$('f-inp'),box=$('f-ac');let L=[],sel=0;
+  const fermer=()=>box.classList.remove('on');
+  const valider=v=>{ajouterFrigo(v);inp.value='';fermer()};
+  inp.addEventListener('input',()=>{
+    const q=norm(inp.value);if(!q){fermer();return}
+    L=ALLING.filter(x=>norm(x.v).includes(q)&&!DATA.frigo.some(f=>norm(f.ingredient)===norm(x.v)))
+      .sort((a,b)=>norm(a.v).indexOf(q)-norm(b.v).indexOf(q)||a.v.length-b.v.length).slice(0,6);
+    if(!L.length){fermer();return}sel=0;
+    box.innerHTML=L.map((x,i)=>'<button data-i="'+i+'">'+esc(x.v)+'<span>'+x.r+'</span></button>').join('');
+    box.querySelectorAll('button').forEach(b=>b.onmousedown=e=>{e.preventDefault();valider(L[+b.dataset.i].v)});
+    box.classList.add('on');
+  });
+  inp.addEventListener('blur',()=>setTimeout(fermer,150));
+  inp.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();valider(box.classList.contains('on')&&L[sel]?L[sel].v:inp.value)}});
+  $('f-ajout').onclick=()=>valider(inp.value);
+})();
 
-/* ================= DIVERS ================= */
-let tT;function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');
-  clearTimeout(tT);tT=setTimeout(()=>t.classList.remove('show'),1800)}
-function refresh(){renderIng();renderCats();chercher();if(typeof renderCourses==='function')renderCourses()}
-renderTypes();refresh();renderFavs();renderCourses();
+/* ================= DÉMARRAGE ================= */
+if('serviceWorker' in navigator&&location.protocol==='https:')navigator.serviceWorker.register('sw.js').catch(()=>{});
+aller(['soir','sem','courses','frigo'].includes(ONGLET)?ONGLET:'soir');
+if(CFG===null&&!load('qm_vu',false)){save('qm_vu',true);ouvrirReglages()}
+envoyer();
 </script>
 </body>
 </html>

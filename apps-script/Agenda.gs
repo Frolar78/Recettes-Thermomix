@@ -8,9 +8,10 @@ const ENTETES = ['date', 'date_fin', 'debut', 'fin', 'journee', 'titre', 'lieu']
 
 function doPost(e) {
   const body = JSON.parse(e.postData.contents);
-  if (typeof SHEET_TOKEN === 'undefined' || !SHEET_TOKEN || body.token !== SHEET_TOKEN) {
+  if (!jetonOk_(body.token)) {
     return json_({ ok: false, erreur: 'jeton invalide' });
   }
+  if (body.action) return actionApp_(body); // requêtes de l'app (Donnees.gs)
 
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const sh = ss.getSheetByName(ONGLET_AGENDA) || ss.insertSheet(ONGLET_AGENDA);

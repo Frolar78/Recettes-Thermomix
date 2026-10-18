@@ -1,0 +1,1492 @@
+{
+ "r775302": {
+  "total": 35,
+  "prep": 15,
+  "nom": "Velouté de légumes"
+ },
+ "r54155": {
+  "total": 25,
+  "prep": 10,
+  "nom": "Velouté de courgette"
+ },
+ "r96393": {
+  "total": 35,
+  "prep": 10,
+  "nom": "Velouté de butternut et patate douce"
+ },
+ "r915839": {
+  "total": 35,
+  "prep": 10,
+  "nom": "Velouté de butternut au curry et lait de coco"
+ },
+ "r67971": {
+  "total": 30,
+  "prep": 10,
+  "nom": "Velouté butternut-poivron rouge"
+ },
+ "r538675": {
+  "total": 35,
+  "prep": 10,
+  "nom": "Velouté de butternut, bacon et comté"
+ },
+ "r737671": {
+  "total": 40,
+  "prep": 10,
+  "nom": "Velouté de butternut, carottes et poireaux"
+ },
+ "r107935": {
+  "total": 35,
+  "prep": 10,
+  "nom": "Velouté poireau-curry à la pointe de miel"
+ },
+ "r932241": {
+  "total": 45,
+  "prep": 15,
+  "nom": "Velouté carottes, pommes de terre et Vache qui rit®"
+ },
+ "r784439": {
+  "total": 30,
+  "prep": 5,
+  "nom": "Soupe à l'oignon gratinée"
+ },
+ "r801119": {
+  "total": 55,
+  "prep": 20,
+  "nom": "Soupe paysanne"
+ },
+ "r761842": {
+  "total": 50,
+  "prep": 20,
+  "nom": "Soupe de légumes et tartines de maroilles"
+ },
+ "r766502": {
+  "total": 70,
+  "prep": 25,
+  "nom": "Minestrone d'hiver"
+ },
+ "r727768": {
+  "total": 75,
+  "prep": 30,
+  "nom": "Soupe au pistou aux spaghetti"
+ },
+ "r801117": {
+  "total": 50,
+  "prep": 20,
+  "nom": "Crème de pommes de terre et courgettes, miettes de chèvre frais"
+ },
+ "r801118": {
+  "total": 65,
+  "prep": 25,
+  "nom": "Velouté de carottes au gingembre, dés de feta et amandes grillées"
+ },
+ "r761843": {
+  "total": 50,
+  "prep": 15,
+  "nom": "Velouté de potiron, vermicelles et parmesan"
+ },
+ "r728987": {
+  "total": 35,
+  "prep": 10,
+  "nom": "Velouté de potimarron au lard et aux châtaignes"
+ },
+ "r761846": {
+  "total": 55,
+  "prep": 15,
+  "nom": "Velouté de chou-fleur et tartine au comté"
+ },
+ "r801424": {
+  "total": 45,
+  "prep": 10,
+  "nom": "Soupe de brocoli crémeuse au cheddar et croûtons gratinés"
+ },
+ "r801120": {
+  "total": 55,
+  "prep": 20,
+  "nom": "Velouté de roquette, pommes de terre et œuf mollet"
+ },
+ "r801433": {
+  "total": 55,
+  "prep": 20,
+  "nom": "Soupe de panais aux oignons caramélisés"
+ },
+ "r801434": {
+  "total": 60,
+  "prep": 20,
+  "nom": "Soupe de champignons, bacon grillé et fromage frais"
+ },
+ "r801436": {
+  "total": 50,
+  "prep": 20,
+  "nom": "Soupe châtaignes-champignons, croûtons de pain d’épice"
+ },
+ "r801437": {
+  "total": 50,
+  "prep": 20,
+  "nom": "Soupe de pommes de terre et de poireaux au jambon sec, crème au citron"
+ },
+ "r801432": {
+  "total": 55,
+  "prep": 15,
+  "nom": "Soupe de butternut aux épices et terrine de campagne sur tartines"
+ },
+ "r801430": {
+  "total": 55,
+  "prep": 20,
+  "nom": "Soupe de pommes de terre et chou vert, tartines au saumon fumé"
+ },
+ "r801431": {
+  "total": 55,
+  "prep": 20,
+  "nom": "Bouillon crémeux de maïs et de pommes de terre, lamelles d’avocat"
+ },
+ "r801440": {
+  "total": 35,
+  "prep": 10,
+  "nom": "Soupe de poireaux, crème fraîche aux herbes et œufs de saumon"
+ },
+ "r801438": {
+  "total": 35,
+  "prep": 10,
+  "nom": "Soupe de patates douces au garam masala et yaourt au citron vert"
+ },
+ "r801429": {
+  "total": 55,
+  "prep": 20,
+  "nom": "Soupe de patates douces à la noisette et filets de dinde aux herbes"
+ },
+ "r801422": {
+  "total": 40,
+  "prep": 20,
+  "nom": "Soupe thaïe au lait de coco et au poulet"
+ },
+ "r801423": {
+  "total": 40,
+  "prep": 10,
+  "nom": "Soupe de lentilles aux épinards et au poulet"
+ },
+ "r801427": {
+  "total": 70,
+  "prep": 15,
+  "nom": "Soupe non mixée au poulet, petites pâtes et légumes"
+ },
+ "r801426": {
+  "total": 35,
+  "prep": 10,
+  "nom": "Soupe de tomates aux tortellinis de viande hachée"
+ },
+ "r801425": {
+  "total": 50,
+  "prep": 20,
+  "nom": "Soupe espagnole chorizo, pois chiches et tomates"
+ },
+ "r801421": {
+  "total": 45,
+  "prep": 20,
+  "nom": "Soupe de moules au curry"
+ },
+ "r728985": {
+  "total": 25,
+  "prep": 10,
+  "nom": "Soupe de tomates au jambon et aux œufs"
+ },
+ "r729358": {
+  "total": 775,
+  "prep": 10,
+  "nom": "Soupe de haricots blancs à la tomate et magret séché"
+ },
+ "r783412": {
+  "total": 30,
+  "prep": 10,
+  "nom": "Soupe aux lentilles corail, légumes et saucisses"
+ },
+ "r731104": {
+  "total": 805,
+  "prep": 20,
+  "nom": "Dahl de pois cassés à la patate douce"
+ },
+ "r761850": {
+  "total": 70,
+  "prep": 30,
+  "nom": "Bouillon thaï aux légumes"
+ },
+ "r761851": {
+  "total": 55,
+  "prep": 20,
+  "nom": "Soupe ramen aux légumes et tofu"
+ },
+ "r730068": {
+  "total": 35,
+  "prep": 15,
+  "nom": "Soupe de nouilles au tofu fumé, épinards et champignons de Paris"
+ },
+ "r801439": {
+  "total": 45,
+  "prep": 20,
+  "nom": "Bouillon de bœuf, légumes et nouilles udon"
+ },
+ "r764659": {
+  "total": 110,
+  "prep": 30,
+  "nom": "Soupe persane au yaourt, brochette vapeur de poulet mariné"
+ },
+ "r801111": {
+  "total": 10,
+  "prep": 10,
+  "nom": "Gaspacho tomate-fraise-basilic"
+ },
+ "r801114": {
+  "total": 10,
+  "prep": 10,
+  "nom": "Gaspacho tomate-poivron et salsa câpres-abricots moelleux"
+ },
+ "r801115": {
+  "total": 15,
+  "prep": 15,
+  "nom": "Soupe froide concombre-menthe et quenelles de chèvre frais"
+ },
+ "r801116": {
+  "total": 60,
+  "prep": 25,
+  "nom": "Soupe froide de poivrons et pain tomates-sardines"
+ },
+ "r801428": {
+  "total": 15,
+  "prep": 10,
+  "nom": "Soupe froide à l'avocat et citron, tartines de chèvre frais"
+ },
+ "r801112": {
+  "total": 170,
+  "prep": 10,
+  "nom": "Soupe froide à la carotte et crevettes au citron vert"
+ },
+ "r801113": {
+  "total": 35,
+  "prep": 10,
+  "nom": "Velouté froid de petits pois à la menthe et à la ricotta"
+ },
+ "r801435": {
+  "total": 60,
+  "prep": 20,
+  "nom": "Soupe froide au cresson et tartines de tapenade"
+ },
+ "r220811": {
+  "total": 30,
+  "prep": 10,
+  "nom": "Poulet-champignons"
+ },
+ "r164169": {
+  "total": 60,
+  "prep": 15,
+  "nom": "Filet de poulet en sauce aux champignons et pommes de terre"
+ },
+ "r623425": {
+  "total": 45,
+  "prep": 10,
+  "nom": "Curry de poulet à la noix de coco"
+ },
+ "r798764": {
+  "total": 50,
+  "prep": 20,
+  "nom": "Poulet au lait de coco et épices"
+ },
+ "r375653": {
+  "total": 45,
+  "prep": 10,
+  "nom": "Curry de poulet aux fruits et riz"
+ },
+ "r130220": {
+  "total": 50,
+  "prep": 20,
+  "nom": "Poulet au curry, méli-mélo de légumes et velouté au lait de coco (Découverte)"
+ },
+ "r80826": {
+  "total": 50,
+  "prep": 20,
+  "nom": "Poulet au curry, tagliatelle de légumes et velouté au lait de coco"
+ },
+ "r729356": {
+  "total": 45,
+  "prep": 10,
+  "nom": "Curry vert de poulet à la patate douce et aux pois chiches"
+ },
+ "r20078": {
+  "total": 40,
+  "prep": 10,
+  "nom": "Tajine de poulet au miel et aux pruneaux"
+ },
+ "r375105": {
+  "total": 30,
+  "prep": 10,
+  "nom": "Poulet aux courgettes, au citron et au miel"
+ },
+ "r375657": {
+  "total": 50,
+  "prep": 15,
+  "nom": "Poulet au citron, olives et boulgour"
+ },
+ "r375661": {
+  "total": 30,
+  "prep": 20,
+  "nom": "Poulet sauce Alfredo au brocoli"
+ },
+ "r375101": {
+  "total": 50,
+  "prep": 15,
+  "nom": "Crumble de poulet aux poireaux"
+ },
+ "r376533": {
+  "total": 45,
+  "prep": 10,
+  "nom": "Poulet à l'ananas, pois gourmands et riz"
+ },
+ "r375665": {
+  "total": 25,
+  "prep": 10,
+  "nom": "Emincé de dinde, châtaignes et champignons"
+ },
+ "r375669": {
+  "total": 45,
+  "prep": 10,
+  "nom": "Emincé de dinde, haricots plats et chorizo"
+ },
+ "r369394": {
+  "total": 30,
+  "prep": 10,
+  "nom": "Bœuf aux oignons, paprika et gnocchis"
+ },
+ "r369397": {
+  "total": 45,
+  "prep": 10,
+  "nom": "Bœuf au pain d'épices et pommes vapeur"
+ },
+ "r369996": {
+  "total": 30,
+  "prep": 10,
+  "nom": "Emincé de bœuf à la mexicaine"
+ },
+ "r370000": {
+  "total": 75,
+  "prep": 20,
+  "nom": "Légumes farcis au bœuf"
+ },
+ "r370008": {
+  "total": 40,
+  "prep": 15,
+  "nom": "Boulettes suédoises aux courgettes"
+ },
+ "r376546": {
+  "total": 60,
+  "prep": 15,
+  "nom": "Pain de viande à l'orientale"
+ },
+ "r370004": {
+  "total": 40,
+  "prep": 15,
+  "nom": "Ratatouille aux merguez"
+ },
+ "r376542": {
+  "total": 45,
+  "prep": 10,
+  "nom": "Saucisses chipolatas, lentilles et carottes"
+ },
+ "r374913": {
+  "total": 35,
+  "prep": 10,
+  "nom": "Veau aux champignons, moutarde et tagliatelle"
+ },
+ "r38594": {
+  "total": 60,
+  "prep": 5,
+  "nom": "Veau aux olives"
+ },
+ "r374917": {
+  "total": 40,
+  "prep": 10,
+  "nom": "Porc barbecue et épis de maïs"
+ },
+ "r374921": {
+  "total": 40,
+  "prep": 10,
+  "nom": "Porc aux navets, au miel et à l'orange"
+ },
+ "r374925": {
+  "total": 40,
+  "prep": 10,
+  "nom": "Porc aigre-doux à la purée"
+ },
+ "r374929": {
+  "total": 35,
+  "prep": 15,
+  "nom": "Jarret de porc, patate douce et poireau"
+ },
+ "r375097": {
+  "total": 55,
+  "prep": 20,
+  "nom": "Couscous d'agneau express"
+ },
+ "r376538": {
+  "total": 50,
+  "prep": 15,
+  "nom": "Parmentier de canard aux oignons"
+ },
+ "r375093": {
+  "total": 35,
+  "prep": 5,
+  "nom": "Fondue-raclette au mont-d'or"
+ },
+ "r912854": {
+  "total": 50,
+  "prep": 5,
+  "nom": "Hachis parmentier"
+ },
+ "r767813": {
+  "total": 60,
+  "prep": 10,
+  "nom": "Mon petit hachis Parmentier"
+ },
+ "r821282": {
+  "total": 105,
+  "prep": 20,
+  "nom": "Hachis parmentier aux herbes,  purée au paprika"
+ },
+ "r209629": {
+  "total": 75,
+  "prep": 10,
+  "nom": "Tartiflette"
+ },
+ "r346897": {
+  "total": 30,
+  "prep": 10,
+  "nom": "Patoto petits pois jambon"
+ },
+ "r376847": {
+  "total": 30,
+  "prep": 10,
+  "nom": "Pavés de saumon, riz coriandre et citron"
+ },
+ "r377313": {
+  "total": 35,
+  "prep": 10,
+  "nom": "Saumon japonais, vermicelles et légumes"
+ },
+ "r38816": {
+  "total": 40,
+  "prep": 20,
+  "nom": "Palmiers saumon aneth"
+ },
+ "r376550": {
+  "total": 45,
+  "prep": 10,
+  "nom": "Crumble de cabillaud au citron et au parmesan"
+ },
+ "r80827": {
+  "total": 45,
+  "prep": 15,
+  "nom": "Brochettes de cabillaud et chorizo, semoule aux légumes et velouté poivron et féta"
+ },
+ "r377317": {
+  "total": 50,
+  "prep": 10,
+  "nom": "Brandade de morue et persillade"
+ },
+ "r377321": {
+  "total": 35,
+  "prep": 10,
+  "nom": "Thon au pesto rouge et purée d'artichauts"
+ },
+ "r44679": {
+  "total": 50,
+  "prep": 5,
+  "nom": "Quiche sans pâte au thon"
+ },
+ "r377326": {
+  "total": 30,
+  "prep": 10,
+  "nom": "Filets de colin, carottes, beurre aux fanes"
+ },
+ "r377330": {
+  "total": 35,
+  "prep": 15,
+  "nom": "Filets de colin, purée de haricots plats"
+ },
+ "r383162": {
+  "total": 45,
+  "prep": 10,
+  "nom": "Gratin de lieu et de poireaux au cheddar"
+ },
+ "r383166": {
+  "total": 35,
+  "prep": 10,
+  "nom": "Dos d'églefin et purée de petits pois"
+ },
+ "r383171": {
+  "total": 40,
+  "prep": 10,
+  "nom": "Riz espagnol aux fruits de mer"
+ },
+ "r383177": {
+  "total": 35,
+  "prep": 10,
+  "nom": "Curry de crevettes, légumes et nouilles"
+ },
+ "r730062": {
+  "total": 45,
+  "prep": 15,
+  "nom": "Curry de crevettes et courgettes"
+ },
+ "r730066": {
+  "total": 80,
+  "prep": 10,
+  "nom": "Mijoté de crevettes aux haricots rouges"
+ },
+ "r354350": {
+  "total": 40,
+  "prep": 10,
+  "nom": "Œufs mollets, ratatouille et jambon"
+ },
+ "r354353": {
+  "total": 30,
+  "prep": 15,
+  "nom": "Œufs en cocotte d'avocat, crevettes et taboulé"
+ },
+ "r354356": {
+  "total": 50,
+  "prep": 15,
+  "nom": "Tortilla aux oignons et aux lardons"
+ },
+ "r354359": {
+  "total": 45,
+  "prep": 15,
+  "nom": "Tortilla à la courgette et à la mimolette"
+ },
+ "r354363": {
+  "total": 35,
+  "prep": 10,
+  "nom": "Tortilla antigaspi du lendemain"
+ },
+ "r357298": {
+  "total": 30,
+  "prep": 10,
+  "nom": "Œufs brouillés aux merguez, tomates et pita grillés"
+ },
+ "r357301": {
+  "total": 30,
+  "prep": 15,
+  "nom": "Œufs à la mexicaine et au guacamole"
+ },
+ "r358592": {
+  "total": 25,
+  "prep": 10,
+  "nom": "Œufs brouillés, asperges et tartines"
+ },
+ "r358595": {
+  "total": 35,
+  "prep": 10,
+  "nom": "Sandwichs d'œufs aux champignons"
+ },
+ "r99393": {
+  "total": 50,
+  "prep": 15,
+  "nom": "Gratin dauphinois"
+ },
+ "r825146": {
+  "total": 60,
+  "prep": 10,
+  "nom": "Gratin dauphinois au pesto rouge et comté"
+ },
+ "r54158": {
+  "total": 50,
+  "prep": 25,
+  "nom": "Quiche lorraine"
+ },
+ "r752207": {
+  "total": 45,
+  "prep": 20,
+  "nom": "Quiche Lorraine"
+ },
+ "r54116": {
+  "total": 150,
+  "prep": 40,
+  "nom": "Lasagne à la bolognaise"
+ },
+ "r828547": {
+  "total": 150,
+  "prep": 40,
+  "nom": "Lasagne fraîches à la bolognaise"
+ },
+ "r545066": {
+  "total": 120,
+  "prep": 40,
+  "nom": "Lasagnes"
+ },
+ "r808471": {
+  "total": 30,
+  "prep": 10,
+  "nom": "Riz cantonais"
+ },
+ "r912658": {
+  "total": 30,
+  "prep": 5,
+  "nom": "Risotto sain à la tomate et au parmesan"
+ },
+ "r762543": {
+  "total": 55,
+  "prep": 20,
+  "nom": "Korma veggie aux noix de cajou"
+ },
+ "r783411": {
+  "total": 25,
+  "prep": 10,
+  "nom": "Mijoté de haricots rouges au chorizo façon minestrone"
+ },
+ "r54193": {
+  "total": 45,
+  "prep": 15,
+  "nom": "Purée de pommes de terre et de légumes"
+ },
+ "r121209": {
+  "total": 25,
+  "prep": 5,
+  "nom": "Purée carotte-pomme de terre"
+ },
+ "r919985": {
+  "total": 50,
+  "prep": 10,
+  "nom": "Purée de pommes de terre et de petits pois"
+ },
+ "r139507": {
+  "total": 45,
+  "prep": 15,
+  "nom": "Purée de pommes de terre-betterave"
+ },
+ "r750083": {
+  "total": 45,
+  "prep": 15,
+  "nom": "Purée de légumes racines au romarin"
+ },
+ "r554072": {
+  "total": 15,
+  "prep": 5,
+  "nom": "Béchamel Sauce"
+ },
+ "r567840": {
+  "total": 15,
+  "prep": 5,
+  "nom": "No fail béchamel"
+ },
+ "r917828": {
+  "total": 15,
+  "prep": 5,
+  "nom": "Béchamel Sauce"
+ },
+ "r67832": {
+  "total": 5,
+  "prep": 5,
+  "nom": "Mayonnaise"
+ },
+ "r554665": {
+  "total": 15,
+  "prep": 5,
+  "nom": "Crème pâtissière"
+ },
+ "r73158": {
+  "total": 85,
+  "prep": 10,
+  "nom": "Pain rapide aux trois graines façonnage marguerite"
+ },
+ "r64997": {
+  "total": 60,
+  "prep": 10,
+  "nom": "Sablés au parmesan"
+ },
+ "r54103": {
+  "total": 75,
+  "prep": 45,
+  "nom": "Pâte à crêpe"
+ },
+ "r775301": {
+  "total": 90,
+  "prep": 60,
+  "nom": "Pâte à crêpe"
+ },
+ "r66931": {
+  "total": 75,
+  "prep": 45,
+  "nom": "Crêpes"
+ },
+ "r918521": {
+  "total": 75,
+  "prep": 45,
+  "nom": "Crêpes"
+ },
+ "r766510": {
+  "total": 75,
+  "prep": 5,
+  "nom": "Crêpes au lait de coco et à la farine de riz"
+ },
+ "r314204": {
+  "total": 60,
+  "prep": 20,
+  "nom": "Semolina pancakes (Beghrir)"
+ },
+ "r545018": {
+  "total": 60,
+  "prep": 5,
+  "nom": "Riz au lait"
+ },
+ "r778044": {
+  "total": 55,
+  "prep": 15,
+  "nom": "Compote de fraises - Gâteau au yaourt"
+ },
+ "r825790": {
+  "total": 1470,
+  "prep": 10,
+  "nom": "Classic madeleines"
+ },
+ "r83804": {
+  "total": 300,
+  "prep": 20,
+  "nom": "Meringues"
+ },
+ "r53341": {
+  "total": 60,
+  "prep": 10,
+  "nom": "Gâteau renversé à l'ananas"
+ },
+ "r38565": {
+  "total": 95,
+  "prep": 5,
+  "nom": "Sorbet aux 3 agrumes"
+ },
+ "r32676": {
+  "total": 5,
+  "prep": 5,
+  "nom": "Nectar de pomme"
+ },
+ "r638234": {
+  "total": 1500,
+  "prep": 10,
+  "nom": "Traditional crème brûlée"
+ },
+ "r921435": {
+  "total": 50,
+  "prep": 10,
+  "nom": "Fondant au chocolate"
+ },
+ "r922070": {
+  "total": 600,
+  "prep": 30,
+  "nom": "Basic cheesecake"
+ },
+ "r917431": {
+  "total": 65,
+  "prep": 20,
+  "nom": "Floating islands on white chocolate custard"
+ },
+ "r917449": {
+  "total": 80,
+  "prep": 15,
+  "nom": "Poached pears on bay leaf crème anglaise and almond crumble"
+ },
+ "r351255": {
+  "total": 40,
+  "prep": 10,
+  "nom": "Soupe de potiron et pomme au comté"
+ },
+ "r351258": {
+  "total": 45,
+  "prep": 15,
+  "nom": "Soupe de potimarron aux épices"
+ },
+ "r351261": {
+  "total": 35,
+  "prep": 15,
+  "nom": "Crème de butternut aux châtaignes"
+ },
+ "r351264": {
+  "total": 35,
+  "prep": 10,
+  "nom": "Soupe poireaux, brie et pommes de terre"
+ },
+ "r351267": {
+  "total": 25,
+  "prep": 10,
+  "nom": "Soupe de cresson aux œufs mollets"
+ },
+ "r351270": {
+  "total": 50,
+  "prep": 10,
+  "nom": "Soupe de tomates au poulet et aux pâtes"
+ },
+ "r351993": {
+  "total": 25,
+  "prep": 5,
+  "nom": "Soupe mexicaine du placard"
+ },
+ "r351996": {
+  "total": 25,
+  "prep": 5,
+  "nom": "Soupe de fruits de mer provençale"
+ },
+ "r352010": {
+  "total": 40,
+  "prep": 5,
+  "nom": "Soupe façon couscous"
+ },
+ "r352035": {
+  "total": 20,
+  "prep": 5,
+  "nom": "Soupe de haricots blancs, jambon et persillade"
+ },
+ "r352039": {
+  "total": 15,
+  "prep": 5,
+  "nom": "Soupe de maïs à l'œuf et au jambon"
+ },
+ "r352043": {
+  "total": 25,
+  "prep": 5,
+  "nom": "Chowder à la dinde"
+ },
+ "r352047": {
+  "total": 30,
+  "prep": 10,
+  "nom": "Chowder au saumon"
+ },
+ "r352051": {
+  "total": 25,
+  "prep": 10,
+  "nom": "Soupe chinoise crevettes et vermicelles"
+ },
+ "r352495": {
+  "total": 25,
+  "prep": 5,
+  "nom": "Tortellini au bouillon, tomate et basilic"
+ },
+ "r352499": {
+  "total": 25,
+  "prep": 5,
+  "nom": "Tortellini au fromage, bouillon aux petits pois"
+ },
+ "r336592": {
+  "total": 35,
+  "prep": 10,
+  "nom": "Salade de riz au saumon, avocat et tarama"
+ },
+ "r343704": {
+  "total": 35,
+  "prep": 15,
+  "nom": "Riz au maquereau et à l'orange"
+ },
+ "r343709": {
+  "total": 25,
+  "prep": 10,
+  "nom": "Salade de quinoa, carottes et clémentines"
+ },
+ "r343713": {
+  "total": 45,
+  "prep": 15,
+  "nom": "Taboulé de quinoa exotique aux crevettes"
+ },
+ "r344476": {
+  "total": 25,
+  "prep": 10,
+  "nom": "Blé, lentilles, cranberries, noix et mimolette"
+ },
+ "r349018": {
+  "total": 25,
+  "prep": 10,
+  "nom": "Salade de blé printanière au chèvre et au pesto"
+ },
+ "r349022": {
+  "total": 30,
+  "prep": 10,
+  "nom": "Salade de lentilles, feta et tomates"
+ },
+ "r349026": {
+  "total": 40,
+  "prep": 15,
+  "nom": "Salade César aux œufs et pommes de terre"
+ },
+ "r349030": {
+  "total": 35,
+  "prep": 15,
+  "nom": "Salade de pommes de terre au poulet"
+ },
+ "r349034": {
+  "total": 50,
+  "prep": 15,
+  "nom": "Haricots, pommes de terre, betterave et chèvre"
+ },
+ "r351055": {
+  "total": 35,
+  "prep": 10,
+  "nom": "Pommes de terre, haddock et épinards"
+ },
+ "r351059": {
+  "total": 30,
+  "prep": 10,
+  "nom": "Salade de patates douces, sauce moutarde"
+ },
+ "r351063": {
+  "total": 25,
+  "prep": 15,
+  "nom": "Salade de carottes, crumble aux noisettes"
+ },
+ "r351067": {
+  "total": 15,
+  "prep": 10,
+  "nom": "Céleri et pommes aux gésiers de canard"
+ },
+ "r351072": {
+  "total": 20,
+  "prep": 15,
+  "nom": "Salade de chou rouge et patate douce aux noix"
+ },
+ "r351236": {
+  "total": 25,
+  "prep": 10,
+  "nom": "Salade de farfalle à la grecque"
+ },
+ "r351240": {
+  "total": 25,
+  "prep": 5,
+  "nom": "Salade de pâtes au thon et aux olives"
+ },
+ "r351246": {
+  "total": 35,
+  "prep": 10,
+  "nom": "Salade de pâtes italienne"
+ },
+ "r351250": {
+  "total": 20,
+  "prep": 10,
+  "nom": "Salade vietnamienne, crevettes et nouilles"
+ },
+ "r379866": {
+  "total": 30,
+  "prep": 10,
+  "nom": "Spaghetti au saumon fumé et pesto de roquette"
+ },
+ "r381897": {
+  "total": 35,
+  "prep": 10,
+  "nom": "Spaghetti complets aux épinards et à l'ail"
+ },
+ "r383221": {
+  "total": 25,
+  "prep": 10,
+  "nom": "Macaroni aux tomates, olives et piment"
+ },
+ "r383225": {
+  "total": 20,
+  "prep": 5,
+  "nom": "Pâtes aux moules, raisins et pignons"
+ },
+ "r383230": {
+  "total": 30,
+  "prep": 10,
+  "nom": "Fettucines aux carottes et crème au brie"
+ },
+ "r384701": {
+  "total": 35,
+  "prep": 15,
+  "nom": "Pâtes carbonara au chou romanesco"
+ },
+ "r384705": {
+  "total": 35,
+  "prep": 15,
+  "nom": "Pâtes à l'aubergine, ricotta et basilic"
+ },
+ "r384709": {
+  "total": 35,
+  "prep": 10,
+  "nom": "Tagliatelles au basilic, courgette et pignons"
+ },
+ "r384719": {
+  "total": 25,
+  "prep": 10,
+  "nom": "Pâtes à la feta, tomates et olives"
+ },
+ "r384863": {
+  "total": 40,
+  "prep": 10,
+  "nom": "Spaetzles à l'alsacienne"
+ },
+ "r384868": {
+  "total": 15,
+  "prep": 5,
+  "nom": "Gnocchis à la carbonara"
+ },
+ "r383641": {
+  "total": 50,
+  "prep": 10,
+  "nom": "Risotto aux saucisses et aux petits pois"
+ },
+ "r383645": {
+  "total": 35,
+  "prep": 10,
+  "nom": "Risotto aux asperges"
+ },
+ "r383649": {
+  "total": 35,
+  "prep": 10,
+  "nom": "\\"
+ },
+ "r383653": {
+  "total": 15,
+  "prep": 5,
+  "nom": "\\"
+ },
+ "r383657": {
+  "total": 40,
+  "prep": 10,
+  "nom": "Riz cantonais \\"
+ },
+ "r383661": {
+  "total": 40,
+  "prep": 10,
+  "nom": "Polenta, oignons confits et chèvre doux"
+ },
+ "r383665": {
+  "total": 35,
+  "prep": 10,
+  "nom": "Veau bolognaise et polenta"
+ },
+ "r383669": {
+  "total": 30,
+  "prep": 10,
+  "nom": "Polenta aux champignons et à la mozzarella"
+ },
+ "r383673": {
+  "total": 35,
+  "prep": 10,
+  "nom": "Curry d'aubergines, tomates et pois chiches"
+ },
+ "r383677": {
+  "total": 40,
+  "prep": 10,
+  "nom": "Quenelles de brochet, riz à paëlla et tomate"
+ },
+ "r383862": {
+  "total": 45,
+  "prep": 10,
+  "nom": "Quenelles nature, comté et épinards"
+ },
+ "r766520": {
+  "total": 115,
+  "prep": 15,
+  "nom": "Crêpes fourrées choco-noisette"
+ },
+ "r767161": {
+  "total": 65,
+  "prep": 15,
+  "nom": "Gaufres, sauce au chocolat"
+ },
+ "r767162": {
+  "total": 45,
+  "prep": 10,
+  "nom": "Pancakes aux myrtilles"
+ },
+ "r767163": {
+  "total": 30,
+  "prep": 5,
+  "nom": "Muffins aux fruits rouges"
+ },
+ "r767164": {
+  "total": 85,
+  "prep": 10,
+  "nom": "Madeleines marbrées choco-vanille"
+ },
+ "r767166": {
+  "total": 120,
+  "prep": 20,
+  "nom": "Sablés dominos"
+ },
+ "r767167": {
+  "total": 50,
+  "prep": 15,
+  "nom": "Spritz au chocolat"
+ },
+ "r767169": {
+  "total": 35,
+  "prep": 10,
+  "nom": "Rochers coco et chocolat"
+ },
+ "r767170": {
+  "total": 35,
+  "prep": 10,
+  "nom": "Chouquettes aux pépites de chocolat"
+ },
+ "r767171": {
+  "total": 100,
+  "prep": 30,
+  "nom": "Minitartelettes à la pomme, pistache et cannelle"
+ },
+ "r767172": {
+  "total": 50,
+  "prep": 15,
+  "nom": "Crumble croustillant aux pommes et aux fruits rouges"
+ },
+ "r767174": {
+  "total": 260,
+  "prep": 10,
+  "nom": "Mousse au chocolat aux crêpes dentelle"
+ },
+ "r767175": {
+  "total": 55,
+  "prep": 10,
+  "nom": "Quatre-quarts aux pépites de chocolat"
+ },
+ "r767176": {
+  "total": 55,
+  "prep": 10,
+  "nom": "Zebra cake"
+ },
+ "r767177": {
+  "total": 55,
+  "prep": 10,
+  "nom": "Banana bread"
+ },
+ "r767178": {
+  "total": 100,
+  "prep": 15,
+  "nom": "Flan pâtissier au chocolat au lait"
+ },
+ "r767179": {
+  "total": 55,
+  "prep": 15,
+  "nom": "Brookie aux noix"
+ },
+ "r767180": {
+  "total": 30,
+  "prep": 10,
+  "nom": "Cookie géant aux 3 chocolats"
+ },
+ "r767801": {
+  "total": 215,
+  "prep": 30,
+  "nom": "Glace sundae nappage caramel"
+ },
+ "r767803": {
+  "total": 25,
+  "prep": 10,
+  "nom": "Nectar pomme-poire"
+ },
+ "r767810": {
+  "total": 195,
+  "prep": 15,
+  "nom": "Minipizzas ourson"
+ },
+ "r767811": {
+  "total": 120,
+  "prep": 15,
+  "nom": "Quiche lorraine individuelle"
+ },
+ "r767812": {
+  "total": 40,
+  "prep": 10,
+  "nom": "Croque-messieurs en étoiles"
+ },
+ "r767814": {
+  "total": 50,
+  "prep": 10,
+  "nom": "Gratin de coquillettes, lardons et petits pois"
+ },
+ "r767815": {
+  "total": 45,
+  "prep": 10,
+  "nom": "Spaghetti aux légumes et boulettes de viande"
+ },
+ "r767816": {
+  "total": 65,
+  "prep": 15,
+  "nom": "Cordons bleus et purée de légumes"
+ },
+ "r767817": {
+  "total": 50,
+  "prep": 10,
+  "nom": "Petits cakes au bacon et au fromage"
+ },
+ "r767818": {
+  "total": 40,
+  "prep": 10,
+  "nom": "Röstis de carottes et pommes de terre"
+ },
+ "r767819": {
+  "total": 40,
+  "prep": 10,
+  "nom": "Soupe de courgette, fromage et pâtes alphabet"
+ },
+ "r767820": {
+  "total": 60,
+  "prep": 10,
+  "nom": "Tomates farcies au chèvre et au poulet"
+ },
+ "r768261": {
+  "total": 25,
+  "prep": 5,
+  "nom": "Risotto aux petits pois et au jambon"
+ },
+ "r768262": {
+  "total": 80,
+  "prep": 20,
+  "nom": "Croquettes de poisson et purée maison"
+ },
+ "r768263": {
+  "total": 30,
+  "prep": 10,
+  "nom": "Mon petit bol de riz cantonais"
+ },
+ "r768264": {
+  "total": 40,
+  "prep": 10,
+  "nom": "Boulettes de porc, courgettes et sauce au yaourt"
+ },
+ "r768265": {
+  "total": 35,
+  "prep": 10,
+  "nom": "Tacos au bœuf, tomates et cheddar"
+ },
+ "r768266": {
+  "total": 25,
+  "prep": 10,
+  "nom": "Fajitas au poulet, cheddar et poivron"
+ },
+ "r768267": {
+  "total": 90,
+  "prep": 15,
+  "nom": "Wraps au jambon et au fromage"
+ },
+ "r768268": {
+  "total": 225,
+  "prep": 15,
+  "nom": "Monster-burgers au cheddar"
+ },
+ "r768269": {
+  "total": 50,
+  "prep": 15,
+  "nom": "Empanadas au bœuf et aux poivrons"
+ },
+ "r446582": {
+  "total": 45,
+  "prep": 20,
+  "nom": "Poulet à la courge et au sarrasin"
+ },
+ "r452691": {
+  "total": 50,
+  "prep": 20,
+  "nom": "Colin, haricots verts et purée de petits pois à la menthe"
+ },
+ "r454324": {
+  "total": 65,
+  "prep": 30,
+  "nom": "Saumon au lait de coco et wasabi, purée de betterave"
+ },
+ "r454327": {
+  "total": 75,
+  "prep": 25,
+  "nom": "Œuf cocotte aux champignons et lardons, purée de carotte"
+ },
+ "r469504": {
+  "total": 55,
+  "prep": 20,
+  "nom": "Courgettes farcies à l'orientale"
+ },
+ "r469336": {
+  "total": 55,
+  "prep": 30,
+  "nom": "Keftas de bœuf et garniture persillée au citron"
+ },
+ "r457114": {
+  "total": 60,
+  "prep": 20,
+  "nom": "Chili de bœuf et muffins de maïs"
+ },
+ "r456695": {
+  "total": 60,
+  "prep": 20,
+  "nom": "Sauté de veau au curry, pommes de terre et choux de Bruxelles"
+ },
+ "r469344": {
+  "total": 50,
+  "prep": 15,
+  "nom": "Comme une envie de carbo"
+ },
+ "r452465": {
+  "total": 45,
+  "prep": 15,
+  "nom": "Tajine de dinde aux dattes, épices et chou romanesco"
+ },
+ "r470465": {
+  "total": 70,
+  "prep": 15,
+  "nom": "Boulettes de porc aux herbes, bouillon parfumé aux dumplings"
+ },
+ "r469902": {
+  "total": 60,
+  "prep": 10,
+  "nom": "Poulet aux pommes façon Vallée d’Auge, riz noir complet"
+ },
+ "r454166": {
+  "total": 80,
+  "prep": 15,
+  "nom": "Crêpes roses à mille trous et dip à l'échalote"
+ },
+ "r463541": {
+  "total": 80,
+  "prep": 20,
+  "nom": "Croquettes au cresson et dip au yaourt"
+ },
+ "r454337": {
+  "total": 75,
+  "prep": 30,
+  "nom": "Boulettes d'asperges au gruyère, dip de carotte cumin-sésame"
+ },
+ "r452425": {
+  "total": 70,
+  "prep": 30,
+  "nom": "Salade de boulgour, chou-fleur et brocoli en deux textures"
+ },
+ "r470473": {
+  "total": 130,
+  "prep": 30,
+  "nom": "Chaussons aux épinards, dip vert"
+ },
+ "r460397": {
+  "total": 55,
+  "prep": 10,
+  "nom": "Velouté anisé à la courge et au fenouil"
+ },
+ "r469338": {
+  "total": 35,
+  "prep": 10,
+  "nom": "Potage rouge tomate-poivron et croûtons à l'ail"
+ },
+ "r456699": {
+  "total": 35,
+  "prep": 10,
+  "nom": "Velours d'endive à l'orange"
+ },
+ "r460404": {
+  "total": 65,
+  "prep": 15,
+  "nom": "Velouté d'asperges noisetté"
+ },
+ "r457117": {
+  "total": 40,
+  "prep": 20,
+  "nom": "Velouté de céleri-rave aux châtaignes, lard croustillant"
+ },
+ "r469907": {
+  "total": 120,
+  "prep": 20,
+  "nom": "Œuf mollet, purée de carottes et petit pain coco vapeur"
+ },
+ "r467050": {
+  "total": 15,
+  "prep": 15,
+  "nom": "Smoothie bowl à la mangue et au lait d'avoine"
+ },
+ "r452423": {
+  "total": 30,
+  "prep": 10,
+  "nom": "Perles du Japon coco-banane"
+ },
+ "r469499": {
+  "total": 30,
+  "prep": 20,
+  "nom": "Semoule à la noisette, compotée d'abricots au romarin"
+ },
+ "r467054": {
+  "total": 45,
+  "prep": 10,
+  "nom": "Pancakes aux flocons d'avoine"
+ },
+ "r454331": {
+  "total": 60,
+  "prep": 30,
+  "nom": "Compote pomme-carotte à la cannelle (Pour les grands et les tout-petits)"
+ },
+ "r490958": {
+  "total": 45,
+  "prep": 30,
+  "nom": "Compote poire-fenouil à l'anis étoilé (Pour les grands et les tout-petits)"
+ },
+ "r463547": {
+  "total": 40,
+  "prep": 5,
+  "nom": "Riz au lait à la vanille (Pour les grands et les tout-petits)"
+ },
+ "r467038": {
+  "total": 60,
+  "prep": 30,
+  "nom": "Crumble à la pomme et aux cerises"
+ },
+ "r473776": {
+  "total": 40,
+  "prep": 20,
+  "nom": "Entremets fraise-framboise comme un tiramisu"
+ },
+ "r456692": {
+  "total": 55,
+  "prep": 10,
+  "nom": "Cake à la banane et au chocolat blanc"
+ },
+ "r469508": {
+  "total": 180,
+  "prep": 10,
+  "nom": "Mousse à la fraise sans œufs"
+ },
+ "r463437": {
+  "total": 60,
+  "prep": 15,
+  "nom": "Gratin de pâtes au brocoli, poire et bleu"
+ },
+ "r463440": {
+  "total": 50,
+  "prep": 20,
+  "nom": "Lentilles vertes à la badiane et panais, craquants d’emmental"
+ },
+ "r463434": {
+  "total": 55,
+  "prep": 15,
+  "nom": "Gratin de crozets aux blettes et champignons"
+ },
+ "r463537": {
+  "total": 180,
+  "prep": 20,
+  "nom": "Risotto de quinoa à l'aubergine"
+ },
+ "r473799": {
+  "total": 60,
+  "prep": 15,
+  "nom": "Ratatouille d'aubergines aux pois chiches, semoule parfumée"
+ },
+ "r457967": {
+  "total": 70,
+  "prep": 30,
+  "nom": "Crêpes garnies au lait de coco"
+ },
+ "r454329": {
+  "total": 50,
+  "prep": 15,
+  "nom": "Dhal de lentilles corail, chou-fleur et patate douce"
+ },
+ "r469512": {
+  "total": 1440,
+  "prep": 30,
+  "nom": "Buddha bowl au quinoa et légumes variés"
+ },
+ "r457971": {
+  "total": 70,
+  "prep": 20,
+  "nom": "Crumble à la courge butternut et au comté"
+ },
+ "r473778": {
+  "total": 50,
+  "prep": 15,
+  "nom": "Loubieh (ragoût de haricots verts libanais)"
+ }
+}
