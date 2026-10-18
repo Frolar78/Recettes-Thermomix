@@ -1488,5 +1488,220 @@
   "total": 50,
   "prep": 15,
   "nom": "Loubieh (ragoût de haricots verts libanais)"
+ },
+ "r71133": {
+  "total": 25,
+  "prep": 10,
+  "nom": "Nouilles chinoises façon thaïe au poulet"
+ },
+ "r557306": {
+  "total": 25,
+  "prep": 15,
+  "nom": "Fajitas de bœuf et guacamole"
+ },
+ "r20702": {
+  "total": 20,
+  "prep": 5,
+  "nom": "Filet de poulet sauce poulette"
+ },
+ "r747284": {
+  "total": 25,
+  "prep": 10,
+  "nom": "Boulettes de poulet asiatiques"
+ },
+ "r924177": {
+  "total": 20,
+  "prep": 15,
+  "nom": "Boulettes de viande aux légumes"
+ },
+ "r926403": {
+  "total": 25,
+  "prep": 15,
+  "nom": "Nuggets de poulet panés au son d’avoine façon milanaise"
+ },
+ "r495730": {
+  "total": 15,
+  "prep": 5,
+  "nom": "Gyros rapides avec tzatziki"
+ },
+ "r783418": {
+  "total": 25,
+  "prep": 15,
+  "nom": "Steaks de poulet au paprika, coleslaw maison"
+ },
+ "r806332": {
+  "total": 25,
+  "prep": 15,
+  "nom": "Burger de poulet à l'italienne, tomates confites et origan"
+ },
+ "r806335": {
+  "total": 25,
+  "prep": 10,
+  "nom": "Sauté de bœuf, brocoli, poivron et nouilles à l'asiatique"
+ },
+ "r112767": {
+  "total": 25,
+  "prep": 5,
+  "nom": "Cabillaud chorizo-tomate"
+ },
+ "r819072": {
+  "total": 25,
+  "prep": 5,
+  "nom": "Curry de cabillaud à la noix de coco"
+ },
+ "r784433": {
+  "total": 25,
+  "prep": 10,
+  "nom": "Cabillaud à la moutarde, riz et sauce tomate"
+ },
+ "r56855": {
+  "total": 25,
+  "prep": 5,
+  "nom": "Poisson pané"
+ },
+ "r347015": {
+  "total": 25,
+  "prep": 20,
+  "nom": "Croquettes de poisson à l'oignon"
+ },
+ "r929035": {
+  "total": 25,
+  "prep": 25,
+  "nom": "Galettes de thon aux herbes et sauce moutarde"
+ },
+ "r729729": {
+  "total": 25,
+  "prep": 10,
+  "nom": "Frittata aux petits pois, saumon et citron"
+ },
+ "r220808": {
+  "total": 25,
+  "prep": 5,
+  "nom": "One pot pasta saumon-épinard"
+ },
+ "r154320": {
+  "total": 20,
+  "prep": 5,
+  "nom": "Tagliatelle au saumon fumé"
+ },
+ "r908319": {
+  "total": 25,
+  "prep": 10,
+  "nom": "Saumon et sauce aux petits pois"
+ },
+ "r765690": {
+  "total": 25,
+  "prep": 10,
+  "nom": "Crevettes à l'ail, tomate et feta"
+ },
+ "r784432": {
+  "total": 25,
+  "prep": 10,
+  "nom": "Papillote de merlan et semoule de légumes"
+ },
+ "r806339": {
+  "total": 25,
+  "prep": 10,
+  "nom": "Merlu, couscous aux olives et sauce vierge tomate-basilic"
+ },
+ "r729134": {
+  "total": 15,
+  "prep": 5,
+  "nom": "Œuf cocotte aux épinards et au chorizo"
+ },
+ "r806330": {
+  "total": 25,
+  "prep": 10,
+  "nom": "Omelette aux poivrons et lardons à l'espagnole"
+ },
+ "r807249": {
+  "total": 25,
+  "prep": 15,
+  "nom": "Quesadilla courge, cheddar, guacamole et œuf au plat"
+ },
+ "r717281": {
+  "total": 25,
+  "prep": 10,
+  "nom": "Pain perdu au jambon"
+ },
+ "r776264": {
+  "total": 25,
+  "prep": 10,
+  "nom": "Chakchouka à l'avocat"
+ },
+ "r220806": {
+  "total": 15,
+  "prep": 5,
+  "nom": "Coquillettes chorizo-comté"
+ },
+ "r784428": {
+  "total": 15,
+  "prep": 5,
+  "nom": "One pot coquillettes au jambon cerise"
+ },
+ "r555363": {
+  "total": 20,
+  "prep": 5,
+  "nom": "Coquillettes au jambon, petits pois et menthe"
+ },
+ "r586218": {
+  "total": 25,
+  "prep": 10,
+  "nom": "Spaghetti carbonara express"
+ },
+ "r54142": {
+  "total": 25,
+  "prep": 10,
+  "nom": "Pâtes à la sauce tomate et au chorizo"
+ },
+ "r121208": {
+  "total": 25,
+  "prep": 5,
+  "nom": "Gratin de pâtes"
+ },
+ "r557300": {
+  "total": 25,
+  "prep": 5,
+  "nom": "Gnocchi à l'amatriciana"
+ },
+ "r673514": {
+  "total": 25,
+  "prep": 5,
+  "nom": "Risotto au bacon et aux champignons de Paris"
+ },
+ "r696785": {
+  "total": 25,
+  "prep": 10,
+  "nom": "Riz fondant aux légumes"
+ },
+ "r154329": {
+  "total": 15,
+  "prep": 10,
+  "nom": "Penne au pesto et jambon cru"
+ },
+ "r784960": {
+  "total": 25,
+  "prep": 5,
+  "nom": "Dahl de lentilles corail, épinards et courge à l'indienne"
+ },
+ "r784959": {
+  "total": 25,
+  "prep": 10,
+  "nom": "Curry de pois chiches au tofu"
+ },
+ "r415128": {
+  "total": 25,
+  "prep": 5,
+  "nom": "Curry de légumes"
+ },
+ "r245438": {
+  "total": 20,
+  "prep": 20,
+  "nom": "Nouilles chinoises et légumes au curry"
+ },
+ "r924178": {
+  "total": 20,
+  "prep": 10,
+  "nom": "Galettes de légumes"
  }
 }
