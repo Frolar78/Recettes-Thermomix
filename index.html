@@ -930,7 +930,7 @@ function typeSoir(agenda,d){
   for(const e of evs){const t=norm(e.titre);
     if(/\b(diner|resto|restaurant|anniversaire)\b/.test(t)&&e.date===d&&(e.debut||'')>='18:00')
       return{type:'dehors',note:'Dîner dehors → rien à prévoir'}}
-  for(const e of evs)if(/\bgarde\b/.test(norm(e.titre)))return{type:'garde',note:'Garde → plat préparé la veille'};
+  for(const e of evs)if(/\bgarde\b/.test(norm(e.titre)))return{type:'garde',note:'Arthur de garde → dîner simple à 3'};
   for(const e of evs){if(estJournee(e)||(e.date_fin||e.date)!==d)continue;
     if(e.fin>='17:00'&&e.fin<='19:30')return{type:'presse',note:'Retour '+hh(e.fin)+' → 20 min max'}}
   return{type:'normal',note:''};
@@ -957,7 +957,7 @@ const DINERS=RECETTES.filter(r=>(r.cat==='Plats'||r.cat==='Soupes')&&!/gaspacho|
 function choisirPlat(ctx){
   let cands=DINERS.filter(r=>!ctx.exclus.has(r.u));
   if(ctx.soir.type==='presse')cands=cands.filter(r=>duree(r)&&duree(r)<=25&&!attente(r));
-  else if(ctx.soir.type==='garde'){const c=cands.filter(r=>r.g.includes('congelation'));if(c.length)cands=c}
+  else if(ctx.soir.type==='garde'){const c=cands.filter(r=>duree(r)&&duree(r)<=45&&!attente(r));if(c.length)cands=c}
   if(!cands.length)return null;
   let meilleur=null;
   for(const r of cands){
@@ -965,7 +965,7 @@ function choisirPlat(ctx){
     const mF=ctx.frigo.filter(f=>r.i.some(k=>corresp(f,k)));
     const fav=ctx.favoris.has(r.u),enf=r.g.includes('enfants');
     const usage=ctx.usage||{};
-    let s=mV.reduce((t,f)=>t+6/(1+2*(usage[f]||0)),0)+mF.length*1.5+(fav?3:0)+(enf?2:0)+(r.g.includes('complet')?1:0)
+    let s=mV.reduce((t,f)=>t+6/(1+2*(usage[f]||0)),0)+mF.length*1.5+(fav?3:0)+(enf?(ctx.soir.type==='garde'?4:2):0)+(r.g.includes('complet')?1:0)
       -(r.i.length-mF.length)*.3+hachage(ctx.date+r.u)*3.5;
     if(ctx.familles.slice(-2).includes(r.fam))s-=5;
     if(r.fam==='soupe')s-=1.5;
@@ -1143,7 +1143,7 @@ function rendreSemaine(){
   $('sem-dates').textContent='du '+a.getDate()+(a.getMonth()!==b.getMonth()?' '+MOIS[a.getMonth()]:'')+' au '+b.getDate()+' '+MOIS[b.getMonth()];
   let cuisiner=0,presses=0,dehors=0;
   js.forEach(d=>{const m=menuDu(d),st=statutDe(m),soir=typeSoir(DATA.agenda,d);
-    if(st.type==='dehors'||(!m&&soir.type==='dehors'))dehors++;else{if(m&&m.id_recette)cuisiner++;if(['presse','garde'].includes(st.type||soir.type))presses++}});
+    if(st.type==='dehors'||(!m&&soir.type==='dehors'))dehors++;else{if(m&&m.id_recette)cuisiner++;if((st.type||soir.type)==='presse')presses++}});
   $('sem-compteurs').innerHTML='<div><b>'+cuisiner+'</b><span>repas à cuisiner</span></div><div class="o"><b>'+presses+'</b><span>soirs pressés</span></div>'+
     '<div><b>'+dehors+'</b><span>dîners dehors</span></div><div><b>'+coursesRestantes().length+'</b><span>articles de courses</span></div>';
   $('sem-synchro').textContent=ilYa(DATA.derniere_synchro);

@@ -15,7 +15,7 @@ const CONSIGNES_IA = [
   "Les CONSIGNES DE LA FAMILLE de la semaine passent avant toutes les règles ci-dessous (mais tu restes dans le catalogue).",
   "Respecte aussi les GOÛTS DE LA FAMILLE (aliments refusés, préférences).",
   "Règles, par ordre d'importance :",
-  "1. Soir « presse » : plat de 25 min maximum, sans attente. Soir « garde » : plat qui se prépare la veille ou se congèle.",
+  "1. Soir « presse » : plat de 25 min maximum, sans attente. Soir « garde » : le papa est de garde à l'hôpital, la maman dîne seule avec les enfants : plat simple de 45 min maximum, sans attente, apprécié des enfants (pas besoin de le préparer la veille).",
   "2. Utiliser en priorité les produits « à finir vite », puis le reste du frigo.",
   "3. Varier : pas deux soirs de suite la même famille (poisson, viande, œufs, pâtes/riz, soupe, légumes), pas plus de deux soupes.",
   "4. Pas de plat déjà servi récemment. Favoris bienvenus, plats adaptés aux enfants appréciés.",
