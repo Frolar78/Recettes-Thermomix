@@ -1,6 +1,6 @@
 /**
  * Données partagées de l'app « Qu'est-ce qu'on mange ? » entre nos téléphones.
- * Onglets : Agenda (lecture seule, rempli par la synchro TimeTree), Menu, Courses, Frigo.
+ * Onglets : Agenda (lecture seule, rempli par la synchro TimeTree), Menu, Courses, Frigo, Gouts.
  * Même jeton que la synchro (SHEET_TOKEN dans Config.gs, jamais commité).
  *
  * Lecture  : GET  ?token=…                       ou POST {token, action:'lire'}
@@ -12,6 +12,7 @@ const ONGLETS_APP = {
   Menu: ['date', 'id_recette', 'titre', 'statut'],
   Courses: ['article', 'rayon', 'origine', 'coche'],
   Frigo: ['ingredient', 'a_finir_vite'],
+  Gouts: ['phrase'],
 };
 
 function jetonOk_(jeton) {
@@ -26,6 +27,7 @@ function doGet(e) {
 function actionApp_(body) {
   if (body.action === 'lire') return json_(lireTout_());
   if (body.action === 'menu_ia') return json_(menuIA_(body.donnees)); // IA.gs
+  if (body.action === 'adapter_ia') return json_(adapterIA_(body.donnees)); // IA.gs
   if (body.action === 'lot') {
     const lock = LockService.getScriptLock();
     lock.waitLock(20000);

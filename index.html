@@ -26,7 +26,7 @@
   html,body{background:var(--bg)}
   body{font-family:'DM Sans',system-ui,sans-serif;color:var(--ink);font-size:16px;line-height:1.45;
     -webkit-font-smoothing:antialiased;padding-bottom:calc(var(--nav) + env(safe-area-inset-bottom) + 24px)}
-  button,input{font-family:inherit;font-size:inherit;color:inherit}
+  button,input,textarea{font-family:inherit;font-size:inherit;color:inherit}
   button{cursor:pointer;border:none;background:none}
   .ico{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
   .ico.s{width:18px;height:18px}
@@ -105,6 +105,24 @@
   .meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:.83rem;color:var(--ink-2)}
   .note{font-size:.83rem;color:var(--orange-txt);background:var(--orange-doux);border-radius:10px;padding:5px 9px;align-self:flex-start}
   .barre-btn{display:flex;gap:10px;margin-top:14px}
+  .consignes{width:100%;min-height:76px;border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:var(--card);outline:none;resize:vertical;line-height:1.4;margin-bottom:10px;display:block}
+  .consignes:focus{border-color:var(--vert)}
+  .consignes::placeholder{color:var(--ink-3)}
+  .adapt{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+  .adapt .btn{width:100%}
+  .sub{border-radius:14px;padding:11px 13px;background:var(--bg);font-size:.9rem;line-height:1.4}
+  .sub b{font-weight:600}
+  .sub .q{color:var(--ink-2)}
+  .sub .att{margin-top:6px;color:var(--orange-txt);background:var(--orange-doux);border-radius:9px;padding:5px 8px;font-size:.84rem}
+  .adapt .petit{font-size:.8rem;color:var(--ink-2)}
+  .heros .adapt .btn-l{background:#2C3B32;border-color:#3A4B41;color:#fff}
+  .heros .sub{background:#2C3B32;color:#fff}
+  .heros .sub .q,.heros .adapt .petit{color:#C3CCC6}
+  .plat-jour{background:var(--card);border-radius:var(--r);padding:14px;margin-bottom:12px}
+  .plat-jour>b{display:block;font-weight:600;margin-bottom:10px}
+  .gout{display:flex;align-items:center;gap:10px;background:var(--card);border-radius:14px;padding:6px 6px 6px 14px;min-height:50px;margin-bottom:8px}
+  .gout span{flex:1;font-size:.95rem}
+  .gout button{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--ink-3)}
   .barre-btn .btn{flex:1}
 
   /* courses */
@@ -183,7 +201,7 @@
   .champ span{display:block;font-size:.85rem;color:var(--ink-2);margin-bottom:5px}
   .champ input{width:100%;min-height:48px;border:1px solid var(--line);border-radius:14px;padding:0 14px;background:var(--card);outline:none}
   .toast{position:fixed;left:50%;bottom:calc(var(--nav) + env(safe-area-inset-bottom) + 16px);transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;
-    padding:11px 18px;border-radius:100px;font-size:.9rem;opacity:0;transition:all .2s;pointer-events:none;z-index:50;white-space:nowrap}
+    padding:11px 18px;border-radius:100px;font-size:.9rem;opacity:0;transition:all .2s;pointer-events:none;z-index:50;width:max-content;max-width:calc(100% - 32px);text-align:center}
   .toast.on{opacity:1;transform:translateX(-50%)}
 </style>
 </head>
@@ -229,6 +247,8 @@
     <span class="t" id="sem-synchro"></span>
     <div class="navsem"><button id="sem-prec" aria-label="Semaine précédente"><svg class="ico"><use href="#i-g"/></svg></button><button id="sem-suiv" aria-label="Semaine suivante"><svg class="ico"><use href="#i-d"/></svg></button></div>
   </div>
+  <textarea class="consignes" id="sem-consignes" rows="3" aria-label="Consignes pour cette semaine" placeholder="Des consignes pour cette semaine ? ex. pas de poisson, garde mercredi, il reste une demi-butternut"></textarea>
+  <button class="lien" id="sem-gouts" style="margin:-6px 0 4px">Nos goûts</button>
   <button class="btn btn-v" id="sem-proposer" style="width:100%;margin-bottom:14px">Proposer la semaine</button>
   <div class="jours" id="sem-jours"></div>
   <div class="barre-btn"><button class="btn btn-o" id="sem-courses"><svg class="ico s"><use href="#i-courses"/></svg>Générer la liste de courses</button></div>
@@ -819,13 +839,13 @@ let tT;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('on'
    CFG = {url, token} : saisi une fois (ou via le lien d'installation #cfg=…), jamais dans le code.
    DATA = dernière copie connue ; FILE = modifications pas encore envoyées.            */
 let CFG=load('qm_cfg',null);
-let DATA=Object.assign({agenda:[],derniere_synchro:'',menu:[],courses:[],frigo:[]},load('qm_data',{}));
+let DATA=Object.assign({agenda:[],derniere_synchro:'',menu:[],courses:[],frigo:[],gouts:[]},load('qm_data',{}));
 let FILE=load('qm_file',[]);
 let ETAT=CFG&&CFG.url?'hors':'local';
 let FAVS=load('ck_favs',[]);
 let FAVS_SET=new Set(FAVS);
-const CLE={Menu:'date',Courses:'article',Frigo:'ingredient'};
-const LISTE={Menu:'menu',Courses:'courses',Frigo:'frigo'};
+const CLE={Menu:'date',Courses:'article',Frigo:'ingredient',Gouts:'phrase'};
+const LISTE={Menu:'menu',Courses:'courses',Frigo:'frigo',Gouts:'gouts'};
 
 function lireLien(texte){   // lien d'installation « …#cfg=… » -> {url, token}
   const m=(texte||'').trim().match(/#cfg=([^\s#]+)/);if(!m)return null;
@@ -866,7 +886,7 @@ async function envoyer(){
   try{
     const j=await appel(lot.length?{action:'lot',ops:lot}:{action:'lire'});
     FILE=FILE.slice(lot.length);
-    DATA={agenda:j.agenda||[],derniere_synchro:j.derniere_synchro||'',menu:j.menu||[],courses:j.courses||[],frigo:j.frigo||[]};
+    DATA={agenda:j.agenda||[],derniere_synchro:j.derniere_synchro||'',menu:j.menu||[],courses:j.courses||[],frigo:j.frigo||[],gouts:j.gouts||[]};
     FILE.forEach(appliquerLocal);           // modifications faites pendant l'envoi
     ETAT='ok';
   }catch(e){ETAT=/jeton/.test(e.message)?'jeton':'hors'}
@@ -881,6 +901,7 @@ setInterval(()=>{if(!document.hidden)envoyer()},60000);
 const menuDu=d=>DATA.menu.find(m=>m.date===d);
 function statutDe(m){const s=(m&&m.statut)||'';const i=s.indexOf('|');return{type:i<0?s:s.slice(0,i),note:i<0?'':s.slice(i+1)}}
 const frigoNoms=()=>DATA.frigo.map(f=>f.ingredient);
+const goutsPhrases=()=>(DATA.gouts||[]).map(g=>g.phrase).filter(Boolean);
 const viteNoms=()=>DATA.frigo.filter(f=>f.a_finir_vite==='1').map(f=>f.ingredient);
 const coursesRestantes=()=>DATA.courses.filter(c=>c.coche!=='1');
 function manquants(r){
@@ -995,7 +1016,8 @@ async function proposerSemaineIA(p){
   const catalogue=DINERS.filter(r=>!exclus.has(r.u)).map(r=>[r.u,r.t,duree(r)||'?',attente(r)?'oui':'non',r.g.join(','),r.i.slice(0,6).join(',')]);
   const j=await appel({action:'menu_ia',donnees:{soirs,frigo:p.frigo,vite:p.vite,
     favoris:[...p.favoris].map(u=>PAR_ID[u]&&PAR_ID[u].t).filter(Boolean),
-    recents:[...exclus].map(u=>PAR_ID[u]&&PAR_ID[u].t).filter(Boolean),catalogue}});
+    recents:[...exclus].map(u=>PAR_ID[u]&&PAR_ID[u].t).filter(Boolean),
+    consignes:p.consignes||'',gouts:p.gouts||[],catalogue}});
   const parDate={};(j.jours||[]).forEach(x=>{if(x&&x.date)parDate[x.date]=x});
   const local=proposerSemaine(p),pris=new Set();
   return local.map(l=>{
@@ -1056,9 +1078,11 @@ function rendreSoir(){
       '<div class="lancer">'+ico('soir','s')+'<span>'+(attente(r)?'À anticiper : <b>'+txtDuree(attente(r))+'</b> de repos/trempage':'Lancer à <b>'+lancerA(r)+'</b> pour passer à table à 19h')+'</span></div>'+
       '<div class="acts"><a class="btn btn-v" href="'+lienDe(r)+'" target="_blank" rel="noopener">'+ico('ext','s')+'Ouvrir dans Cookidoo</a>'+
       '<button class="rond" id="h-fav" aria-label="Favori" style="color:'+(fav?'#F3A37A':'#fff')+'">'+ico('coeur')+'</button>'+
-      '<button class="rond" id="h-autre" aria-label="Proposer autre chose">'+ico('retour')+'</button></div></div>';
+      '<button class="rond" id="h-autre" aria-label="Proposer autre chose">'+ico('retour')+'</button></div>'+
+      '<div id="h-adapt"></div></div>';
     $('h-autre').onclick=autreChose;
     $('h-fav').onclick=()=>basculerFavori(r.u);
+    zoneAdapter($('h-adapt'),r);
   }else{
     h.innerHTML='<div class="heros"><div class="lbl">Ce soir</div><h3>Rien de prévu pour l\'instant</h3>'+
       '<div class="acts" style="margin-top:6px"><button class="btn btn-v" id="h-autre">Proposer un plat</button>'+
@@ -1123,6 +1147,8 @@ function rendreSemaine(){
   $('sem-compteurs').innerHTML='<div><b>'+cuisiner+'</b><span>repas à cuisiner</span></div><div class="o"><b>'+presses+'</b><span>soirs pressés</span></div>'+
     '<div><b>'+dehors+'</b><span>dîners dehors</span></div><div><b>'+coursesRestantes().length+'</b><span>articles de courses</span></div>';
   $('sem-synchro').textContent=ilYa(DATA.derniere_synchro);
+  const ng=goutsPhrases().length;
+  $('sem-gouts').textContent='Nos goûts'+(ng?' ('+ng+')':' — à renseigner');
   $('sem-jours').innerHTML=js.map(d=>{
     const dt=deIso(d),m=menuDu(d),st=statutDe(m),r=m&&PAR_ID[m.id_recette];
     const evs=evenementsDu(DATA.agenda,d).map(e=>'<span class="pastille p-ev">'+(estJournee(e)||!e.debut?'':hh(e.debut)+' ')+esc(e.titre)+'</span>').join('');
@@ -1137,13 +1163,17 @@ function rendreSemaine(){
   }).join('');
   $('sem-jours').querySelectorAll('.jour').forEach(b=>b.onclick=()=>ouvrirChoix(b.dataset.d));
 }
+$('sem-consignes').value=load('qm_consignes','');   // brouillon gardé sur ce téléphone
+$('sem-consignes').oninput=e=>save('qm_consignes',e.target.value);
+$('sem-gouts').onclick=ouvrirGouts;
 $('sem-prec').onclick=()=>{DECALAGE--;rendre()};
 $('sem-suiv').onclick=()=>{DECALAGE++;rendre()};
 $('sem-proposer').onclick=async()=>{
   const jours=joursSemaine().filter(d=>d>=AUJ());
   if(!jours.length){toast('Cette semaine est passée');return}
   if(jours.some(d=>menuDu(d))&&!confirm('Remplacer les dîners déjà prévus de '+jours.length+' soir(s) ?'))return;
-  const p={jours,agenda:DATA.agenda,menu:DATA.menu,frigo:frigoNoms(),vite:viteNoms(),favoris:FAVS_SET};
+  const p={jours,agenda:DATA.agenda,menu:DATA.menu,frigo:frigoNoms(),vite:viteNoms(),favoris:FAVS_SET,
+    consignes:$('sem-consignes').value.trim(),gouts:goutsPhrases()};
   const bt=$('sem-proposer');bt.disabled=true;bt.textContent='Claude réfléchit…';
   let prop,msg='Semaine proposée par Claude';
   try{prop=await proposerSemaineIA(p)}
@@ -1170,7 +1200,12 @@ function ouvrirChoix(d){
     '<div class="ajout"><input id="ch-q" placeholder="Chercher une recette…" autocomplete="off"></div>'+
     '<div style="display:flex;gap:8px;margin-top:10px"><button class="btn btn-l" id="ch-dehors" style="flex:1">Dîner dehors</button>'+
     (m?'<button class="btn btn-l" id="ch-eff" style="flex:1">Effacer</button>':'')+'</div>'+
-    '<div class="defile" id="ch-l"></div>');
+    '<div class="defile"><div id="ch-plat"></div><div id="ch-l"></div></div>');
+  const rj=m&&statutDe(m).type!=='dehors'&&PAR_ID[m.id_recette];
+  if(rj){$('ch-plat').innerHTML='<div class="plat-jour"><b>'+esc(rj.t)+'</b>'+
+    '<a class="btn btn-l" style="width:100%" href="'+lienDe(rj)+'" target="_blank" rel="noopener">'+ico('ext','s')+'Ouvrir dans Cookidoo</a>'+
+    '<div id="ch-adapt"></div></div><p class="vide" style="margin:0 2px 8px">Ou choisir un autre plat :</p>';
+    zoneAdapter($('ch-adapt'),rj)}
   const liste=()=>{
     const q=norm($('ch-q').value);
     let l=q?RECETTES.filter(r=>norm(r.t).includes(q)):DINERS.slice().sort((a,b)=>(FAVS_SET.has(b.u)-FAVS_SET.has(a.u))||a.t.localeCompare(b.t,'fr'));
@@ -1180,6 +1215,62 @@ function ouvrirChoix(d){
   $('ch-q').oninput=liste;liste();
   $('ch-dehors').onclick=()=>{mettreAuMenu(d,null,'dehors|Dîner dehors → rien à prévoir');fermerFeuille()};
   if(m)$('ch-eff').onclick=()=>{ecrire([{onglet:'Menu',cle:d,suppr:true}]);fermerFeuille()};
+}
+
+/* ---------- feuille : nos goûts (onglet Gouts, partagé) ---------- */
+function ouvrirGouts(){
+  ouvrirFeuille('<h3>Nos goûts</h3>'+
+    '<p class="vide" style="margin-bottom:10px">Des phrases libres, lues par Claude pour les menus et les adaptations.</p>'+
+    '<div class="ajout"><input id="gt-inp" placeholder="ex. les enfants n\'aiment pas les champignons" autocomplete="off" enterkeyhint="done">'+
+    '<button class="carre btn-v" id="gt-ok" aria-label="Ajouter">'+ico('plus')+'</button></div>'+
+    '<div class="defile" id="gt-l"></div>');
+  const liste=()=>{
+    const l=goutsPhrases();
+    $('gt-l').innerHTML=l.map((g,i)=>'<div class="gout"><span>'+esc(g)+'</span><button data-i="'+i+'" aria-label="Retirer">'+ico('x')+'</button></div>').join('')||
+      '<p class="vide">Rien pour l\'instant.</p>';
+    $('gt-l').querySelectorAll('button').forEach(b=>b.onclick=()=>{ecrire([{onglet:'Gouts',cle:l[+b.dataset.i],suppr:true}]);liste()});
+  };
+  const ajouter=()=>{const v=$('gt-inp').value.trim().replace(/\s+/g,' ');if(!v)return;$('gt-inp').value='';
+    if(goutsPhrases().some(g=>norm(g)===norm(v))){toast('Déjà noté');return}
+    ecrire([{onglet:'Gouts',cle:v,ligne:{}}]);liste()};
+  $('gt-ok').onclick=ajouter;
+  $('gt-inp').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();ajouter()}});
+  liste();
+}
+
+/* ---------- adapter une recette avec Claude (Apps Script → adapter_ia) ----------
+   Substitutions à l'identique uniquement : la recette Cookidoo et ses réglages restent la référence. */
+const ADAPT={};   // id recette -> {etat:'charge'|'ok'|'erreur', res, msg} (mémoire de la session)
+function zoneAdapter(box,r){
+  const a=ADAPT[r.u];
+  let h='';
+  if(!a||a.etat==='erreur')h='<button class="btn btn-l" data-adapt>'+ico('retour','s')+'Adapter avec Claude</button>'+
+    (a?'<span class="petit">Claude indisponible ('+esc(a.msg)+')</span>':'');
+  else if(a.etat==='charge')h='<button class="btn btn-l" disabled>Claude regarde la recette…</button>';
+  else{
+    const subs=a.res.substitutions||[],manq=a.res.manquants||[];
+    h=(subs.length?subs.map(x=>'<div class="sub"><b>'+esc(x.remplacer)+' → '+esc(x.par)+'</b>'+(x.quantite?' <span class="q">('+esc(x.quantite)+')</span>':'')+
+        (x.pourquoi?'<div class="q">'+esc(x.pourquoi)+'</div>':'')+(x.attention?'<div class="att">'+esc(x.attention)+'</div>':'')+'</div>').join(''):
+        '<div class="sub">Rien à changer : la recette Cookidoo s\'applique telle quelle.</div>')+
+      (manq.length?'<div class="sub"><b>Encore manquant :</b> '+esc(manq.join(', '))+'</div>'+
+        '<button class="btn btn-o" data-manq>'+ico('courses','s')+'Ajouter les manquants aux courses</button>':'')+
+      '<span class="petit">Temps, température et vitesse : suivez la recette Cookidoo.'+(a.res.source==='catalogue'?' (Quantités Cookidoo non lues : ingrédients principaux seulement.)':'')+'</span>';
+  }
+  box.innerHTML='<div class="adapt">'+h+'</div>';
+  const b=box.querySelector('[data-adapt]');
+  if(b)b.onclick=()=>adapter(box,r);
+  const bm=box.querySelector('[data-manq]');
+  if(bm)bm.onclick=()=>{const n=ajouterCourses((a.res.manquants||[]).map(k=>({nom:k,origine:'adapté'})));
+    toast(n?n+' article'+(n>1?'s':'')+' ajouté'+(n>1?'s':'')+' aux courses':'Déjà dans la liste')};
+}
+async function adapter(box,r){
+  if(!CFG||!CFG.url){toast('Configurez d\'abord le partage (pastille en haut)');return}
+  ADAPT[r.u]={etat:'charge'};zoneAdapter(box,r);
+  try{
+    const j=await appel({action:'adapter_ia',donnees:{id:r.u,titre:r.t,ingredients:r.i,frigo:frigoNoms(),vite:viteNoms(),gouts:goutsPhrases()}});
+    ADAPT[r.u]={etat:'ok',res:j};
+  }catch(e){ADAPT[r.u]={etat:'erreur',msg:e.message}}
+  if(box.isConnected)zoneAdapter(box,r);else rendre();
 }
 
 /* ---------- feuille : réglages (code famille) ---------- */
