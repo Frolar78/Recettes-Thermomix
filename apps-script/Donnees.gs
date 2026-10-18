@@ -25,6 +25,7 @@ function doGet(e) {
 
 function actionApp_(body) {
   if (body.action === 'lire') return json_(lireTout_());
+  if (body.action === 'menu_ia') return json_(menuIA_(body.donnees)); // IA.gs
   if (body.action === 'lot') {
     const lock = LockService.getScriptLock();
     lock.waitLock(20000);

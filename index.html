@@ -982,6 +982,32 @@ function proposerSemaine({jours,agenda,menu,frigo,vite,favoris}){
   return sortie;
 }
 
+/* « Proposer la semaine » par Claude (Apps Script → API Anthropic, cf. apps-script/IA.gs).
+   Claude ne choisit que dans DINERS ; tout id inconnu, déjà servi ou incompatible est remplacé
+   par l'algorithme local. En cas d'échec (hors ligne, clé absente…) → proposerSemaine() seul. */
+async function proposerSemaineIA(p){
+  if(!CFG||!CFG.url)throw new Error('pas de service configuré');
+  const sauf=new Set(p.jours);
+  const exclus=new Set(p.menu.filter(m=>!sauf.has(m.date)&&m.date>=plusJours(p.jours[0],-14)&&m.date<=plusJours(p.jours[p.jours.length-1],14))
+    .map(m=>m.id_recette).filter(Boolean));
+  const soirs=p.jours.map(d=>({date:d,jour:JOURS_L[deIso(d).getDay()],type:typeSoir(p.agenda,d).type,
+    evenements:evenementsDu(p.agenda,d).map(e=>(e.debut?hh(e.debut)+' ':'')+e.titre).join(' ; ')}));
+  const catalogue=DINERS.filter(r=>!exclus.has(r.u)).map(r=>[r.u,r.t,duree(r)||'?',attente(r)?'oui':'non',r.g.join(','),r.i.slice(0,6).join(',')]);
+  const j=await appel({action:'menu_ia',donnees:{soirs,frigo:p.frigo,vite:p.vite,
+    favoris:[...p.favoris].map(u=>PAR_ID[u]&&PAR_ID[u].t).filter(Boolean),
+    recents:[...exclus].map(u=>PAR_ID[u]&&PAR_ID[u].t).filter(Boolean),catalogue}});
+  const parDate={};(j.jours||[]).forEach(x=>{if(x&&x.date)parDate[x.date]=x});
+  const local=proposerSemaine(p),pris=new Set();
+  return local.map(l=>{
+    const x=parDate[l.date],r=x&&PAR_ID[x.id],soir=typeSoir(p.agenda,l.date);
+    const ok=r&&soir.type!=='dehors'&&DINERS.includes(r)&&!exclus.has(r.u)&&!pris.has(r.u)
+      &&!(soir.type==='presse'&&(attente(r)||(duree(r)||99)>25));
+    if(!ok){if(l.id_recette)pris.add(l.id_recette);return l}
+    pris.add(r.u);
+    return{date:l.date,id_recette:r.u,titre:r.t,statut:soir.type+'|'+(soir.type==='normal'?'✨ '+String(x.raison||'').slice(0,80):soir.note)};
+  });
+}
+
 /* ================= NAVIGATION ================= */
 let ONGLET=load('qm_onglet','soir');
 function aller(o){ONGLET=o;save('qm_onglet',o);
@@ -1113,13 +1139,18 @@ function rendreSemaine(){
 }
 $('sem-prec').onclick=()=>{DECALAGE--;rendre()};
 $('sem-suiv').onclick=()=>{DECALAGE++;rendre()};
-$('sem-proposer').onclick=()=>{
+$('sem-proposer').onclick=async()=>{
   const jours=joursSemaine().filter(d=>d>=AUJ());
   if(!jours.length){toast('Cette semaine est passée');return}
   if(jours.some(d=>menuDu(d))&&!confirm('Remplacer les dîners déjà prévus de '+jours.length+' soir(s) ?'))return;
-  const prop=proposerSemaine({jours,agenda:DATA.agenda,menu:DATA.menu,frigo:frigoNoms(),vite:viteNoms(),favoris:FAVS_SET});
-  ecrire(prop.map(p=>({onglet:'Menu',cle:p.date,ligne:{id_recette:p.id_recette,titre:p.titre,statut:p.statut}})));
-  toast('Semaine proposée');
+  const p={jours,agenda:DATA.agenda,menu:DATA.menu,frigo:frigoNoms(),vite:viteNoms(),favoris:FAVS_SET};
+  const bt=$('sem-proposer');bt.disabled=true;bt.textContent='Claude réfléchit…';
+  let prop,msg='Semaine proposée par Claude';
+  try{prop=await proposerSemaineIA(p)}
+  catch(e){prop=proposerSemaine(p);msg='IA indisponible ('+e.message+') · proposition classique'}
+  bt.disabled=false;bt.textContent='Proposer la semaine';
+  ecrire(prop.map(x=>({onglet:'Menu',cle:x.date,ligne:{id_recette:x.id_recette,titre:x.titre,statut:x.statut}})));
+  toast(msg);
 };
 $('sem-courses').onclick=()=>{
   const items=[];
