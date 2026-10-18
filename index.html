@@ -805,7 +805,12 @@ function deIso(s){const[a,m,j]=s.split('-').map(Number);return new Date(a,m-1,j)
 function plusJours(s,n){const d=deIso(s);d.setDate(d.getDate()+n);return iso(d)}
 const AUJ=()=>iso(new Date());
 function hh(t){return t?t.replace(':','h'):''}           // 18:30 -> 18h30
-function duree(r){return r&&r.d?r.d:null}
+/* Cookidoo « temps total » inclut repos/trempage/froid : au-delà de 2 h 30 on considère que
+   l'écart avec la préparation est de l'attente, pas du temps avant de passer à table. */
+const ATTENTE_MIN=150;
+function attente(r){return r&&r.d>ATTENTE_MIN?r.d-(r.p||0):0}
+function duree(r){return r&&r.d?(attente(r)?(r.p||r.d):r.d):null}
+function txtRecette(r){const a=attente(r);return txtDuree(duree(r))+(a?' + attente '+txtDuree(a):'')}
 function txtDuree(m){if(!m)return'';if(m<60)return m+' min';const h=Math.floor(m/60),r=m%60;return h+' h'+(r?' '+String(r).padStart(2,'0'):'')}
 function hachage(s){let h=2166136261;for(const c of s){h^=c.charCodeAt(0);h=Math.imul(h,16777619)}return (h>>>0)/4294967296}
 let tT;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(tT);tT=setTimeout(()=>t.classList.remove('on'),2000)}
@@ -930,7 +935,7 @@ const DINERS=RECETTES.filter(r=>(r.cat==='Plats'||r.cat==='Soupes')&&!/gaspacho|
 /* Choisit la meilleure recette pour un soir. ctx = {date, soir:{type,note}, exclus:Set, familles:[], frigo:[], vite:[], favoris:Set} */
 function choisirPlat(ctx){
   let cands=DINERS.filter(r=>!ctx.exclus.has(r.u));
-  if(ctx.soir.type==='presse')cands=cands.filter(r=>r.d&&r.d<=25);
+  if(ctx.soir.type==='presse')cands=cands.filter(r=>duree(r)&&duree(r)<=25&&!attente(r));
   else if(ctx.soir.type==='garde'){const c=cands.filter(r=>r.g.includes('congelation'));if(c.length)cands=c}
   if(!cands.length)return null;
   let meilleur=null;
@@ -943,7 +948,7 @@ function choisirPlat(ctx){
       -(r.i.length-mF.length)*.3+hachage(ctx.date+r.u)*3.5;
     if(ctx.familles.slice(-2).includes(r.fam))s-=5;
     if(r.fam==='soupe')s-=1.5;
-    if(ctx.soir.type==='normal'&&r.d>90)s-=4;
+    if(ctx.soir.type==='normal'&&duree(r)>90)s-=4;
     if(!meilleur||s>meilleur.s)meilleur={r,s,mV:mV.filter(f=>!usage[f]),fav,enf};
   }
   const m=meilleur;
@@ -1020,9 +1025,9 @@ function rendreSoir(){
   }else if(r){
     const fav=FAVS_SET.has(r.u);
     h.innerHTML='<div class="heros"><div class="lbl">Plat du soir</div><h3>'+esc(r.t)+'</h3>'+
-      '<span class="pastille p-tm">'+ico('horloge','s')+'Thermomix · '+txtDuree(duree(r))+'</span>'+
+      '<span class="pastille p-tm">'+ico('horloge','s')+'Thermomix · '+txtRecette(r)+'</span>'+
       (st.note?' <span class="pastille p-or" style="margin-top:6px">'+esc(st.note)+'</span>':'')+
-      '<div class="lancer">'+ico('soir','s')+'<span>Lancer à <b>'+lancerA(r)+'</b> pour passer à table à 19h</span></div>'+
+      '<div class="lancer">'+ico('soir','s')+'<span>'+(attente(r)?'À anticiper : <b>'+txtDuree(attente(r))+'</b> de repos/trempage':'Lancer à <b>'+lancerA(r)+'</b> pour passer à table à 19h')+'</span></div>'+
       '<div class="acts"><a class="btn btn-v" href="'+lienDe(r)+'" target="_blank" rel="noopener">'+ico('ext','s')+'Ouvrir dans Cookidoo</a>'+
       '<button class="rond" id="h-fav" aria-label="Favori" style="color:'+(fav?'#F3A37A':'#fff')+'">'+ico('coeur')+'</button>'+
       '<button class="rond" id="h-autre" aria-label="Proposer autre chose">'+ico('retour')+'</button></div></div>';
@@ -1097,7 +1102,7 @@ function rendreSemaine(){
     const evs=evenementsDu(DATA.agenda,d).map(e=>'<span class="pastille p-ev">'+(estJournee(e)||!e.debut?'':hh(e.debut)+' ')+esc(e.titre)+'</span>').join('');
     let corps;
     if(st.type==='dehors')corps='<div class="plat">Dîner dehors</div>';
-    else if(r)corps='<div class="plat">'+esc(r.t)+'</div><div class="meta"><span class="pastille p-tm">TM7</span>'+txtDuree(duree(r))+'</div>';
+    else if(r)corps='<div class="plat">'+esc(r.t)+'</div><div class="meta"><span class="pastille p-tm">TM7</span>'+txtRecette(r)+'</div>';
     else corps='<div class="plat vide">Pas encore de dîner — toucher pour choisir</div>';
     let note=st.note;
     if(!m){const s=typeSoir(DATA.agenda,d);note=s.note}
@@ -1138,7 +1143,7 @@ function ouvrirChoix(d){
   const liste=()=>{
     const q=norm($('ch-q').value);
     let l=q?RECETTES.filter(r=>norm(r.t).includes(q)):DINERS.slice().sort((a,b)=>(FAVS_SET.has(b.u)-FAVS_SET.has(a.u))||a.t.localeCompare(b.t,'fr'));
-    $('ch-l').innerHTML=l.slice(0,80).map(r=>'<button class="choix" data-u="'+r.u+'"><b>'+esc(r.t)+'</b><span>'+txtDuree(duree(r))+'</span></button>').join('')||'<p class="vide">Aucune recette du catalogue ne correspond.</p>';
+    $('ch-l').innerHTML=l.slice(0,80).map(r=>'<button class="choix" data-u="'+r.u+'"><b>'+esc(r.t)+'</b><span>'+txtRecette(r)+'</span></button>').join('')||'<p class="vide">Aucune recette du catalogue ne correspond.</p>';
     $('ch-l').querySelectorAll('.choix').forEach(b=>b.onclick=()=>{mettreAuMenu(d,PAR_ID[b.dataset.u],'normal');fermerFeuille();toast('Dîner modifié')});
   };
   $('ch-q').oninput=liste;liste();
@@ -1228,7 +1233,7 @@ function rendreFrigo(){
   if(!choisis.length){$('f-idees').innerHTML='<p class="vide">Cochez au moins un ingrédient.</p>';return}
   const res=trouver(choisis,[],120).filter(x=>x.r.cat!=='Desserts'&&x.r.cat!=='Bases').slice(0,10);
   $('f-idees').innerHTML=res.map(x=>{const r=x.r;
-    return'<div class="idee"><b>'+esc(r.t)+'</b><div class="meta"><span class="pastille p-tm">TM7</span>'+txtDuree(duree(r))+'</div>'+
+    return'<div class="idee"><b>'+esc(r.t)+'</b><div class="meta"><span class="pastille p-tm">TM7</span>'+txtRecette(r)+'</div>'+
       '<span class="u">Utilise '+esc(x.matched.join(', '))+'</span>'+
       (x.missing.length?'<span class="m">Il manque : '+esc(x.missing.join(', '))+'</span>':'<span class="m">Rien ne manque</span>')+
       '<div class="acts"><a class="btn btn-l" href="'+lienDe(r)+'" target="_blank" rel="noopener">'+ico('ext','s')+'Cookidoo</a>'+
